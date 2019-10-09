@@ -36,41 +36,40 @@
             this.viewZoomTrackBarLabel = new System.Windows.Forms.Label();
             this.viewZoomTrackBar = new System.Windows.Forms.TrackBar();
             this.gridPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.heightSizeGridPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.widthSizeGridPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.clearSizeGridPropertiesButton = new System.Windows.Forms.Button();
             this.resizeSizeGridPropertiesButton = new System.Windows.Forms.Button();
             this.heightSizeGridPropertiesLabel = new System.Windows.Forms.Label();
             this.widthSizeGridPropertiesLabel = new System.Windows.Forms.Label();
             this.sizegGridPropertiesSLabel = new System.Windows.Forms.Label();
             this.caGroupBox = new System.Windows.Forms.GroupBox();
+            this.nucleonAmoutCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.randomPlacementButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.boundaryConditionPropertiesComboBoxLabel = new System.Windows.Forms.Label();
+            this.boundaryConditionCAPropertiesComboBox = new System.Windows.Forms.ComboBox();
             this.neighbourhoodCAPropertiesComboBoxLabel = new System.Windows.Forms.Label();
             this.neighbourhoodCAPropertiesComboBox = new System.Windows.Forms.ComboBox();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
-            this.boundaryConditionPropertiesComboBoxLabel = new System.Windows.Forms.Label();
-            this.boundaryConditionCAPropertiesComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.randomPlacementButton = new System.Windows.Forms.Button();
-            this.nucleonAmoutCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.widthSizeGridPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.heightSizeGridPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewZoomTrackBar)).BeginInit();
             this.gridPropertiesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightSizeGridPropertiesNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).BeginInit();
             this.caGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.heightSizeGridPropertiesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
             // 
-            this.viewPanel.AutoSize = true;
-            this.viewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.viewPanel.Controls.Add(this.viewPictureBox);
-            this.viewPanel.Location = new System.Drawing.Point(12, 3);
+            this.viewPanel.Location = new System.Drawing.Point(9, 12);
             this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(562, 535);
+            this.viewPanel.Size = new System.Drawing.Size(500, 500);
             this.viewPanel.TabIndex = 0;
             // 
             // viewPictureBox
@@ -83,6 +82,8 @@
             this.viewPictureBox.Size = new System.Drawing.Size(100, 100);
             this.viewPictureBox.TabIndex = 0;
             this.viewPictureBox.TabStop = false;
+            this.viewPictureBox.Click += new System.EventHandler(this.ViewPictureBox_Click);
+            this.viewPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPictureBox_Paint);
             // 
             // viewGroupBox
             // 
@@ -90,12 +91,13 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(580, 12);
+            this.viewGroupBox.Location = new System.Drawing.Point(520, 12);
             this.viewGroupBox.Name = "viewGroupBox";
             this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
+            this.viewGroupBox.Visible = false;
             // 
             // viewGridCheckBox
             // 
@@ -137,12 +139,36 @@
             this.gridPropertiesGroupBox.Controls.Add(this.heightSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.widthSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.sizegGridPropertiesSLabel);
-            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(580, 109);
+            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(520, 109);
             this.gridPropertiesGroupBox.Name = "gridPropertiesGroupBox";
             this.gridPropertiesGroupBox.Size = new System.Drawing.Size(174, 117);
             this.gridPropertiesGroupBox.TabIndex = 2;
             this.gridPropertiesGroupBox.TabStop = false;
             this.gridPropertiesGroupBox.Text = "Grid Properties";
+            // 
+            // heightSizeGridPropertiesNumericUpDown
+            // 
+            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 60);
+            this.heightSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.heightSizeGridPropertiesNumericUpDown.Name = "heightSizeGridPropertiesNumericUpDown";
+            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.heightSizeGridPropertiesNumericUpDown.TabIndex = 10;
+            // 
+            // widthSizeGridPropertiesNumericUpDown
+            // 
+            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 38);
+            this.widthSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.widthSizeGridPropertiesNumericUpDown.Name = "widthSizeGridPropertiesNumericUpDown";
+            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.widthSizeGridPropertiesNumericUpDown.TabIndex = 9;
             // 
             // clearSizeGridPropertiesButton
             // 
@@ -152,6 +178,7 @@
             this.clearSizeGridPropertiesButton.TabIndex = 7;
             this.clearSizeGridPropertiesButton.Text = "Clear";
             this.clearSizeGridPropertiesButton.UseVisualStyleBackColor = true;
+            this.clearSizeGridPropertiesButton.Click += new System.EventHandler(this.ClearSizeGridPropertiesButton_Click);
             // 
             // resizeSizeGridPropertiesButton
             // 
@@ -161,6 +188,7 @@
             this.resizeSizeGridPropertiesButton.TabIndex = 6;
             this.resizeSizeGridPropertiesButton.Text = "Resize";
             this.resizeSizeGridPropertiesButton.UseVisualStyleBackColor = true;
+            this.resizeSizeGridPropertiesButton.Click += new System.EventHandler(this.ResizeSizeGridPropertiesButton_Click);
             // 
             // heightSizeGridPropertiesLabel
             // 
@@ -200,32 +228,47 @@
             this.caGroupBox.Controls.Add(this.boundaryConditionCAPropertiesComboBox);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBoxLabel);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
-            this.caGroupBox.Location = new System.Drawing.Point(580, 232);
+            this.caGroupBox.Location = new System.Drawing.Point(520, 232);
             this.caGroupBox.Name = "caGroupBox";
             this.caGroupBox.Size = new System.Drawing.Size(174, 172);
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
             // 
-            // neighbourhoodCAPropertiesComboBoxLabel
+            // nucleonAmoutCAPropertiesNumericUpDown
             // 
-            this.neighbourhoodCAPropertiesComboBoxLabel.AutoSize = true;
-            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
-            this.neighbourhoodCAPropertiesComboBoxLabel.Name = "neighbourhoodCAPropertiesComboBoxLabel";
-            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(83, 13);
-            this.neighbourhoodCAPropertiesComboBoxLabel.TabIndex = 1;
-            this.neighbourhoodCAPropertiesComboBoxLabel.Text = "Neighbourhood:";
+            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 118);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nucleonAmoutCAPropertiesNumericUpDown.Name = "nucleonAmoutCAPropertiesNumericUpDown";
+            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
+            this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // neighbourhoodCAPropertiesComboBox
+            // randomPlacementButton
             // 
-            this.neighbourhoodCAPropertiesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.neighbourhoodCAPropertiesComboBox.FormattingEnabled = true;
-            this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
-            "Periodic"});
-            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
-            this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
-            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
-            this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
+            this.randomPlacementButton.Location = new System.Drawing.Point(9, 144);
+            this.randomPlacementButton.Name = "randomPlacementButton";
+            this.randomPlacementButton.Size = new System.Drawing.Size(159, 23);
+            this.randomPlacementButton.TabIndex = 7;
+            this.randomPlacementButton.Text = "Random nucleon placement";
+            this.randomPlacementButton.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 102);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Nucleon Amout:";
             // 
             // boundaryConditionPropertiesComboBoxLabel
             // 
@@ -247,56 +290,52 @@
             this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.boundaryConditionCAPropertiesComboBox.TabIndex = 2;
             // 
-            // label1
+            // neighbourhoodCAPropertiesComboBoxLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 102);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Nucleon Amout:";
+            this.neighbourhoodCAPropertiesComboBoxLabel.AutoSize = true;
+            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Name = "neighbourhoodCAPropertiesComboBoxLabel";
+            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(83, 13);
+            this.neighbourhoodCAPropertiesComboBoxLabel.TabIndex = 1;
+            this.neighbourhoodCAPropertiesComboBoxLabel.Text = "Neighbourhood:";
             // 
-            // randomPlacementButton
+            // neighbourhoodCAPropertiesComboBox
             // 
-            this.randomPlacementButton.Location = new System.Drawing.Point(9, 144);
-            this.randomPlacementButton.Name = "randomPlacementButton";
-            this.randomPlacementButton.Size = new System.Drawing.Size(159, 23);
-            this.randomPlacementButton.TabIndex = 7;
-            this.randomPlacementButton.Text = "Random nucleon placement";
-            this.randomPlacementButton.UseVisualStyleBackColor = true;
+            this.neighbourhoodCAPropertiesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.neighbourhoodCAPropertiesComboBox.FormattingEnabled = true;
+            this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
+            "Periodic"});
+            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
+            this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
+            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
+            this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
             // 
-            // nucleonAmoutCAPropertiesNumericUpDown
+            // errorLabel
             // 
-            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 118);
-            this.nucleonAmoutCAPropertiesNumericUpDown.Name = "nucleonAmoutCAPropertiesNumericUpDown";
-            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
-            // 
-            // widthSizeGridPropertiesNumericUpDown
-            // 
-            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 38);
-            this.widthSizeGridPropertiesNumericUpDown.Name = "widthSizeGridPropertiesNumericUpDown";
-            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.widthSizeGridPropertiesNumericUpDown.TabIndex = 9;
-            // 
-            // heightSizeGridPropertiesNumericUpDown
-            // 
-            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 60);
-            this.heightSizeGridPropertiesNumericUpDown.Name = "heightSizeGridPropertiesNumericUpDown";
-            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.heightSizeGridPropertiesNumericUpDown.TabIndex = 10;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.ForeColor = System.Drawing.Color.Crimson;
+            this.errorLabel.Location = new System.Drawing.Point(516, 497);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(20, 13);
+            this.errorLabel.TabIndex = 4;
+            this.errorLabel.Text = "Err";
+            this.errorLabel.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 546);
+            this.ClientSize = new System.Drawing.Size(706, 538);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.caGroupBox);
             this.Controls.Add(this.viewGroupBox);
             this.Controls.Add(this.gridPropertiesGroupBox);
             this.Controls.Add(this.viewPanel);
+            this.MaximizeBox = false;
             this.Menu = this.mainMenu;
             this.Name = "Form1";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "MultiscaleModeling";
             this.viewPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).EndInit();
@@ -305,11 +344,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.viewZoomTrackBar)).EndInit();
             this.gridPropertiesGroupBox.ResumeLayout(false);
             this.gridPropertiesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightSizeGridPropertiesNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).EndInit();
             this.caGroupBox.ResumeLayout(false);
             this.caGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.heightSizeGridPropertiesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +379,7 @@
         private System.Windows.Forms.NumericUpDown heightSizeGridPropertiesNumericUpDown;
         private System.Windows.Forms.NumericUpDown widthSizeGridPropertiesNumericUpDown;
         private System.Windows.Forms.NumericUpDown nucleonAmoutCAPropertiesNumericUpDown;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
 

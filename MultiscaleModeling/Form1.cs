@@ -73,6 +73,7 @@ namespace MultiscaleModeling
             //populateComboBox.SelectedIndex = 0;
 
             nextImage = new Bitmap((int)cellXSize * Grid.SizeX, (int)cellYSize * Grid.SizeY);
+            viewPictureBox.Size = nextImage.Size;
             viewPictureBox.Image = nextImage;
             InitializeGrid();
             viewPictureBox.Refresh();
@@ -136,6 +137,95 @@ namespace MultiscaleModeling
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
+            }
+        }
+
+        private void ResizeSizeGridPropertiesButton_Click(object sender, EventArgs e)
+        {
+            if (running || mcRunning)
+            {
+                return;
+            }
+            int sizeX;
+            int sizeY;
+            int.TryParse(widthSizeGridPropertiesNumericUpDown.Text, out sizeX);
+            int.TryParse(heightSizeGridPropertiesNumericUpDown.Text, out sizeY);
+
+            currentGrid.Resize(sizeX, sizeY);
+            nextStepGrid.Resize(sizeX, sizeY);
+
+            nextImage = new Bitmap((int)cellXSize * Grid.SizeX, (int)cellYSize * Grid.SizeY);
+            InitializeGrid();
+
+            viewPictureBox.Size = new Size(nextImage.Size.Width, nextImage.Size.Height);
+            viewPictureBox.Image = nextImage;
+            viewPictureBox.Refresh();
+        }
+
+        private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
+        {
+            lock (synLock)
+            {
+                currentGrid.Clear();
+                nextStepGrid.Clear();
+            }
+            InitializeGrid();
+            lock (synLock)
+            {
+                viewPictureBox.Image = nextImage;
+            }
+            viewPictureBox.Refresh();
+        }
+
+
+        //GUI METHODS
+        //PICTURE BOX METHODS
+        private void ViewPictureBox_Click(object sender, EventArgs e)
+        {
+            if (running || mcRunning)
+            {
+                return;
+            }
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == MouseButtons.Left)
+            {
+                int x = (int)(me.X / cellXSize);
+                int y = (int)(me.Y / cellYSize);
+                if (x >= Grid.SizeX || x < 0
+                    || y >= Grid.SizeY || y < 0)
+                {
+                    return;
+                }
+                lock (synLock)
+                {
+                    currentGrid.ChangeCellValue(x, y);
+                    currentGrid.Cells[x, y].Id = idZiarno;
+                }
+                if (currentGrid.Cells[x, y].State != 0)
+                {
+                    emptyCount--;
+                    FillCell(x, y, Color.FromName(knownColors[idZiarno % knownColors.Count()]));
+                }
+                else
+                {
+                    emptyCount++;
+                    FillCell(x, y, BackgroundColor);
+                }
+            }
+            else
+            {
+                idZiarno++;
+                idZiarno = idZiarno % nPopulation;
+            }
+
+            viewPictureBox.Refresh();
+        }
+
+        private void ViewPictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            lock (synLock)
+            {
+                e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
             }
         }
     }
