@@ -260,6 +260,7 @@
             this.randomPlacementButton.TabIndex = 7;
             this.randomPlacementButton.Text = "Random nucleon placement";
             this.randomPlacementButton.UseVisualStyleBackColor = true;
+            this.randomPlacementButton.Click += new System.EventHandler(this.RandomPlacementButton_Click);
             // 
             // label1
             // 

@@ -228,5 +228,63 @@ namespace MultiscaleModeling
                 e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
             }
         }
+
+        private void RandomPlacementButton_Click(object sender, EventArgs e)
+        {
+
+            RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
+           
+            viewPictureBox.Refresh();
+        }
+
+        void RandomPopulate(int nPopulation)
+        {
+            if (nPopulation > Grid.SizeX * Grid.SizeY || nPopulation <= 0)
+            {
+                return;
+            }
+
+            currentGrid.Clear();
+            nextStepGrid.Clear();
+            InitializeGrid();
+
+            List<Model.Point> freePoints = new List<Model.Point>();
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    freePoints.Add(new Model.Point(x, y));
+                }
+            }
+
+            List<Model.Point> start = new List<Model.Point>();
+
+            Random r = new Random();
+            for (int i = 0; i < nPopulation;)
+            {
+
+                int index = r.Next(0, freePoints.Count());
+
+                start.Add(freePoints[index]);
+                freePoints.RemoveAt(index);
+                i++;
+            }
+            Populate(start, nPopulation);
+        }
+        void Populate(List<Model.Point> start, int nPopulation)
+        {
+            lock (synLock)
+            {
+                foreach (Model.Point p in start)
+                {
+                    currentGrid.ChangeCellValue(p.X, p.Y);
+                    idZiarno = idZiarno % nPopulation;
+                    currentGrid.Cells[p.X, p.Y].Id = idZiarno;
+                    FillCell(p.X, p.Y, Color.FromName(knownColors[idZiarno % knownColors.Count()]));
+                    idZiarno++;
+                    emptyCount--;
+                }
+            }
+        }
     }
 }
