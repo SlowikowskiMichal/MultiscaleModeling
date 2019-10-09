@@ -12,8 +12,8 @@ namespace MultiscaleModeling.Model
         public static int SizeX { get => _sizeX; }
         public static int SizeY { get => _sizeY; }
 
-        static private int _sizeX = 100;
-        static private int _sizeY = 100;
+        static private int _sizeX = 300;
+        static private int _sizeY = 300;
 
         public Grid()
         {
