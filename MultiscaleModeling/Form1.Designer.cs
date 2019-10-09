@@ -52,7 +52,12 @@
             this.neighbourhoodCAPropertiesComboBoxLabel = new System.Windows.Forms.Label();
             this.neighbourhoodCAPropertiesComboBox = new System.Windows.Forms.ComboBox();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
-            this.errorLabel = new System.Windows.Forms.Label();
+            this.runCAExecutionButton = new System.Windows.Forms.Button();
+            this.stopCAExecutionButton = new System.Windows.Forms.Button();
+            this.caSimulationCAPropertiesLabel = new System.Windows.Forms.Label();
+            this.speedCAExecutionTrackBarLabel = new System.Windows.Forms.Label();
+            this.speedCAExecutionTrackBar = new System.Windows.Forms.TrackBar();
+            this.executionGroupBox = new System.Windows.Forms.GroupBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -62,6 +67,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).BeginInit();
             this.caGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedCAExecutionTrackBar)).BeginInit();
+            this.executionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -91,7 +98,7 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(520, 12);
+            this.viewGroupBox.Location = new System.Drawing.Point(525, 12);
             this.viewGroupBox.Name = "viewGroupBox";
             this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
@@ -139,7 +146,7 @@
             this.gridPropertiesGroupBox.Controls.Add(this.heightSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.widthSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.sizegGridPropertiesSLabel);
-            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(520, 109);
+            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(525, 109);
             this.gridPropertiesGroupBox.Name = "gridPropertiesGroupBox";
             this.gridPropertiesGroupBox.Size = new System.Drawing.Size(174, 117);
             this.gridPropertiesGroupBox.TabIndex = 2;
@@ -228,9 +235,9 @@
             this.caGroupBox.Controls.Add(this.boundaryConditionCAPropertiesComboBox);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBoxLabel);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
-            this.caGroupBox.Location = new System.Drawing.Point(520, 232);
+            this.caGroupBox.Location = new System.Drawing.Point(525, 232);
             this.caGroupBox.Name = "caGroupBox";
-            this.caGroupBox.Size = new System.Drawing.Size(174, 172);
+            this.caGroupBox.Size = new System.Drawing.Size(174, 174);
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
@@ -251,6 +258,7 @@
             0,
             0,
             0});
+            this.nucleonAmoutCAPropertiesNumericUpDown.ValueChanged += new System.EventHandler(this.NucleonAmoutCAPropertiesNumericUpDown_ValueChanged);
             // 
             // randomPlacementButton
             // 
@@ -311,23 +319,77 @@
             this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
             // 
-            // errorLabel
+            // runCAExecutionButton
             // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.ForeColor = System.Drawing.Color.Crimson;
-            this.errorLabel.Location = new System.Drawing.Point(516, 497);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(20, 13);
-            this.errorLabel.TabIndex = 4;
-            this.errorLabel.Text = "Err";
-            this.errorLabel.Visible = false;
+            this.runCAExecutionButton.Location = new System.Drawing.Point(6, 34);
+            this.runCAExecutionButton.Name = "runCAExecutionButton";
+            this.runCAExecutionButton.Size = new System.Drawing.Size(80, 23);
+            this.runCAExecutionButton.TabIndex = 9;
+            this.runCAExecutionButton.Text = "Run";
+            this.runCAExecutionButton.UseVisualStyleBackColor = true;
+            this.runCAExecutionButton.Click += new System.EventHandler(this.RunCAExecutionButton_Click);
+            // 
+            // stopCAExecutionButton
+            // 
+            this.stopCAExecutionButton.Location = new System.Drawing.Point(88, 34);
+            this.stopCAExecutionButton.Name = "stopCAExecutionButton";
+            this.stopCAExecutionButton.Size = new System.Drawing.Size(80, 23);
+            this.stopCAExecutionButton.TabIndex = 10;
+            this.stopCAExecutionButton.Text = "Stop";
+            this.stopCAExecutionButton.UseVisualStyleBackColor = true;
+            this.stopCAExecutionButton.Click += new System.EventHandler(this.StopCAExecutionButton_Click);
+            // 
+            // caSimulationCAPropertiesLabel
+            // 
+            this.caSimulationCAPropertiesLabel.AutoSize = true;
+            this.caSimulationCAPropertiesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.caSimulationCAPropertiesLabel.Location = new System.Drawing.Point(9, 16);
+            this.caSimulationCAPropertiesLabel.Name = "caSimulationCAPropertiesLabel";
+            this.caSimulationCAPropertiesLabel.Size = new System.Drawing.Size(105, 15);
+            this.caSimulationCAPropertiesLabel.TabIndex = 11;
+            this.caSimulationCAPropertiesLabel.Text = "CA Simulation: ";
+            // 
+            // speedCAExecutionTrackBarLabel
+            // 
+            this.speedCAExecutionTrackBarLabel.AutoSize = true;
+            this.speedCAExecutionTrackBarLabel.Location = new System.Drawing.Point(20, 63);
+            this.speedCAExecutionTrackBarLabel.Name = "speedCAExecutionTrackBarLabel";
+            this.speedCAExecutionTrackBarLabel.Size = new System.Drawing.Size(38, 13);
+            this.speedCAExecutionTrackBarLabel.TabIndex = 13;
+            this.speedCAExecutionTrackBarLabel.Text = "Speed";
+            // 
+            // speedCAExecutionTrackBar
+            // 
+            this.speedCAExecutionTrackBar.AutoSize = false;
+            this.speedCAExecutionTrackBar.Location = new System.Drawing.Point(64, 63);
+            this.speedCAExecutionTrackBar.Minimum = 1;
+            this.speedCAExecutionTrackBar.Name = "speedCAExecutionTrackBar";
+            this.speedCAExecutionTrackBar.Size = new System.Drawing.Size(104, 30);
+            this.speedCAExecutionTrackBar.TabIndex = 12;
+            this.speedCAExecutionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.speedCAExecutionTrackBar.Value = 1;
+            this.speedCAExecutionTrackBar.Visible = false;
+            // 
+            // executionGroupBox
+            // 
+            this.executionGroupBox.Controls.Add(this.caSimulationCAPropertiesLabel);
+            this.executionGroupBox.Controls.Add(this.speedCAExecutionTrackBarLabel);
+            this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
+            this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
+            this.executionGroupBox.Controls.Add(this.speedCAExecutionTrackBar);
+            this.executionGroupBox.Location = new System.Drawing.Point(525, 412);
+            this.executionGroupBox.Name = "executionGroupBox";
+            this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
+            this.executionGroupBox.TabIndex = 14;
+            this.executionGroupBox.TabStop = false;
+            this.executionGroupBox.Text = "Execution";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 538);
-            this.Controls.Add(this.errorLabel);
+            this.ClientSize = new System.Drawing.Size(711, 522);
+            this.Controls.Add(this.executionGroupBox);
             this.Controls.Add(this.caGroupBox);
             this.Controls.Add(this.viewGroupBox);
             this.Controls.Add(this.gridPropertiesGroupBox);
@@ -350,8 +412,10 @@
             this.caGroupBox.ResumeLayout(false);
             this.caGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedCAExecutionTrackBar)).EndInit();
+            this.executionGroupBox.ResumeLayout(false);
+            this.executionGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -380,7 +444,12 @@
         private System.Windows.Forms.NumericUpDown heightSizeGridPropertiesNumericUpDown;
         private System.Windows.Forms.NumericUpDown widthSizeGridPropertiesNumericUpDown;
         private System.Windows.Forms.NumericUpDown nucleonAmoutCAPropertiesNumericUpDown;
-        private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label caSimulationCAPropertiesLabel;
+        private System.Windows.Forms.Button stopCAExecutionButton;
+        private System.Windows.Forms.Button runCAExecutionButton;
+        private System.Windows.Forms.Label speedCAExecutionTrackBarLabel;
+        private System.Windows.Forms.TrackBar speedCAExecutionTrackBar;
+        private System.Windows.Forms.GroupBox executionGroupBox;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MultiscaleModeling.Model;
@@ -285,6 +286,124 @@ namespace MultiscaleModeling
                     emptyCount--;
                 }
             }
+        }
+
+        private void RunCAExecutionButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+                return;
+            running = true;
+            GUI(!running);
+            Thread calculations = new Thread(Continue);
+            calculations.Start();
+        }
+
+        void CalculateNextStep(int startX, int startY, int endX, int endY)
+        {
+            Random r = new Random();
+            nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
+            List<Model.Point> n;
+            List<int> a = new List<int>();
+
+            for (int x = startX; x < endX; x++)
+            {
+                for (int y = startY; y < endY; y++)
+                {
+                    if (currentGrid.Cells[x, y].State != 0)
+                    {
+                        continue;
+                    }
+
+                    n = neighborhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, boundaryCondition);
+                    a.Clear();
+
+                    n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1).ForEach(p => a.Add(currentGrid.Cells[p.X, p.Y].Id));
+
+                    Dictionary<int, int> counts = a.GroupBy(v => v)
+                                      .ToDictionary(g => g.Key,
+                                                    g => g.Count());
+                    int max = 0;
+                    int k = 0;
+                    foreach (int key in counts.Keys)
+                    {
+                        if (max < counts[key])
+                        {
+                            max = counts[key];
+                            k = key;
+                        }
+                        else if (max == counts[key] && r.NextDouble() > 0.5)
+                        {
+                            k = key;
+                        }
+                    }
+
+                    if (max > 0)
+                    {
+                        lock (synLock)
+                        {
+                            emptyCount--;
+                            nextStepGrid.Cells[x, y].ChangeState();
+                            nextStepGrid.Cells[x, y].Id = k;
+                        }
+
+                        FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
+                    }
+                }
+            }
+        }
+
+        void Continue()
+        {
+            int nThreads = 4;
+            Thread[] calculations = new Thread[nThreads];
+            int x = Grid.SizeX / 2;
+            int y = Grid.SizeY / 2;
+
+            long current = DateTime.Now.Ticks;
+            while (running && emptyCount > 0)
+            {
+                calculations[0] = new Thread(() => CalculateNextStep(0, 0, x, y));
+                calculations[1] = new Thread(() => CalculateNextStep(x, 0, Grid.SizeX, y));
+                calculations[2] = new Thread(() => CalculateNextStep(0, y, x, Grid.SizeY));
+                calculations[3] = new Thread(() => CalculateNextStep(x, y, Grid.SizeX, Grid.SizeY));
+                foreach (Thread task in calculations)
+                {
+                    task.Start();
+                }
+                foreach (Thread task in calculations)
+                {
+                    task.Join();
+                }
+                currentGrid.Copy(nextStepGrid);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    viewPanel.Refresh();
+                });
+
+            }
+            running = false;
+            this.Invoke((MethodInvoker)delegate
+            {
+                GUI(!running);
+            });
+        }
+
+        private void GUI(bool flag)
+        {
+            viewGroupBox.Enabled = flag;
+            gridPropertiesGroupBox.Enabled = flag;
+            caGroupBox.Enabled = flag;
+        }
+
+        private void StopCAExecutionButton_Click(object sender, EventArgs e)
+        {
+            running = false;
+            GUI(!running);
+        }
+
+        private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
         }
     }
 }
