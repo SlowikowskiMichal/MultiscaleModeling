@@ -64,6 +64,11 @@ namespace MultiscaleModeling.Controller
         {
             return currentGrid.Cells[x, y].State != 0;
         }
+
+        public int GetCurrentGridCellId(int x, int y)
+        {
+            return currentGrid.Cells[x, y].Id;
+        }
         public void ResizeGrid(int width, int height)
         {
             currentGrid.Resize(width, height);
@@ -106,6 +111,50 @@ namespace MultiscaleModeling.Controller
             CurrentNucleonID = CurrentNucleonID % nucleonsPopulation;
         }
 
+        public void RandomPopulate(int nPopulation)
+        {
+            if (nPopulation > Grid.SizeX * Grid.SizeY || nPopulation <= 0)
+            {
+                return;
+            }
+            nucleonsPopulation = nPopulation;
+            ClearGrid();
+
+            List<Model.Point> freePoints = new List<Model.Point>();
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    freePoints.Add(new Model.Point(x, y));
+                }
+            }
+
+            List<Model.Point> start = new List<Model.Point>();
+
+            Random r = new Random();
+            for (int i = 0; i < nucleonsPopulation;)
+            {
+
+                int index = r.Next(0, freePoints.Count());
+
+                start.Add(freePoints[index]);
+                freePoints.RemoveAt(index);
+                i++;
+            }
+            Populate(start, nucleonsPopulation);
+        }
+        void Populate(List<Model.Point> start, int nPopulation)
+        {
+            foreach (Model.Point p in start)
+            {
+                currentGrid.ChangeCellValue(p.X, p.Y);
+                currentGrid.Cells[p.X, p.Y].Id = CurrentNucleonID;
+                CurrentNucleonID++;
+                CurrentNucleonID = CurrentNucleonID % nPopulation;
+                emptyCount--;
+            }
+    
+        }
         #endregion
 
     }

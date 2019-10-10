@@ -112,7 +112,7 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x,y))
                     {
-                        FillCell(x, y, Color.FromName(knownColors[currentGrid.Cells[x, y].Id % knownColors.Count()]));
+                        FillCell(x, y, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x,y) % knownColors.Count()]));
                     }
                     else
                     {
@@ -231,58 +231,9 @@ namespace MultiscaleModeling
 
         private void RandomPlacementButton_Click(object sender, EventArgs e)
         {
-            RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);         
-            viewPictureBox.Refresh();
-        }
-
-        void RandomPopulate(int nPopulation)
-        {
-            if (nPopulation > Grid.SizeX * Grid.SizeY || nPopulation <= 0)
-            {
-                return;
-            }
-
-            currentGrid.Clear();
-            nextStepGrid.Clear();
+            gridController.RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
             DrawGridOnImage();
-
-            List<Model.Point> freePoints = new List<Model.Point>();
-            for (int x = 0; x < Grid.SizeX; x++)
-            {
-                for (int y = 0; y < Grid.SizeY; y++)
-                {
-                    freePoints.Add(new Model.Point(x, y));
-                }
-            }
-
-            List<Model.Point> start = new List<Model.Point>();
-
-            Random r = new Random();
-            for (int i = 0; i < nPopulation;)
-            {
-
-                int index = r.Next(0, freePoints.Count());
-
-                start.Add(freePoints[index]);
-                freePoints.RemoveAt(index);
-                i++;
-            }
-            Populate(start, nPopulation);
-        }
-        void Populate(List<Model.Point> start, int nPopulation)
-        {
-            lock (synLock)
-            {
-                foreach (Model.Point p in start)
-                {
-                    currentGrid.ChangeCellValue(p.X, p.Y);
-                    idZiarno = idZiarno % nPopulation;
-                    currentGrid.Cells[p.X, p.Y].Id = idZiarno;
-                    FillCell(p.X, p.Y, Color.FromName(knownColors[idZiarno % knownColors.Count()]));
-                    idZiarno++;
-                    emptyCount--;
-                }
-            }
+            viewPictureBox.Refresh();
         }
 
         private void RunCAExecutionButton_Click(object sender, EventArgs e)
