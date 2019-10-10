@@ -98,7 +98,7 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(525, 12);
+            this.viewGroupBox.Location = new System.Drawing.Point(525, 421);
             this.viewGroupBox.Name = "viewGroupBox";
             this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
@@ -146,7 +146,7 @@
             this.gridPropertiesGroupBox.Controls.Add(this.heightSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.widthSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.sizegGridPropertiesSLabel);
-            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(525, 109);
+            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(525, 12);
             this.gridPropertiesGroupBox.Name = "gridPropertiesGroupBox";
             this.gridPropertiesGroupBox.Size = new System.Drawing.Size(174, 117);
             this.gridPropertiesGroupBox.TabIndex = 2;
@@ -235,7 +235,7 @@
             this.caGroupBox.Controls.Add(this.boundaryConditionCAPropertiesComboBox);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBoxLabel);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
-            this.caGroupBox.Location = new System.Drawing.Point(525, 232);
+            this.caGroupBox.Location = new System.Drawing.Point(525, 135);
             this.caGroupBox.Name = "caGroupBox";
             this.caGroupBox.Size = new System.Drawing.Size(174, 174);
             this.caGroupBox.TabIndex = 3;
@@ -254,7 +254,7 @@
             this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
             this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
@@ -293,7 +293,7 @@
             this.boundaryConditionCAPropertiesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.boundaryConditionCAPropertiesComboBox.FormattingEnabled = true;
             this.boundaryConditionCAPropertiesComboBox.Items.AddRange(new object[] {
-            "von Neumann"});
+            "Moore"});
             this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
             this.boundaryConditionCAPropertiesComboBox.Name = "boundaryConditionCAPropertiesComboBox";
             this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
@@ -377,7 +377,7 @@
             this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.speedCAExecutionTrackBar);
-            this.executionGroupBox.Location = new System.Drawing.Point(525, 412);
+            this.executionGroupBox.Location = new System.Drawing.Point(525, 315);
             this.executionGroupBox.Name = "executionGroupBox";
             this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
             this.executionGroupBox.TabIndex = 14;

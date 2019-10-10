@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Grid.cs" />
+    <Compile Include="Model\Neighborhood\MooresNeighborhood.cs" />
     <Compile Include="Model\Neighborhood\Neighborhood.cs" />
     <Compile Include="Model\Neighborhood\NeumannNeighborhood.cs" />
     <Compile Include="Model\Point.cs" />

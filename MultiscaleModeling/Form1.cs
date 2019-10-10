@@ -26,7 +26,7 @@ namespace MultiscaleModeling
         int emptyCount = 0;
         //IMAGE
         List<string> knownColors = Enum.GetNames(typeof(KnownColor)).ToList();
-        readonly Neighborhood[] implementedNeighborhood = {new NeumannNeighborhood()};
+        readonly Neighborhood[] implementedNeighborhood = {new MooresNeighborhood()};
         Color BackgroundColor = Color.White;
         Bitmap nextImage;
         //GRID VIEW
