@@ -110,7 +110,7 @@ namespace MultiscaleModeling
             {
                 for (int y = currentPositionY; y < endPositionY; y++)
                 {
-                    if (gridController.GetCurrentGridCellState(x,y) != 0)
+                    if (gridController.GetCurrentGridCellState(x,y))
                     {
                         FillCell(x, y, Color.FromName(knownColors[currentGrid.Cells[x, y].Id % knownColors.Count()]));
                     }
@@ -153,7 +153,6 @@ namespace MultiscaleModeling
                 list[n] = value;
             }
         }
-
         private void SetImageSize()
         {
             nextImage = new Bitmap(
@@ -166,7 +165,6 @@ namespace MultiscaleModeling
             DrawGridOnImage();
             viewPictureBox.Refresh();
         }
-
         private void ResizeSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
             int sizeX;
@@ -178,7 +176,6 @@ namespace MultiscaleModeling
 
             SetImageSize();
         }
-
         private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
             gridController.ClearGrid();
@@ -200,22 +197,18 @@ namespace MultiscaleModeling
             MouseEventArgs me = (MouseEventArgs)e;
             if (me.Button == MouseButtons.Left)
             {
-                int x = (int)(me.X / cellXSize);
-                int y = (int)(me.Y / cellYSize);
-                if (x >= Grid.SizeX || x < 0
+                //Calculate pictureBox click position to grid position
+                int x = (int)(me.X / cellXSize) + currentPositionX;
+                int y = (int)(me.Y / cellYSize) + currentPositionY;
+ /*               if (x >= Grid.SizeX || x < 0
                     || y >= Grid.SizeY || y < 0)
                 {
                     return;
                 }
-                lock (synLock)
+*/             
+                if(gridController.ChangeGridValue(x, y))
                 {
-                    currentGrid.ChangeCellValue(x, y);
-                    currentGrid.Cells[x, y].Id = idZiarno;
-                }
-                if (currentGrid.Cells[x, y].State != 0)
-                {
-                    emptyCount--;
-                    FillCell(x, y, Color.FromName(knownColors[idZiarno % knownColors.Count()]));
+                    FillCell(x, y, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
                 }
                 else
                 {
@@ -225,19 +218,15 @@ namespace MultiscaleModeling
             }
             else
             {
-                idZiarno++;
-                idZiarno = idZiarno % nPopulation;
+                gridController.ChangeCurrentNucleonID();
             }
 
-            viewPictureBox.Refresh();
+            viewPictureBox.Image = nextImage;
         }
 
         private void ViewPictureBox_Paint(object sender, PaintEventArgs e)
         {
-            lock (synLock)
-            {
-                e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
-            }
+            e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
         }
 
         private void RandomPlacementButton_Click(object sender, EventArgs e)
