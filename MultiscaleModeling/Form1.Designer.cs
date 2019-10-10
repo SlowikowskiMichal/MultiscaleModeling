@@ -170,6 +170,11 @@
             this.heightSizeGridPropertiesNumericUpDown.Name = "heightSizeGridPropertiesNumericUpDown";
             this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.heightSizeGridPropertiesNumericUpDown.TabIndex = 10;
+            this.heightSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
             // widthSizeGridPropertiesNumericUpDown
             // 
@@ -182,6 +187,11 @@
             this.widthSizeGridPropertiesNumericUpDown.Name = "widthSizeGridPropertiesNumericUpDown";
             this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.widthSizeGridPropertiesNumericUpDown.TabIndex = 9;
+            this.widthSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
             // clearSizeGridPropertiesButton
             // 

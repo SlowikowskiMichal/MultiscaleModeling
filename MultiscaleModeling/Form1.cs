@@ -10,13 +10,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MultiscaleModeling.Model;
 using MultiscaleModeling.Model.Neighbourhood;
+using MultiscaleModeling.Controller;
 
 namespace MultiscaleModeling
 {
     public partial class Form1 : Form
     {
         readonly static object synLock = new object();
-        //GRID
+
+        #region ATTRIBUTES
+        #region GRID
+        GridController gridController;
+        CelluralAutomataProperties celluralAutomataProperties;
+
         const int sizeX = 1;
         const int sizeY = 1;
         float cellXSize;
@@ -26,17 +32,22 @@ namespace MultiscaleModeling
         int emptyCount = 0;
         int currentPositionX = 0;
         int currentPositionY = 0;
-        //IMAGE
+        #endregion
+        #region IMAGE
         List<string> knownColors = Enum.GetNames(typeof(KnownColor)).ToList();
         readonly Neighbourhood[] implementedNeighborhood = {new MooresNeighbourhood()};
         Color BackgroundColor = Color.White;
         Bitmap nextImage;
-        //GRID VIEW
+        SolidBrush brush;
+        #endregion
+        #region GRID VIEW
         int zoom;
         bool drawGrid;
-        //GRID OPTIONS
+        #endregion
+        #region GRID OPTIONS
         BoundaryConditions boundaryCondition;
         Neighbourhood neighborhood;
+        #endregion
         //FILL
         int idZiarno = 0;
         int nPopulation;
@@ -46,25 +57,36 @@ namespace MultiscaleModeling
         bool mcRunning = false;
         //Label
         string errMsg = "";
+        #endregion
 
         public Form1()
         {
             InitializeComponent();
 
             //GRID
-            currentGrid = new Grid();
-            nextStepGrid = new Grid();
-            widthSizeGridPropertiesNumericUpDown.Text = Grid.SizeX.ToString();
-            heightSizeGridPropertiesNumericUpDown.Text = Grid.SizeY.ToString();
+            gridController = new GridController(
+                int.Parse(widthSizeGridPropertiesNumericUpDown.Text),
+                int.Parse(heightSizeGridPropertiesNumericUpDown.Text),
+                int.Parse(nucleonAmoutCAPropertiesNumericUpDown.Text)
+            );
+
+            celluralAutomataProperties = new CelluralAutomataProperties(
+                neighbourhoodCAPropertiesComboBox.SelectedIndex,
+                boundaryConditionCAPropertiesComboBox.SelectedIndex
+            );
+            
             //IMAGE
             knownColors.RemoveAll(color => color == "White" || color == "Black"
                     || color == "Transparent");
             Shuffle(knownColors);
+            brush = new SolidBrush(Color.White);
             //GRID VIEW
             zoom = viewZoomTrackBar.Value;
             cellXSize = sizeX * zoom;
             cellYSize = sizeY * zoom;
             drawGrid = viewGridCheckBox.Checked;
+
+
             //GRID OPTIONS
             boundaryConditionCAPropertiesComboBox.SelectedIndex = 0;
             boundaryCondition = (BoundaryConditions)boundaryConditionCAPropertiesComboBox.SelectedIndex;
@@ -73,59 +95,49 @@ namespace MultiscaleModeling
             //FILL
             nPopulation = (int)nucleonAmoutCAPropertiesNumericUpDown.Value;
             //populateComboBox.SelectedIndex = 0;
-
-            nextImage = new Bitmap((int)cellXSize * Grid.SizeX, (int)cellYSize * Grid.SizeY);
-            viewPictureBox.Size = nextImage.Size;
-            viewPictureBox.Image = nextImage;
-            InitializeGrid();
-            viewPictureBox.Refresh();
+            viewPictureBox.Size = viewPanel.Size;
+            SetImageSize();
         }
 
-        void InitializeGrid()
+        void DrawGridOnImage()
         {
-            mcStep = 0;
-            emptyCount = Grid.SizeX * Grid.SizeY;
-            lock (synLock)
+            int endPositionX = currentPositionX + nextImage.Width;
+            int endPositionY = currentPositionY + nextImage.Height;
+
+            Graphics.FromImage(nextImage).Clear(Color.Black);
+ 
+            for (int x = currentPositionX; x < endPositionX; x++)
             {
-                Graphics.FromImage(nextImage).Clear(Color.Black);
-            }
-            for (int i = 0; i < Grid.SizeX; i++)
-            {
-                for (int j = 0; j < Grid.SizeY; j++)
+                for (int y = currentPositionY; y < endPositionY; y++)
                 {
-                    if (currentGrid.Cells[i, j].State != 0)
+                    if (gridController.GetCurrentGridCellState(x,y) != 0)
                     {
-                        FillCell(i, j, Color.FromName(knownColors[currentGrid.Cells[i, j].Id % knownColors.Count()]));
+                        FillCell(x, y, Color.FromName(knownColors[currentGrid.Cells[x, y].Id % knownColors.Count()]));
                     }
                     else
                     {
-                        FillCell(i, j, Color.White);
+                        FillCell(x, y, Color.White);
                     }
                 }
             }
         }
-
         void FillCell(int x, int y, Color color)
         {
-            lock (synLock)
-            {
-                SolidBrush brush = new SolidBrush(color);
+            brush.Color = color;
 
-                if (drawGrid)
-                {
-                    Graphics.FromImage(nextImage).
-                        FillRectangle(brush,
-                        x * cellXSize + 1, y * cellYSize + 1,
-                        cellXSize - 2, cellYSize - 2);
-                }
-                else
-                {
-                    Graphics.FromImage(nextImage).
-                        FillRectangle(brush,
-                        x * cellXSize, y * cellYSize,
-                        cellXSize, cellYSize);
-                }
-                brush.Dispose();
+            if (drawGrid)
+            {
+                Graphics.FromImage(nextImage).
+                    FillRectangle(brush,
+                    x * cellXSize + 1, y * cellYSize + 1,
+                    cellXSize - 2, cellYSize - 2);
+            }
+            else
+            {
+                Graphics.FromImage(nextImage).
+                    FillRectangle(brush,
+                    x * cellXSize, y * cellYSize,
+                    cellXSize, cellYSize);
             }
         }
         void Shuffle<T>(IList<T> list)
@@ -142,40 +154,37 @@ namespace MultiscaleModeling
             }
         }
 
+        private void SetImageSize()
+        {
+            nextImage = new Bitmap(
+                Math.Min(viewPanel.Size.Width, Grid.SizeX),
+                Math.Min(viewPanel.Size.Height, Grid.SizeY)
+            );
+
+            
+            viewPictureBox.Image = nextImage;
+            DrawGridOnImage();
+            viewPictureBox.Refresh();
+        }
+
         private void ResizeSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
-            if (running || mcRunning)
-            {
-                return;
-            }
             int sizeX;
             int sizeY;
             int.TryParse(widthSizeGridPropertiesNumericUpDown.Text, out sizeX);
             int.TryParse(heightSizeGridPropertiesNumericUpDown.Text, out sizeY);
 
-            currentGrid.Resize(sizeX, sizeY);
-            nextStepGrid.Resize(sizeX, sizeY);
+            gridController.ResizeGrid(sizeX, sizeY);
 
-            nextImage = new Bitmap((int)cellXSize * Grid.SizeX, (int)cellYSize * Grid.SizeY);
-            InitializeGrid();
-
-            viewPictureBox.Size = new Size(nextImage.Size.Width, nextImage.Size.Height);
-            viewPictureBox.Image = nextImage;
-            viewPictureBox.Refresh();
+            SetImageSize();
         }
 
         private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
-            lock (synLock)
-            {
-                currentGrid.Clear();
-                nextStepGrid.Clear();
-            }
-            InitializeGrid();
-            lock (synLock)
-            {
-                viewPictureBox.Image = nextImage;
-            }
+            gridController.ClearGrid();
+            DrawGridOnImage();
+
+            viewPictureBox.Image = nextImage;
             viewPictureBox.Refresh();
         }
 
@@ -246,7 +255,7 @@ namespace MultiscaleModeling
 
             currentGrid.Clear();
             nextStepGrid.Clear();
-            InitializeGrid();
+            DrawGridOnImage();
 
             List<Model.Point> freePoints = new List<Model.Point>();
             for (int x = 0; x < Grid.SizeX; x++)
