@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\CelluralAutomataProperties.cs" />
+    <Compile Include="Controller\GridController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,9 +56,9 @@
     </Compile>
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Grid.cs" />
-    <Compile Include="Model\Neighborhood\MooresNeighborhood.cs" />
-    <Compile Include="Model\Neighborhood\Neighborhood.cs" />
-    <Compile Include="Model\Neighborhood\NeumannNeighborhood.cs" />
+    <Compile Include="Model\Neighborhood\MooresNeighbourhood.cs" />
+    <Compile Include="Model\Neighborhood\Neighbourhood.cs" />
+    <Compile Include="Model\Neighborhood\NeumannNeighbourhood.cs" />
     <Compile Include="Model\Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

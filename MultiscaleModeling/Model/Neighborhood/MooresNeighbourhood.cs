@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiscaleModeling.Model.Neighborhood
+namespace MultiscaleModeling.Model.Neighbourhood
 {
-    class MooresNeighborhood : Neighborhood
+    class MooresNeighbourhood : Neighbourhood
     {
         override public List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryConditions condition)
         {

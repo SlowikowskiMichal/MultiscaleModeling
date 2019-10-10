@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MultiscaleModeling.Model;
-using MultiscaleModeling.Model.Neighborhood;
+using MultiscaleModeling.Model.Neighbourhood;
 
 namespace MultiscaleModeling
 {
@@ -24,25 +24,26 @@ namespace MultiscaleModeling
         Grid currentGrid;
         Grid nextStepGrid;
         int emptyCount = 0;
+        int currentPositionX = 0;
+        int currentPositionY = 0;
         //IMAGE
         List<string> knownColors = Enum.GetNames(typeof(KnownColor)).ToList();
-        readonly Neighborhood[] implementedNeighborhood = {new MooresNeighborhood()};
+        readonly Neighbourhood[] implementedNeighborhood = {new MooresNeighbourhood()};
         Color BackgroundColor = Color.White;
         Bitmap nextImage;
         //GRID VIEW
-        int speed;
         int zoom;
         bool drawGrid;
         //GRID OPTIONS
         BoundaryConditions boundaryCondition;
-        Neighborhood neighborhood;
+        Neighbourhood neighborhood;
         //FILL
         int idZiarno = 0;
         int nPopulation;
         //SIMULATION
+        int mcStep = 0;
         bool running = false;
         bool mcRunning = false;
-        int mcStep = 0;
         //Label
         string errMsg = "";
 
@@ -232,9 +233,7 @@ namespace MultiscaleModeling
 
         private void RandomPlacementButton_Click(object sender, EventArgs e)
         {
-
-            RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
-           
+            RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);         
             viewPictureBox.Refresh();
         }
 
@@ -293,7 +292,7 @@ namespace MultiscaleModeling
             if (running)
                 return;
             running = true;
-            GUI(!running);
+            SetGuiOnExecution(!running);
             Thread calculations = new Thread(Continue);
             calculations.Start();
         }
@@ -346,7 +345,7 @@ namespace MultiscaleModeling
                             nextStepGrid.Cells[x, y].Id = k;
                         }
 
-                        FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
+                        //FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
                     }
                 }
             }
@@ -386,12 +385,27 @@ namespace MultiscaleModeling
             running = false;
             this.Invoke((MethodInvoker)delegate
             {
-                GUI(!running);
-                viewPanel.Refresh();
+                SetGuiOnExecution(!running);
+                DrawGridOnViewPictureBox(currentPositionX,currentPositionY,viewPictureBox.Size.Width,viewPictureBox.Size.Height);
             });
         }
 
-        private void GUI(bool flag)
+        private void DrawGridOnViewPictureBox(int startPositionX, int startPositionY, int endPositionX, int endPositionY)
+        {
+            endPositionX = Math.Min(endPositionX, Grid.SizeX);
+            endPositionY = Math.Min(endPositionY, Grid.SizeY);
+
+            for(int y = startPositionY; y < endPositionY; y++)
+            {
+                for (int x = startPositionX; x < endPositionX; x++)
+                {
+                    FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
+                }
+            }
+            viewPictureBox.Refresh();
+        }
+
+        private void SetGuiOnExecution(bool flag)
         {
             viewGroupBox.Enabled = flag;
             gridPropertiesGroupBox.Enabled = flag;
@@ -401,12 +415,33 @@ namespace MultiscaleModeling
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
             running = false;
-            GUI(!running);
+            SetGuiOnExecution(!running);
         }
 
         private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
+        }
+
+        //MAIN MENU
+
+        private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveBitmapDialog = new SaveFileDialog();
+            saveBitmapDialog.Filter = "Bitmap Image|*.bmp";
+            saveBitmapDialog.Title = "Save an Image File";
+            saveBitmapDialog.ShowDialog();
+
+            if (saveBitmapDialog.FileName != "")
+            {
+                System.IO.FileStream fs =
+                    (System.IO.FileStream)saveBitmapDialog.OpenFile();
+
+                viewPictureBox.Image.Save(fs,
+                  System.Drawing.Imaging.ImageFormat.Bmp);
+
+                fs.Close();
+            }
         }
     }
 }

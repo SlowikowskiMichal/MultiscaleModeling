@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiscaleModeling.Model.Neighborhood
+namespace MultiscaleModeling.Model.Neighbourhood
 {
     enum BoundaryConditions { Periodic = 0, Reflective = 1 };
 
-    abstract class Neighborhood
+    abstract class Neighbourhood
     {
         public abstract List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryConditions condition);
 

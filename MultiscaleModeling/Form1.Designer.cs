@@ -251,6 +251,11 @@
             // nucleonAmoutCAPropertiesNumericUpDown
             // 
             this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 118);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nucleonAmoutCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -260,7 +265,7 @@
             this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
             this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
@@ -299,7 +304,7 @@
             this.boundaryConditionCAPropertiesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.boundaryConditionCAPropertiesComboBox.FormattingEnabled = true;
             this.boundaryConditionCAPropertiesComboBox.Items.AddRange(new object[] {
-            "Moore"});
+            "Periodic"});
             this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
             this.boundaryConditionCAPropertiesComboBox.Name = "boundaryConditionCAPropertiesComboBox";
             this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
@@ -319,7 +324,7 @@
             this.neighbourhoodCAPropertiesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.neighbourhoodCAPropertiesComboBox.FormattingEnabled = true;
             this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
-            "Periodic"});
+            "Moore"});
             this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
             this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
             this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
@@ -423,6 +428,7 @@
             // 
             this.bitmapSaveFileMenuItem.Index = 1;
             this.bitmapSaveFileMenuItem.Text = "... to BITMAP";
+            this.bitmapSaveFileMenuItem.Click += new System.EventHandler(this.BitmapSaveFileMenuItem_Click);
             // 
             // Form1
             // 
