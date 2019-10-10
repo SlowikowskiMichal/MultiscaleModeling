@@ -55,9 +55,16 @@
             this.runCAExecutionButton = new System.Windows.Forms.Button();
             this.stopCAExecutionButton = new System.Windows.Forms.Button();
             this.caSimulationCAPropertiesLabel = new System.Windows.Forms.Label();
-            this.speedCAExecutionTrackBarLabel = new System.Windows.Forms.Label();
-            this.speedCAExecutionTrackBar = new System.Windows.Forms.TrackBar();
             this.executionGroupBox = new System.Windows.Forms.GroupBox();
+            this.caExecutionProgressBar = new System.Windows.Forms.ProgressBar();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.fileMenuItem = new System.Windows.Forms.MenuItem();
+            this.openFileMenuItem = new System.Windows.Forms.MenuItem();
+            this.jsonOpenFileMenuItem = new System.Windows.Forms.MenuItem();
+            this.bitmapOpenFileMenuItem = new System.Windows.Forms.MenuItem();
+            this.saveFileMenuItem = new System.Windows.Forms.MenuItem();
+            this.jsonSaveFileMenuItem = new System.Windows.Forms.MenuItem();
+            this.bitmapSaveFileMenuItem = new System.Windows.Forms.MenuItem();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -67,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).BeginInit();
             this.caGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speedCAExecutionTrackBar)).BeginInit();
             this.executionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -254,7 +260,7 @@
             this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
             this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
@@ -282,7 +288,7 @@
             // boundaryConditionPropertiesComboBoxLabel
             // 
             this.boundaryConditionPropertiesComboBoxLabel.AutoSize = true;
-            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 62);
+            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
             this.boundaryConditionPropertiesComboBoxLabel.Name = "boundaryConditionPropertiesComboBoxLabel";
             this.boundaryConditionPropertiesComboBoxLabel.Size = new System.Drawing.Size(102, 13);
             this.boundaryConditionPropertiesComboBoxLabel.TabIndex = 3;
@@ -294,7 +300,7 @@
             this.boundaryConditionCAPropertiesComboBox.FormattingEnabled = true;
             this.boundaryConditionCAPropertiesComboBox.Items.AddRange(new object[] {
             "Moore"});
-            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
+            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
             this.boundaryConditionCAPropertiesComboBox.Name = "boundaryConditionCAPropertiesComboBox";
             this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.boundaryConditionCAPropertiesComboBox.TabIndex = 2;
@@ -302,7 +308,7 @@
             // neighbourhoodCAPropertiesComboBoxLabel
             // 
             this.neighbourhoodCAPropertiesComboBoxLabel.AutoSize = true;
-            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 62);
             this.neighbourhoodCAPropertiesComboBoxLabel.Name = "neighbourhoodCAPropertiesComboBoxLabel";
             this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(83, 13);
             this.neighbourhoodCAPropertiesComboBoxLabel.TabIndex = 1;
@@ -314,7 +320,7 @@
             this.neighbourhoodCAPropertiesComboBox.FormattingEnabled = true;
             this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
             "Periodic"});
-            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
+            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
             this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
             this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
@@ -349,40 +355,74 @@
             this.caSimulationCAPropertiesLabel.TabIndex = 11;
             this.caSimulationCAPropertiesLabel.Text = "CA Simulation: ";
             // 
-            // speedCAExecutionTrackBarLabel
-            // 
-            this.speedCAExecutionTrackBarLabel.AutoSize = true;
-            this.speedCAExecutionTrackBarLabel.Location = new System.Drawing.Point(20, 63);
-            this.speedCAExecutionTrackBarLabel.Name = "speedCAExecutionTrackBarLabel";
-            this.speedCAExecutionTrackBarLabel.Size = new System.Drawing.Size(38, 13);
-            this.speedCAExecutionTrackBarLabel.TabIndex = 13;
-            this.speedCAExecutionTrackBarLabel.Text = "Speed";
-            // 
-            // speedCAExecutionTrackBar
-            // 
-            this.speedCAExecutionTrackBar.AutoSize = false;
-            this.speedCAExecutionTrackBar.Location = new System.Drawing.Point(64, 63);
-            this.speedCAExecutionTrackBar.Minimum = 1;
-            this.speedCAExecutionTrackBar.Name = "speedCAExecutionTrackBar";
-            this.speedCAExecutionTrackBar.Size = new System.Drawing.Size(104, 30);
-            this.speedCAExecutionTrackBar.TabIndex = 12;
-            this.speedCAExecutionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.speedCAExecutionTrackBar.Value = 1;
-            this.speedCAExecutionTrackBar.Visible = false;
-            // 
             // executionGroupBox
             // 
+            this.executionGroupBox.Controls.Add(this.caExecutionProgressBar);
             this.executionGroupBox.Controls.Add(this.caSimulationCAPropertiesLabel);
-            this.executionGroupBox.Controls.Add(this.speedCAExecutionTrackBarLabel);
             this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
-            this.executionGroupBox.Controls.Add(this.speedCAExecutionTrackBar);
             this.executionGroupBox.Location = new System.Drawing.Point(525, 315);
             this.executionGroupBox.Name = "executionGroupBox";
             this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
             this.executionGroupBox.TabIndex = 14;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
+            // 
+            // caExecutionProgressBar
+            // 
+            this.caExecutionProgressBar.Location = new System.Drawing.Point(6, 64);
+            this.caExecutionProgressBar.Name = "caExecutionProgressBar";
+            this.caExecutionProgressBar.Size = new System.Drawing.Size(168, 23);
+            this.caExecutionProgressBar.TabIndex = 12;
+            // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.fileMenuItem});
+            // 
+            // fileMenuItem
+            // 
+            this.fileMenuItem.Index = 0;
+            this.fileMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.openFileMenuItem,
+            this.saveFileMenuItem});
+            this.fileMenuItem.Text = "File";
+            // 
+            // openFileMenuItem
+            // 
+            this.openFileMenuItem.Index = 0;
+            this.openFileMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.jsonOpenFileMenuItem,
+            this.bitmapOpenFileMenuItem});
+            this.openFileMenuItem.Text = "Open...";
+            // 
+            // jsonOpenFileMenuItem
+            // 
+            this.jsonOpenFileMenuItem.Index = 0;
+            this.jsonOpenFileMenuItem.Text = "... from JSON";
+            // 
+            // bitmapOpenFileMenuItem
+            // 
+            this.bitmapOpenFileMenuItem.Index = 1;
+            this.bitmapOpenFileMenuItem.Text = "... from BITMAP";
+            // 
+            // saveFileMenuItem
+            // 
+            this.saveFileMenuItem.Index = 1;
+            this.saveFileMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.jsonSaveFileMenuItem,
+            this.bitmapSaveFileMenuItem});
+            this.saveFileMenuItem.Text = "Save...";
+            // 
+            // jsonSaveFileMenuItem
+            // 
+            this.jsonSaveFileMenuItem.Index = 0;
+            this.jsonSaveFileMenuItem.Text = "... to JSON";
+            // 
+            // bitmapSaveFileMenuItem
+            // 
+            this.bitmapSaveFileMenuItem.Index = 1;
+            this.bitmapSaveFileMenuItem.Text = "... to BITMAP";
             // 
             // Form1
             // 
@@ -395,7 +435,7 @@
             this.Controls.Add(this.gridPropertiesGroupBox);
             this.Controls.Add(this.viewPanel);
             this.MaximizeBox = false;
-            this.Menu = this.mainMenu;
+            this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -412,7 +452,6 @@
             this.caGroupBox.ResumeLayout(false);
             this.caGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.speedCAExecutionTrackBar)).EndInit();
             this.executionGroupBox.ResumeLayout(false);
             this.executionGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -447,9 +486,16 @@
         private System.Windows.Forms.Label caSimulationCAPropertiesLabel;
         private System.Windows.Forms.Button stopCAExecutionButton;
         private System.Windows.Forms.Button runCAExecutionButton;
-        private System.Windows.Forms.Label speedCAExecutionTrackBarLabel;
-        private System.Windows.Forms.TrackBar speedCAExecutionTrackBar;
         private System.Windows.Forms.GroupBox executionGroupBox;
+        private System.Windows.Forms.ProgressBar caExecutionProgressBar;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem fileMenuItem;
+        private System.Windows.Forms.MenuItem openFileMenuItem;
+        private System.Windows.Forms.MenuItem jsonOpenFileMenuItem;
+        private System.Windows.Forms.MenuItem bitmapOpenFileMenuItem;
+        private System.Windows.Forms.MenuItem saveFileMenuItem;
+        private System.Windows.Forms.MenuItem jsonSaveFileMenuItem;
+        private System.Windows.Forms.MenuItem bitmapSaveFileMenuItem;
     }
 }
 

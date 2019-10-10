@@ -375,16 +375,19 @@ namespace MultiscaleModeling
                     task.Join();
                 }
                 currentGrid.Copy(nextStepGrid);
-                this.Invoke((MethodInvoker)delegate
-                {
-                    viewPanel.Refresh();
-                });
+
+                //Drawing each frame
+                //this.Invoke((MethodInvoker)delegate
+                //{
+                //    viewPanel.Refresh();
+                //});
 
             }
             running = false;
             this.Invoke((MethodInvoker)delegate
             {
                 GUI(!running);
+                viewPanel.Refresh();
             });
         }
 
