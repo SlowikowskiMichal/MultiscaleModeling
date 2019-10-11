@@ -99,20 +99,131 @@ namespace MultiscaleModeling
             SetImageSize();
         }
 
+        //GUI METHODS
+        //PICTURE BOX METHODS
+        #region GUI ACTIONS
+        private void ViewPictureBox_Click(object sender, EventArgs e)
+        {
+            if (running || mcRunning)
+            {
+                return;
+            }
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == MouseButtons.Left)
+            {
+                //Calculate pictureBox click position to grid position
+                int x = (int)(me.X / cellXSize) + currentPositionX;
+                int y = (int)(me.Y / cellYSize) + currentPositionY;
+ /*               if (x >= Grid.SizeX || x < 0
+                    || y >= Grid.SizeY || y < 0)
+                {
+                    return;
+                }
+*/             
+                if(gridController.ChangeGridValue(x, y))
+                {
+                    FillCell(x, y, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
+                }
+                else
+                {
+                    emptyCount++;
+                    FillCell(x, y, BackgroundColor);
+                }
+            }
+            else
+            {
+                gridController.ChangeCurrentNucleonID();
+            }
+
+            viewPictureBox.Image = nextImage;
+        }
+        private void ViewPictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
+        }
+        private void ResizeSizeGridPropertiesButton_Click(object sender, EventArgs e)
+        {
+            int sizeX;
+            int sizeY;
+            int.TryParse(widthSizeGridPropertiesNumericUpDown.Text, out sizeX);
+            int.TryParse(heightSizeGridPropertiesNumericUpDown.Text, out sizeY);
+
+            gridController.ResizeGrid(sizeX, sizeY);
+
+            SetImageSize();
+        }
+        private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
+        {
+            gridController.ClearGrid();
+            DrawGridOnImage();
+
+            viewPictureBox.Image = nextImage;
+            viewPictureBox.Refresh();
+        }
+        private void RandomPlacementButton_Click(object sender, EventArgs e)
+        {
+            gridController.RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
+            DrawGridOnImage();
+            viewPictureBox.Refresh();
+        }
+        private void RunCAExecutionButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+                return;
+            running = true;
+            SetGuiOnExecution(!running);
+            Thread calculations = new Thread(Continue);
+            calculations.Start();
+        }
+        private void StopCAExecutionButton_Click(object sender, EventArgs e)
+        {
+            running = false;
+            SetGuiOnExecution(!running);
+        }
+        private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
+        }
+        private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveBitmapDialog = new SaveFileDialog();
+            saveBitmapDialog.Filter = "Bitmap Image|*.bmp";
+            saveBitmapDialog.Title = "Save an Image File";
+            saveBitmapDialog.ShowDialog();
+
+            if (saveBitmapDialog.FileName != "")
+            {
+                System.IO.FileStream fs =
+                    (System.IO.FileStream)saveBitmapDialog.OpenFile();
+
+                viewPictureBox.Image.Save(fs,
+                  System.Drawing.Imaging.ImageFormat.Bmp);
+
+                fs.Close();
+            }
+        }
+        #endregion
+        #region DO ZAOURANIA
+        private void SetGuiOnExecution(bool flag)
+        {
+            viewGroupBox.Enabled = flag;
+            gridPropertiesGroupBox.Enabled = flag;
+            caGroupBox.Enabled = flag;
+        }
         void DrawGridOnImage()
         {
             int endPositionX = currentPositionX + nextImage.Width;
             int endPositionY = currentPositionY + nextImage.Height;
 
             Graphics.FromImage(nextImage).Clear(Color.Black);
- 
+
             for (int x = currentPositionX; x < endPositionX; x++)
             {
                 for (int y = currentPositionY; y < endPositionY; y++)
                 {
-                    if (gridController.GetCurrentGridCellState(x,y))
+                    if (gridController.GetCurrentGridCellState(x, y))
                     {
-                        FillCell(x, y, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x,y) % knownColors.Count()]));
+                        FillCell(x, y, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x, y) % knownColors.Count()]));
                     }
                     else
                     {
@@ -120,6 +231,20 @@ namespace MultiscaleModeling
                     }
                 }
             }
+        }
+        private void DrawGridOnViewPictureBox(int startPositionX, int startPositionY, int endPositionX, int endPositionY)
+        {
+            endPositionX = Math.Min(endPositionX, Grid.SizeX);
+            endPositionY = Math.Min(endPositionY, Grid.SizeY);
+
+            for (int y = startPositionY; y < endPositionY; y++)
+            {
+                for (int x = startPositionX; x < endPositionX; x++)
+                {
+                    FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
+                }
+            }
+            viewPictureBox.Refresh();
         }
         void FillCell(int x, int y, Color color)
         {
@@ -160,90 +285,10 @@ namespace MultiscaleModeling
                 Math.Min(viewPanel.Size.Height, Grid.SizeY)
             );
 
-            
+
             viewPictureBox.Image = nextImage;
             DrawGridOnImage();
             viewPictureBox.Refresh();
-        }
-        private void ResizeSizeGridPropertiesButton_Click(object sender, EventArgs e)
-        {
-            int sizeX;
-            int sizeY;
-            int.TryParse(widthSizeGridPropertiesNumericUpDown.Text, out sizeX);
-            int.TryParse(heightSizeGridPropertiesNumericUpDown.Text, out sizeY);
-
-            gridController.ResizeGrid(sizeX, sizeY);
-
-            SetImageSize();
-        }
-        private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
-        {
-            gridController.ClearGrid();
-            DrawGridOnImage();
-
-            viewPictureBox.Image = nextImage;
-            viewPictureBox.Refresh();
-        }
-
-
-        //GUI METHODS
-        //PICTURE BOX METHODS
-        private void ViewPictureBox_Click(object sender, EventArgs e)
-        {
-            if (running || mcRunning)
-            {
-                return;
-            }
-            MouseEventArgs me = (MouseEventArgs)e;
-            if (me.Button == MouseButtons.Left)
-            {
-                //Calculate pictureBox click position to grid position
-                int x = (int)(me.X / cellXSize) + currentPositionX;
-                int y = (int)(me.Y / cellYSize) + currentPositionY;
- /*               if (x >= Grid.SizeX || x < 0
-                    || y >= Grid.SizeY || y < 0)
-                {
-                    return;
-                }
-*/             
-                if(gridController.ChangeGridValue(x, y))
-                {
-                    FillCell(x, y, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
-                }
-                else
-                {
-                    emptyCount++;
-                    FillCell(x, y, BackgroundColor);
-                }
-            }
-            else
-            {
-                gridController.ChangeCurrentNucleonID();
-            }
-
-            viewPictureBox.Image = nextImage;
-        }
-
-        private void ViewPictureBox_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawImage(nextImage, 0, 0, nextImage.Width, nextImage.Height);
-        }
-
-        private void RandomPlacementButton_Click(object sender, EventArgs e)
-        {
-            gridController.RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
-            DrawGridOnImage();
-            viewPictureBox.Refresh();
-        }
-
-        private void RunCAExecutionButton_Click(object sender, EventArgs e)
-        {
-            if (running)
-                return;
-            running = true;
-            SetGuiOnExecution(!running);
-            Thread calculations = new Thread(Continue);
-            calculations.Start();
         }
 
         void CalculateNextStep(int startX, int startY, int endX, int endY)
@@ -299,7 +344,6 @@ namespace MultiscaleModeling
                 }
             }
         }
-
         void Continue()
         {
             int nThreads = 4;
@@ -335,62 +379,9 @@ namespace MultiscaleModeling
             this.Invoke((MethodInvoker)delegate
             {
                 SetGuiOnExecution(!running);
-                DrawGridOnViewPictureBox(currentPositionX,currentPositionY,viewPictureBox.Size.Width,viewPictureBox.Size.Height);
+                DrawGridOnViewPictureBox(currentPositionX, currentPositionY, viewPictureBox.Size.Width, viewPictureBox.Size.Height);
             });
         }
-
-        private void DrawGridOnViewPictureBox(int startPositionX, int startPositionY, int endPositionX, int endPositionY)
-        {
-            endPositionX = Math.Min(endPositionX, Grid.SizeX);
-            endPositionY = Math.Min(endPositionY, Grid.SizeY);
-
-            for(int y = startPositionY; y < endPositionY; y++)
-            {
-                for (int x = startPositionX; x < endPositionX; x++)
-                {
-                    FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
-                }
-            }
-            viewPictureBox.Refresh();
-        }
-
-        private void SetGuiOnExecution(bool flag)
-        {
-            viewGroupBox.Enabled = flag;
-            gridPropertiesGroupBox.Enabled = flag;
-            caGroupBox.Enabled = flag;
-        }
-
-        private void StopCAExecutionButton_Click(object sender, EventArgs e)
-        {
-            running = false;
-            SetGuiOnExecution(!running);
-        }
-
-        private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
-        }
-
-        //MAIN MENU
-
-        private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveBitmapDialog = new SaveFileDialog();
-            saveBitmapDialog.Filter = "Bitmap Image|*.bmp";
-            saveBitmapDialog.Title = "Save an Image File";
-            saveBitmapDialog.ShowDialog();
-
-            if (saveBitmapDialog.FileName != "")
-            {
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)saveBitmapDialog.OpenFile();
-
-                viewPictureBox.Image.Save(fs,
-                  System.Drawing.Imaging.ImageFormat.Bmp);
-
-                fs.Close();
-            }
-        }
+        #endregion
     }
 }
