@@ -45,7 +45,7 @@ namespace MultiscaleModeling
         bool drawGrid;
         #endregion
         #region GRID OPTIONS
-        BoundaryConditions boundaryCondition;
+        BoundaryCondition boundaryCondition;
         Neighbourhood neighborhood;
         #endregion
         //FILL
@@ -70,10 +70,10 @@ namespace MultiscaleModeling
                 int.Parse(nucleonAmoutCAPropertiesNumericUpDown.Text)
             );
 
-            celluralAutomataProperties = new CelluralAutomataProperties(
-                neighbourhoodCAPropertiesComboBox.SelectedIndex,
-                boundaryConditionCAPropertiesComboBox.SelectedIndex
-            );
+            celluralAutomataProperties = new CelluralAutomataProperties();
+
+            gridController.SetBoundaryCondition(celluralAutomataProperties.GetBoundaryCondition());
+            gridController.SetNeighbourhood(celluralAutomataProperties.GetNeighbourhood());
             
             //IMAGE
             knownColors.RemoveAll(color => color == "White" || color == "Black"
@@ -89,7 +89,7 @@ namespace MultiscaleModeling
 
             //GRID OPTIONS
             boundaryConditionCAPropertiesComboBox.SelectedIndex = 0;
-            boundaryCondition = (BoundaryConditions)boundaryConditionCAPropertiesComboBox.SelectedIndex;
+            boundaryCondition = (BoundaryCondition)boundaryConditionCAPropertiesComboBox.SelectedIndex;
             neighbourhoodCAPropertiesComboBox.SelectedIndex = 0;
             neighborhood = implementedNeighborhood[neighbourhoodCAPropertiesComboBox.SelectedIndex];
             //FILL
@@ -166,19 +166,22 @@ namespace MultiscaleModeling
             DrawGridOnImage();
             viewPictureBox.Refresh();
         }
-        private void RunCAExecutionButton_Click(object sender, EventArgs e)
+        private async void RunCAExecutionButton_Click(object sender, EventArgs e)
         {
             if (running)
                 return;
             running = true;
-            SetGuiOnExecution(!running);
-            Thread calculations = new Thread(Continue);
-            calculations.Start();
+            var progress = new Progress<string>();
+            SetGuiAsEnabled(!running);
+            await Task.Factory.StartNew(() => gridController.Continue(progress),
+                            TaskCreationOptions.LongRunning);
+            this.DrawGridOnImage();
+            viewPictureBox.Refresh();
         }
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
             running = false;
-            SetGuiOnExecution(!running);
+            SetGuiAsEnabled(!running);
         }
         private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
@@ -202,18 +205,16 @@ namespace MultiscaleModeling
                 fs.Close();
             }
         }
-        #endregion
-        #region DO ZAOURANIA
-        private void SetGuiOnExecution(bool flag)
+        private void SetGuiAsEnabled(bool flag)
         {
             viewGroupBox.Enabled = flag;
             gridPropertiesGroupBox.Enabled = flag;
             caGroupBox.Enabled = flag;
         }
-        void DrawGridOnImage()
+        public void DrawGridOnImage()
         {
-            int endPositionX = currentPositionX + nextImage.Width;
-            int endPositionY = currentPositionY + nextImage.Height;
+            int endPositionX = Math.Min(currentPositionX + nextImage.Width, Grid.SizeX);
+            int endPositionY = Math.Min(currentPositionY + nextImage.Height, Grid.SizeY);
 
             Graphics.FromImage(nextImage).Clear(Color.Black);
 
@@ -246,6 +247,9 @@ namespace MultiscaleModeling
             }
             viewPictureBox.Refresh();
         }
+        #endregion
+        #region DO ZAOURANIA
+
         void FillCell(int x, int y, Color color)
         {
             brush.Color = color;
@@ -289,98 +293,6 @@ namespace MultiscaleModeling
             viewPictureBox.Image = nextImage;
             DrawGridOnImage();
             viewPictureBox.Refresh();
-        }
-
-        void CalculateNextStep(int startX, int startY, int endX, int endY)
-        {
-            Random r = new Random();
-            nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
-            List<Model.Point> n;
-            List<int> a = new List<int>();
-
-            for (int x = startX; x < endX; x++)
-            {
-                for (int y = startY; y < endY; y++)
-                {
-                    if (currentGrid.Cells[x, y].State != 0)
-                    {
-                        continue;
-                    }
-
-                    n = neighborhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, boundaryCondition);
-                    a.Clear();
-
-                    n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1).ForEach(p => a.Add(currentGrid.Cells[p.X, p.Y].Id));
-
-                    Dictionary<int, int> counts = a.GroupBy(v => v)
-                                      .ToDictionary(g => g.Key,
-                                                    g => g.Count());
-                    int max = 0;
-                    int k = 0;
-                    foreach (int key in counts.Keys)
-                    {
-                        if (max < counts[key])
-                        {
-                            max = counts[key];
-                            k = key;
-                        }
-                        else if (max == counts[key] && r.NextDouble() > 0.5)
-                        {
-                            k = key;
-                        }
-                    }
-
-                    if (max > 0)
-                    {
-                        lock (synLock)
-                        {
-                            emptyCount--;
-                            nextStepGrid.Cells[x, y].ChangeState();
-                            nextStepGrid.Cells[x, y].Id = k;
-                        }
-
-                        //FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
-                    }
-                }
-            }
-        }
-        void Continue()
-        {
-            int nThreads = 4;
-            Thread[] calculations = new Thread[nThreads];
-            int x = Grid.SizeX / 2;
-            int y = Grid.SizeY / 2;
-
-            long current = DateTime.Now.Ticks;
-            while (running && emptyCount > 0)
-            {
-                calculations[0] = new Thread(() => CalculateNextStep(0, 0, x, y));
-                calculations[1] = new Thread(() => CalculateNextStep(x, 0, Grid.SizeX, y));
-                calculations[2] = new Thread(() => CalculateNextStep(0, y, x, Grid.SizeY));
-                calculations[3] = new Thread(() => CalculateNextStep(x, y, Grid.SizeX, Grid.SizeY));
-                foreach (Thread task in calculations)
-                {
-                    task.Start();
-                }
-                foreach (Thread task in calculations)
-                {
-                    task.Join();
-                }
-                currentGrid.Copy(nextStepGrid);
-
-                //Drawing each frame
-                //this.Invoke((MethodInvoker)delegate
-                //{
-                //    viewPanel.Refresh();
-                //});
-
-            }
-            running = false;
-            this.Invoke((MethodInvoker)delegate
-            {
-                SetGuiOnExecution(!running);
-                DrawGridOnViewPictureBox(currentPositionX, currentPositionY, viewPictureBox.Size.Width, viewPictureBox.Size.Height);
-            });
         }
         #endregion
     }

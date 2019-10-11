@@ -12,10 +12,10 @@ namespace MultiscaleModeling.Controller
         #region ATTRIBUTES
         string[] NeighbourhoodNames = new string[] { "Moore" };
         readonly Neighbourhood[] implementedNeighborhood = { new MooresNeighbourhood() };
-        int currentNeighborhood;
+        public int currentNeighborhood { private get; set; }
 
         readonly string[] BoundaryConditionsNames = new string[] { "Periodic" };
-        int currentBoundaryCondition;
+        public int currentBoundaryCondition { private get; set; }
         #endregion
 
         #region METHODS
@@ -34,6 +34,16 @@ namespace MultiscaleModeling.Controller
         }
 
         #endregion
+
+        public Neighbourhood GetNeighbourhood()
+        {
+            return implementedNeighborhood[currentNeighborhood];
+        }
+
+        public BoundaryCondition GetBoundaryCondition()
+        {
+            return (BoundaryCondition)currentBoundaryCondition;
+        }
         #endregion
     }
 }

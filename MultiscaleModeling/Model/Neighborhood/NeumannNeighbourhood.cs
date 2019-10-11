@@ -8,7 +8,7 @@ namespace MultiscaleModeling.Model.Neighbourhood
 {
     class NeumannNeighbourhood : Neighbourhood
     {
-        public override List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryConditions condition)
+        public override List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryCondition condition)
         {
             List<Point> cellNeighborIndexes = new List<Point>();
 

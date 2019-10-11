@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace MultiscaleModeling.Model.Neighbourhood
 {
-    enum BoundaryConditions { Periodic = 0, Reflective = 1 };
+    enum BoundaryCondition { Periodic = 0, Reflective = 1 };
 
     abstract class Neighbourhood
     {
-        public abstract List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryConditions condition);
+        public abstract List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryCondition condition);
 
-        protected void CheckForBoundaryCondition(List<Point> cellNeighborIndexes, int SizeX, int SizeY, BoundaryConditions boundary)
+        protected void CheckForBoundaryCondition(List<Point> cellNeighborIndexes, int SizeX, int SizeY, BoundaryCondition boundary)
         {
 
             Func<int, int, int> lessThanZero;
             Func<int, int, int> moreThanSize;
 
 
-            if (boundary == BoundaryConditions.Periodic)
+            if (boundary == BoundaryCondition.Periodic)
             {
                 lessThanZero = PeriodicLessThanZero;
                 moreThanSize = PeriodicMoreThanZero;
             }
-            else if (boundary == BoundaryConditions.Reflective)
+            else if (boundary == BoundaryCondition.Reflective)
             {
                 lessThanZero = ReflectiveLessThanZero;
                 moreThanSize = ReflectiveMoreThanZero;

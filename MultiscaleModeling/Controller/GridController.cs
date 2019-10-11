@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
 using MultiscaleModeling.Model;
+using System.Threading;
+using MultiscaleModeling.Model.Neighbourhood;
+
 namespace MultiscaleModeling.Controller
 {
     class GridController
     {
         #region ATTRIBUTES
 
+        #region THREADING
         readonly static object synLock = new object();
+        bool running;
+        #endregion
 
         #region GRID
         Grid currentGrid;
@@ -24,6 +27,22 @@ namespace MultiscaleModeling.Controller
         public int CurrentNucleonID { get; private set; }
         #endregion
 
+        #region B/N CONDITIONS
+        public Neighbourhood Neighbourhood { get; private set; }
+        public BoundaryCondition BoundaryCondition { get; private set; }
+        #endregion
+
+        #endregion
+
+        #region GETTERS SETTERS
+        public void SetNeighbourhood(Neighbourhood neighbourhood)
+        {
+            this.Neighbourhood = neighbourhood;
+        }
+        public void SetBoundaryCondition(BoundaryCondition boundaryCondition)
+        {
+            this.BoundaryCondition = boundaryCondition;
+        }
         #endregion
 
         #region METHODS
@@ -154,6 +173,87 @@ namespace MultiscaleModeling.Controller
                 emptyCount--;
             }
     
+        }
+        void CalculateNextStep(int startX, int startY, int endX, int endY)
+        {
+            Random r = new Random();
+            nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
+            List<Model.Point> n;
+            List<int> a = new List<int>();
+
+            for (int x = startX; x < endX; x++)
+            {
+                for (int y = startY; y < endY; y++)
+                {
+                    if (currentGrid.Cells[x, y].State != 0)
+                    {
+                        continue;
+                    }
+
+                    n = Neighbourhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, BoundaryCondition);
+                    a.Clear();
+
+                    n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1).ForEach(p => a.Add(currentGrid.Cells[p.X, p.Y].Id));
+
+                    Dictionary<int, int> counts = a.GroupBy(v => v)
+                                      .ToDictionary(g => g.Key,
+                                                    g => g.Count());
+                    int max = 0;
+                    int k = 0;
+                    foreach (int key in counts.Keys)
+                    {
+                        if (max < counts[key])
+                        {
+                            max = counts[key];
+                            k = key;
+                        }
+                        else if (max == counts[key] && r.NextDouble() > 0.5)
+                        {
+                            k = key;
+                        }
+                    }
+
+                    if (max > 0)
+                    {
+                        lock (synLock)
+                        {
+                            emptyCount--;
+                            nextStepGrid.Cells[x, y].ChangeState();
+                            nextStepGrid.Cells[x, y].Id = k;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Continue(IProgress<string> progress)
+        {
+            int nThreads = 4;
+            Thread[] calculations = new Thread[nThreads];
+            int x = Grid.SizeX / 2;
+            int y = Grid.SizeY / 2;
+
+            running = true;
+
+            long current = DateTime.Now.Ticks;
+            while (running && emptyCount > 0)
+            {
+                calculations[0] = new Thread(() => CalculateNextStep(0, 0, x, y));
+                calculations[1] = new Thread(() => CalculateNextStep(x, 0, Grid.SizeX, y));
+                calculations[2] = new Thread(() => CalculateNextStep(0, y, x, Grid.SizeY));
+                calculations[3] = new Thread(() => CalculateNextStep(x, y, Grid.SizeX, Grid.SizeY));
+                foreach (Thread task in calculations)
+                {
+                    task.Start();
+                }
+                foreach (Thread task in calculations)
+                {
+                    task.Join();
+                }
+                currentGrid.Copy(nextStepGrid);
+
+            }
+            running = false;
         }
         #endregion
 

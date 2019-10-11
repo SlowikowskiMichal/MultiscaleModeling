@@ -8,7 +8,7 @@ namespace MultiscaleModeling.Model.Neighbourhood
 {
     class MooresNeighbourhood : Neighbourhood
     {
-        override public List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryConditions condition)
+        override public List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryCondition condition)
         {
             List<Point> cellNeighborIndexes = new List<Point>();
 
