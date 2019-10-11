@@ -138,26 +138,16 @@ namespace MultiscaleModeling.Controller
             }
             nucleonsPopulation = nPopulation;
             ClearGrid();
-
-            List<Model.Point> freePoints = new List<Model.Point>();
-            for (int x = 0; x < Grid.SizeX; x++)
-            {
-                for (int y = 0; y < Grid.SizeY; y++)
-                {
-                    freePoints.Add(new Model.Point(x, y));
-                }
-            }
-
+            int gridSize = Grid.SizeX * Grid.SizeY;
             List<Model.Point> start = new List<Model.Point>();
 
             Random r = new Random();
             for (int i = 0; i < nucleonsPopulation;)
             {
 
-                int index = r.Next(0, freePoints.Count());
+                
 
-                start.Add(freePoints[index]);
-                freePoints.RemoveAt(index);
+                start.Add(new Point(r.Next(0, Grid.SizeX),r.Next(0, Grid.SizeY)));
                 i++;
             }
             Populate(start, nucleonsPopulation);
@@ -251,7 +241,7 @@ namespace MultiscaleModeling.Controller
                     task.Join();
                 }
                 currentGrid.Copy(nextStepGrid);
-                progress.Report((gridSize - emptyCount) * 100 / gridSize);
+                progress.Report((gridSize - emptyCount) / gridSize * 100);
             }
             running = false;
         }

@@ -173,7 +173,7 @@ namespace MultiscaleModeling
             running = true;
             var progress = new Progress<int>(v =>
             {
-                caExecutionProgressBar.Value = v;
+                caExecutionProgressBar.Value = Math.Abs(v);
             });
 
             SetGuiAsEnabled(false);
@@ -186,8 +186,6 @@ namespace MultiscaleModeling
         }
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
-            gridController.StopExecution();
-            running = false;
             SetGuiAsEnabled(!running);
         }
         private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -196,6 +194,8 @@ namespace MultiscaleModeling
         }
         private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
         {
+            Bitmap imageToSave = new Bitmap(Grid.SizeX, Grid.SizeY);
+            DrawGridOnImage(ref imageToSave);
             SaveFileDialog saveBitmapDialog = new SaveFileDialog();
             saveBitmapDialog.Filter = "Bitmap Image|*.bmp";
             saveBitmapDialog.Title = "Save an Image File";
@@ -205,9 +205,6 @@ namespace MultiscaleModeling
             {
                 System.IO.FileStream fs =
                     (System.IO.FileStream)saveBitmapDialog.OpenFile();
-
-                Bitmap imageToSave = new Bitmap(Grid.SizeX, Grid.SizeY);
-                DrawGridOnImage(ref imageToSave);
                 imageToSave.Save(fs,
                   System.Drawing.Imaging.ImageFormat.Bmp);
 
