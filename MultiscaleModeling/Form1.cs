@@ -122,12 +122,12 @@ namespace MultiscaleModeling
 */             
                 if(gridController.ChangeGridValue(x, y))
                 {
-                    FillCell(x, y, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
+                    FillCell(x, y,nextImage, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
                 }
                 else
                 {
                     emptyCount++;
-                    FillCell(x, y, BackgroundColor);
+                    FillCell(x, y, nextImage, BackgroundColor);
                 }
             }
             else
@@ -147,7 +147,7 @@ namespace MultiscaleModeling
             int sizeY;
             int.TryParse(widthSizeGridPropertiesNumericUpDown.Text, out sizeX);
             int.TryParse(heightSizeGridPropertiesNumericUpDown.Text, out sizeY);
-
+            nextImage = new Bitmap(sizeX, sizeY);
             gridController.ResizeGrid(sizeX, sizeY);
 
             SetImageSize();
@@ -155,7 +155,7 @@ namespace MultiscaleModeling
         private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
             gridController.ClearGrid();
-            DrawGridOnImage();
+            DrawGridOnImage(ref nextImage);
 
             viewPictureBox.Image = nextImage;
             viewPictureBox.Refresh();
@@ -163,7 +163,7 @@ namespace MultiscaleModeling
         private void RandomPlacementButton_Click(object sender, EventArgs e)
         {
             gridController.RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
-            DrawGridOnImage();
+            DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
         }
         private async void RunCAExecutionButton_Click(object sender, EventArgs e)
@@ -171,15 +171,22 @@ namespace MultiscaleModeling
             if (running)
                 return;
             running = true;
-            var progress = new Progress<string>();
-            SetGuiAsEnabled(!running);
+            var progress = new Progress<int>(v =>
+            {
+                caExecutionProgressBar.Value = v;
+            });
+
+            SetGuiAsEnabled(false);
             await Task.Factory.StartNew(() => gridController.Continue(progress),
                             TaskCreationOptions.LongRunning);
-            this.DrawGridOnImage();
+            this.DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
+            running = false;
+            SetGuiAsEnabled(true);
         }
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
+            gridController.StopExecution();
             running = false;
             SetGuiAsEnabled(!running);
         }
@@ -199,7 +206,9 @@ namespace MultiscaleModeling
                 System.IO.FileStream fs =
                     (System.IO.FileStream)saveBitmapDialog.OpenFile();
 
-                viewPictureBox.Image.Save(fs,
+                Bitmap imageToSave = new Bitmap(Grid.SizeX, Grid.SizeY);
+                DrawGridOnImage(ref imageToSave);
+                imageToSave.Save(fs,
                   System.Drawing.Imaging.ImageFormat.Bmp);
 
                 fs.Close();
@@ -211,12 +220,16 @@ namespace MultiscaleModeling
             gridPropertiesGroupBox.Enabled = flag;
             caGroupBox.Enabled = flag;
         }
-        public void DrawGridOnImage()
+        public void DrawGridOnImage(ref Bitmap imageToDrawOn)
         {
-            int endPositionX = Math.Min(currentPositionX + nextImage.Width, Grid.SizeX);
-            int endPositionY = Math.Min(currentPositionY + nextImage.Height, Grid.SizeY);
+            if(imageToDrawOn == null)
+            {
+                imageToDrawOn = nextImage;
+            }
+            int endPositionX = Math.Min(currentPositionX + imageToDrawOn.Width, Grid.SizeX);
+            int endPositionY = Math.Min(currentPositionY + imageToDrawOn.Height, Grid.SizeY);
 
-            Graphics.FromImage(nextImage).Clear(Color.Black);
+            Graphics.FromImage(imageToDrawOn).Clear(Color.Black);
 
             for (int x = currentPositionX; x < endPositionX; x++)
             {
@@ -224,46 +237,31 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x, y))
                     {
-                        FillCell(x, y, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x, y) % knownColors.Count()]));
+                        FillCell(x, y, imageToDrawOn, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x, y) % knownColors.Count()]));
                     }
                     else
                     {
-                        FillCell(x, y, Color.White);
+                        FillCell(x, y, imageToDrawOn, Color.White);
                     }
                 }
             }
         }
-        private void DrawGridOnViewPictureBox(int startPositionX, int startPositionY, int endPositionX, int endPositionY)
-        {
-            endPositionX = Math.Min(endPositionX, Grid.SizeX);
-            endPositionY = Math.Min(endPositionY, Grid.SizeY);
-
-            for (int y = startPositionY; y < endPositionY; y++)
-            {
-                for (int x = startPositionX; x < endPositionX; x++)
-                {
-                    FillCell(x, y, Color.FromName(knownColors[nextStepGrid.Cells[x, y].Id % knownColors.Count()]));
-                }
-            }
-            viewPictureBox.Refresh();
-        }
         #endregion
         #region DO ZAOURANIA
-
-        void FillCell(int x, int y, Color color)
+        void FillCell(int x, int y, Bitmap imageToDrawOn, Color color)
         {
             brush.Color = color;
 
             if (drawGrid)
             {
-                Graphics.FromImage(nextImage).
+                Graphics.FromImage(imageToDrawOn).
                     FillRectangle(brush,
                     x * cellXSize + 1, y * cellYSize + 1,
                     cellXSize - 2, cellYSize - 2);
             }
             else
             {
-                Graphics.FromImage(nextImage).
+                Graphics.FromImage(imageToDrawOn).
                     FillRectangle(brush,
                     x * cellXSize, y * cellYSize,
                     cellXSize, cellYSize);
@@ -291,7 +289,7 @@ namespace MultiscaleModeling
 
 
             viewPictureBox.Image = nextImage;
-            DrawGridOnImage();
+            DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
         }
         #endregion

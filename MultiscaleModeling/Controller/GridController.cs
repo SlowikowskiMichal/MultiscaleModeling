@@ -226,13 +226,13 @@ namespace MultiscaleModeling.Controller
             }
         }
 
-        public void Continue(IProgress<string> progress)
+        public void Continue(IProgress<int> progress)
         {
             int nThreads = 4;
             Thread[] calculations = new Thread[nThreads];
             int x = Grid.SizeX / 2;
             int y = Grid.SizeY / 2;
-
+            int gridSize = Grid.SizeX * Grid.SizeY;
             running = true;
 
             long current = DateTime.Now.Ticks;
@@ -251,9 +251,17 @@ namespace MultiscaleModeling.Controller
                     task.Join();
                 }
                 currentGrid.Copy(nextStepGrid);
-
+                progress.Report((gridSize - emptyCount) * 100 / gridSize);
             }
             running = false;
+        }
+
+        public void StopExecution()
+        {
+            lock(synLock)
+            {
+                running = false;
+            }
         }
         #endregion
 
