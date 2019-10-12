@@ -253,6 +253,11 @@ namespace MultiscaleModeling.Controller
                 running = false;
             }
         }
+
+        public Grid GetCurrentGrid()
+        {
+            return currentGrid;
+        }
         #endregion
 
     }

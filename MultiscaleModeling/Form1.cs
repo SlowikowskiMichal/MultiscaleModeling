@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MultiscaleModeling.Model;
 using MultiscaleModeling.Model.Neighbourhood;
 using MultiscaleModeling.Controller;
+using MultiscaleModeling.Controller.FileIO.Export;
+using MultiscaleModeling.Controller.FileIO.Import;
 
 namespace MultiscaleModeling
 {
@@ -57,6 +59,10 @@ namespace MultiscaleModeling
         bool mcRunning = false;
         //Label
         string errMsg = "";
+        #region IMPORT EXPORT
+        ISaver Saver;
+        ILoader Loader;
+        #endregion
         #endregion
 
         public Form1()
@@ -194,6 +200,7 @@ namespace MultiscaleModeling
         }
         private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
         {
+            /*
             Bitmap imageToSave = new Bitmap(Grid.SizeX, Grid.SizeY);
             DrawGridOnImage(ref imageToSave);
             SaveFileDialog saveBitmapDialog = new SaveFileDialog();
@@ -210,6 +217,9 @@ namespace MultiscaleModeling
 
                 fs.Close();
             }
+            */
+            Saver = new BitmapSaver();
+            Saver.Save(gridController.GetCurrentGrid());
         }
         private void SetGuiAsEnabled(bool flag)
         {
