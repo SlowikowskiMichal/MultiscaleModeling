@@ -9,5 +9,6 @@ namespace MultiscaleModeling.Controller.FileIO.Import
 {
     interface ILoader
     {
+        void Load(string filePath, ref GridController gridController);
     }
 }

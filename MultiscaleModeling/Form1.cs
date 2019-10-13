@@ -303,13 +303,32 @@ namespace MultiscaleModeling
 
         private void jsonSaveFileMenuItem_Click(object sender, EventArgs e)
         {
-            int? nPopulation;
+            int nPopulation;
             int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
             Saver = new JSONSaver(nPopulation,
                 neighbourhoodCAPropertiesComboBox.Text,
                 boundaryConditionCAPropertiesComboBox.Text);
             
             Saver.Save(gridController.GetCurrentGrid());
+        }
+
+        private void bitmapOpenFileMenuItem_Click(object sender, EventArgs e)
+        {
+            Loader = new BitmapLoader();
+            OpenFileDialog openBitmapDialog = new OpenFileDialog();
+            openBitmapDialog.Filter = "Bitmap Image|*.bmp";
+            openBitmapDialog.Title = "Save an Image File";
+            openBitmapDialog.ShowDialog();
+            if (openBitmapDialog.FileName != String.Empty) {
+                Loader.Load(openBitmapDialog.FileName, ref gridController);
+
+                widthSizeGridPropertiesNumericUpDown.Text = Grid.SizeX.ToString();
+                heightSizeGridPropertiesNumericUpDown.Text = Grid.SizeY.ToString();
+                nextImage = new Bitmap(Grid.SizeX, Grid.SizeY);
+                nucleonAmoutCAPropertiesNumericUpDown.Text = gridController.GetNucleonsPopulation().ToString();
+            }
+            this.DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
         }
     }
 }

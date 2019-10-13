@@ -43,6 +43,10 @@ namespace MultiscaleModeling.Controller
         {
             this.BoundaryCondition = boundaryCondition;
         }
+        public int GetNucleonsPopulation()
+        {
+            return nucleonsPopulation;
+        }
         #endregion
 
         #region METHODS
@@ -257,6 +261,25 @@ namespace MultiscaleModeling.Controller
         public Grid GetCurrentGrid()
         {
             return currentGrid;
+        }
+        /// <summary>
+        /// Method constructs grid from Dictionary of UInt32 Keys (Grain ID)
+        /// and list of point in this grain.
+        /// </summary>
+        /// <param name="grains"></param>
+        public void SetGridFromPointsDictionary(Dictionary<int, List<Point>> grains)
+        {
+            int currentID = 0;
+            this.nucleonsPopulation = grains.Keys.Count;
+
+            foreach (List<Point> l in grains.Values)
+            {
+                foreach(Point p in l)
+                {
+                    currentGrid.ChangeCellValue(p.X, p.Y,currentID);
+                }
+                currentID++;
+            }
         }
         #endregion
 

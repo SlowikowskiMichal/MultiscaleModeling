@@ -8,5 +8,9 @@ namespace MultiscaleModeling.Controller.FileIO.Import
 {
     class JSONLoader : ILoader
     {
+        public void Load(string filePath, ref GridController gridController)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

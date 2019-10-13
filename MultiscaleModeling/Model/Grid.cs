@@ -70,6 +70,24 @@ namespace MultiscaleModeling.Model
             }
         }
 
+        public void ChangeCellValue(int x, int y, int value)
+        {
+            if (x < _sizeX && y < _sizeY && x >= 0 && y >= 0)
+            {
+                Cells[x, y].ChangeState();
+                Cells[x, y].Id = value;
+            }
+        }
+
+        public void ChangeCellValue(int x, int y, int value, int state)
+        {
+            if (x < _sizeX && y < _sizeY && x >= 0 && y >= 0)
+            {
+                Cells[x, y].ChangeState(state);
+                Cells[x, y].Id = value;
+            }
+        }
+
         public void Clear()
         {
             foreach (Cell c in Cells)

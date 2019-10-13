@@ -23,6 +23,11 @@ namespace MultiscaleModeling.Model
             State = (State == 0) ? 1 : 0;
         }
 
+        public void ChangeState(int state)
+        {
+            State = state;
+        }
+
         public void Reset()
         {
             State = 0;

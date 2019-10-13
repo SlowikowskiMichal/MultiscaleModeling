@@ -420,6 +420,7 @@
             // 
             this.bitmapOpenFileMenuItem.Index = 1;
             this.bitmapOpenFileMenuItem.Text = "... from BITMAP";
+            this.bitmapOpenFileMenuItem.Click += new System.EventHandler(this.bitmapOpenFileMenuItem_Click);
             // 
             // saveFileMenuItem
             // 
