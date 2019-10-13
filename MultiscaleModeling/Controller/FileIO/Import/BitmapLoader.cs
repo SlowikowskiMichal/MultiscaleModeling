@@ -31,11 +31,14 @@ namespace MultiscaleModeling.Controller.FileIO.Import
                 for (int x = 0; x < image.Width; x++)
                 {
                     int color = image.GetPixel(x, y).ToArgb();
-                    if (!grains.ContainsKey(color))                    
+                    if (color != -1)
                     {
-                        grains.Add(color, new List<Model.Point>());
+                    if (!grains.ContainsKey(color))
+                        {
+                            grains.Add(color, new List<Model.Point>());
+                        }
+                        grains[color].Add(new Model.Point(x, y));
                     }
-                    grains[color].Add(new Model.Point(x, y));
                 }
             }
             return grains;

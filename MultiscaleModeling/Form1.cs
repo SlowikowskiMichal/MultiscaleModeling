@@ -196,7 +196,7 @@ namespace MultiscaleModeling
         }
         private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
+            gridController.SetNucleonsPopulationDecimal(Decimal.ToInt32(nucleonAmoutCAPropertiesNumericUpDown.Value));
         }
         private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
         {

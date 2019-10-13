@@ -220,6 +220,11 @@ namespace MultiscaleModeling.Controller
             }
         }
 
+        internal void SetNucleonsPopulationDecimal(int v)
+        {
+            nucleonsPopulation = v;
+        }
+
         public void Continue(IProgress<int> progress)
         {
             int nThreads = 4;
@@ -245,7 +250,7 @@ namespace MultiscaleModeling.Controller
                     task.Join();
                 }
                 currentGrid.Copy(nextStepGrid);
-                progress.Report((gridSize - emptyCount) / gridSize * 100);
+                progress.Report((gridSize - emptyCount) * 100 / gridSize );
             }
             running = false;
         }
@@ -269,14 +274,16 @@ namespace MultiscaleModeling.Controller
         /// <param name="grains"></param>
         public void SetGridFromPointsDictionary(Dictionary<int, List<Point>> grains)
         {
+            emptyCount = Grid.SizeX * Grid.SizeY;
             int currentID = 0;
-            this.nucleonsPopulation = grains.Keys.Count;
+            this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
 
             foreach (List<Point> l in grains.Values)
             {
                 foreach(Point p in l)
                 {
                     currentGrid.ChangeCellValue(p.X, p.Y,currentID);
+                    emptyCount--;
                 }
                 currentID++;
             }

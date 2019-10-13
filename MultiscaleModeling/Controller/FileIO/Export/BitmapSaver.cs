@@ -59,7 +59,8 @@ namespace MultiscaleModeling.Controller.FileIO.Export
                 byte* row = (byte*)bitmapData.Scan0 + (y * bitmapData.Stride);
                 for (int x = 0; x < width; x++)
                 {
-                    Color color = Color.FromName(knownColors[grid.Cells[x, y].Id % knownColors.Count()]);
+                    Color color = grid.Cells[x, y].State == 0 ? Color.White : 
+                        Color.FromName(knownColors[grid.Cells[x, y].Id % knownColors.Count()]);
 
 
                     row[x * PixelSize] = color.B;   //Blue  0-255
