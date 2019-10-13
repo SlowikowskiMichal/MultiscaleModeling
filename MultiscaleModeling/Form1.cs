@@ -300,5 +300,16 @@ namespace MultiscaleModeling
             viewPictureBox.Refresh();
         }
         #endregion
+
+        private void jsonSaveFileMenuItem_Click(object sender, EventArgs e)
+        {
+            int? nPopulation;
+            int.TryParse(nucleonAmoutCAPropertiesNumericUpDown.Text, out nPopulation);
+            Saver = new JSONSaver(nPopulation,
+                neighbourhoodCAPropertiesComboBox.Text,
+                boundaryConditionCAPropertiesComboBox.Text);
+            
+            Saver.Save(gridController.GetCurrentGrid());
+        }
     }
 }

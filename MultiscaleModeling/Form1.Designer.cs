@@ -80,10 +80,9 @@
             // viewPanel
             // 
             this.viewPanel.Controls.Add(this.viewPictureBox);
-            this.viewPanel.Location = new System.Drawing.Point(12, 15);
-            this.viewPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewPanel.Location = new System.Drawing.Point(9, 12);
             this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(667, 615);
+            this.viewPanel.Size = new System.Drawing.Size(500, 500);
             this.viewPanel.TabIndex = 0;
             // 
             // viewPictureBox
@@ -92,9 +91,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.viewPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.viewPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.viewPictureBox.Name = "viewPictureBox";
-            this.viewPictureBox.Size = new System.Drawing.Size(133, 123);
+            this.viewPictureBox.Size = new System.Drawing.Size(100, 100);
             this.viewPictureBox.TabIndex = 0;
             this.viewPictureBox.TabStop = false;
             this.viewPictureBox.Click += new System.EventHandler(this.ViewPictureBox_Click);
@@ -106,11 +104,9 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(700, 518);
-            this.viewGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewGroupBox.Location = new System.Drawing.Point(525, 421);
             this.viewGroupBox.Name = "viewGroupBox";
-            this.viewGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.viewGroupBox.Size = new System.Drawing.Size(232, 112);
+            this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
@@ -121,10 +117,9 @@
             this.viewGridCheckBox.AllowDrop = true;
             this.viewGridCheckBox.AutoSize = true;
             this.viewGridCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.viewGridCheckBox.Location = new System.Drawing.Point(16, 86);
-            this.viewGridCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewGridCheckBox.Location = new System.Drawing.Point(12, 70);
             this.viewGridCheckBox.Name = "viewGridCheckBox";
-            this.viewGridCheckBox.Size = new System.Drawing.Size(187, 21);
+            this.viewGridCheckBox.Size = new System.Drawing.Size(145, 17);
             this.viewGridCheckBox.TabIndex = 2;
             this.viewGridCheckBox.Text = "Show Grid Between Cells";
             this.viewGridCheckBox.UseVisualStyleBackColor = true;
@@ -132,20 +127,18 @@
             // viewZoomTrackBarLabel
             // 
             this.viewZoomTrackBarLabel.AutoSize = true;
-            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(16, 25);
-            this.viewZoomTrackBarLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(12, 20);
             this.viewZoomTrackBarLabel.Name = "viewZoomTrackBarLabel";
-            this.viewZoomTrackBarLabel.Size = new System.Drawing.Size(44, 17);
+            this.viewZoomTrackBarLabel.Size = new System.Drawing.Size(34, 13);
             this.viewZoomTrackBarLabel.TabIndex = 1;
             this.viewZoomTrackBarLabel.Text = "Zoom";
             // 
             // viewZoomTrackBar
             // 
-            this.viewZoomTrackBar.Location = new System.Drawing.Point(71, 23);
-            this.viewZoomTrackBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.viewZoomTrackBar.Location = new System.Drawing.Point(53, 19);
             this.viewZoomTrackBar.Minimum = 1;
             this.viewZoomTrackBar.Name = "viewZoomTrackBar";
-            this.viewZoomTrackBar.Size = new System.Drawing.Size(139, 56);
+            this.viewZoomTrackBar.Size = new System.Drawing.Size(104, 45);
             this.viewZoomTrackBar.TabIndex = 0;
             this.viewZoomTrackBar.Value = 1;
             // 
@@ -159,26 +152,23 @@
             this.gridPropertiesGroupBox.Controls.Add(this.heightSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.widthSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.sizegGridPropertiesSLabel);
-            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(700, 15);
-            this.gridPropertiesGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(525, 12);
             this.gridPropertiesGroupBox.Name = "gridPropertiesGroupBox";
-            this.gridPropertiesGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gridPropertiesGroupBox.Size = new System.Drawing.Size(232, 144);
+            this.gridPropertiesGroupBox.Size = new System.Drawing.Size(174, 117);
             this.gridPropertiesGroupBox.TabIndex = 2;
             this.gridPropertiesGroupBox.TabStop = false;
             this.gridPropertiesGroupBox.Text = "Grid Properties";
             // 
             // heightSizeGridPropertiesNumericUpDown
             // 
-            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 74);
-            this.heightSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 60);
             this.heightSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.heightSizeGridPropertiesNumericUpDown.Name = "heightSizeGridPropertiesNumericUpDown";
-            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.heightSizeGridPropertiesNumericUpDown.TabIndex = 10;
             this.heightSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
             500,
@@ -188,15 +178,14 @@
             // 
             // widthSizeGridPropertiesNumericUpDown
             // 
-            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 47);
-            this.widthSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 38);
             this.widthSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.widthSizeGridPropertiesNumericUpDown.Name = "widthSizeGridPropertiesNumericUpDown";
-            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.widthSizeGridPropertiesNumericUpDown.TabIndex = 9;
             this.widthSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
             500,
@@ -206,10 +195,9 @@
             // 
             // clearSizeGridPropertiesButton
             // 
-            this.clearSizeGridPropertiesButton.Location = new System.Drawing.Point(124, 105);
-            this.clearSizeGridPropertiesButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clearSizeGridPropertiesButton.Location = new System.Drawing.Point(93, 85);
             this.clearSizeGridPropertiesButton.Name = "clearSizeGridPropertiesButton";
-            this.clearSizeGridPropertiesButton.Size = new System.Drawing.Size(100, 28);
+            this.clearSizeGridPropertiesButton.Size = new System.Drawing.Size(75, 23);
             this.clearSizeGridPropertiesButton.TabIndex = 7;
             this.clearSizeGridPropertiesButton.Text = "Clear";
             this.clearSizeGridPropertiesButton.UseVisualStyleBackColor = true;
@@ -217,10 +205,9 @@
             // 
             // resizeSizeGridPropertiesButton
             // 
-            this.resizeSizeGridPropertiesButton.Location = new System.Drawing.Point(16, 105);
-            this.resizeSizeGridPropertiesButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resizeSizeGridPropertiesButton.Location = new System.Drawing.Point(12, 85);
             this.resizeSizeGridPropertiesButton.Name = "resizeSizeGridPropertiesButton";
-            this.resizeSizeGridPropertiesButton.Size = new System.Drawing.Size(100, 28);
+            this.resizeSizeGridPropertiesButton.Size = new System.Drawing.Size(75, 23);
             this.resizeSizeGridPropertiesButton.TabIndex = 6;
             this.resizeSizeGridPropertiesButton.Text = "Resize";
             this.resizeSizeGridPropertiesButton.UseVisualStyleBackColor = true;
@@ -229,20 +216,18 @@
             // heightSizeGridPropertiesLabel
             // 
             this.heightSizeGridPropertiesLabel.AutoSize = true;
-            this.heightSizeGridPropertiesLabel.Location = new System.Drawing.Point(24, 76);
-            this.heightSizeGridPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.heightSizeGridPropertiesLabel.Location = new System.Drawing.Point(18, 62);
             this.heightSizeGridPropertiesLabel.Name = "heightSizeGridPropertiesLabel";
-            this.heightSizeGridPropertiesLabel.Size = new System.Drawing.Size(58, 17);
+            this.heightSizeGridPropertiesLabel.Size = new System.Drawing.Size(47, 13);
             this.heightSizeGridPropertiesLabel.TabIndex = 3;
             this.heightSizeGridPropertiesLabel.Text = "• Height";
             // 
             // widthSizeGridPropertiesLabel
             // 
             this.widthSizeGridPropertiesLabel.AutoSize = true;
-            this.widthSizeGridPropertiesLabel.Location = new System.Drawing.Point(24, 49);
-            this.widthSizeGridPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.widthSizeGridPropertiesLabel.Location = new System.Drawing.Point(18, 40);
             this.widthSizeGridPropertiesLabel.Name = "widthSizeGridPropertiesLabel";
-            this.widthSizeGridPropertiesLabel.Size = new System.Drawing.Size(53, 17);
+            this.widthSizeGridPropertiesLabel.Size = new System.Drawing.Size(44, 13);
             this.widthSizeGridPropertiesLabel.TabIndex = 2;
             this.widthSizeGridPropertiesLabel.Text = "• Width";
             // 
@@ -250,10 +235,9 @@
             // 
             this.sizegGridPropertiesSLabel.AutoSize = true;
             this.sizegGridPropertiesSLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sizegGridPropertiesSLabel.Location = new System.Drawing.Point(12, 20);
-            this.sizegGridPropertiesSLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sizegGridPropertiesSLabel.Location = new System.Drawing.Point(9, 16);
             this.sizegGridPropertiesSLabel.Name = "sizegGridPropertiesSLabel";
-            this.sizegGridPropertiesSLabel.Size = new System.Drawing.Size(46, 18);
+            this.sizegGridPropertiesSLabel.Size = new System.Drawing.Size(39, 15);
             this.sizegGridPropertiesSLabel.TabIndex = 0;
             this.sizegGridPropertiesSLabel.Text = "Size:";
             // 
@@ -267,19 +251,16 @@
             this.caGroupBox.Controls.Add(this.boundaryConditionCAPropertiesComboBox);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBoxLabel);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
-            this.caGroupBox.Location = new System.Drawing.Point(700, 166);
-            this.caGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.caGroupBox.Location = new System.Drawing.Point(525, 135);
             this.caGroupBox.Name = "caGroupBox";
-            this.caGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.caGroupBox.Size = new System.Drawing.Size(232, 214);
+            this.caGroupBox.Size = new System.Drawing.Size(174, 174);
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
             // 
             // nucleonAmoutCAPropertiesNumericUpDown
             // 
-            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 145);
-            this.nucleonAmoutCAPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 118);
             this.nucleonAmoutCAPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -291,7 +272,7 @@
             0,
             0});
             this.nucleonAmoutCAPropertiesNumericUpDown.Name = "nucleonAmoutCAPropertiesNumericUpDown";
-            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
             this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
             5,
@@ -302,10 +283,9 @@
             // 
             // randomPlacementButton
             // 
-            this.randomPlacementButton.Location = new System.Drawing.Point(12, 177);
-            this.randomPlacementButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.randomPlacementButton.Location = new System.Drawing.Point(9, 144);
             this.randomPlacementButton.Name = "randomPlacementButton";
-            this.randomPlacementButton.Size = new System.Drawing.Size(212, 28);
+            this.randomPlacementButton.Size = new System.Drawing.Size(159, 23);
             this.randomPlacementButton.TabIndex = 7;
             this.randomPlacementButton.Text = "Random nucleon placement";
             this.randomPlacementButton.UseVisualStyleBackColor = true;
@@ -314,20 +294,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 126);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 102);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 17);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Nucleon Amout:";
             // 
             // boundaryConditionPropertiesComboBoxLabel
             // 
             this.boundaryConditionPropertiesComboBoxLabel.AutoSize = true;
-            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(8, 27);
-            this.boundaryConditionPropertiesComboBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
             this.boundaryConditionPropertiesComboBoxLabel.Name = "boundaryConditionPropertiesComboBoxLabel";
-            this.boundaryConditionPropertiesComboBoxLabel.Size = new System.Drawing.Size(136, 17);
+            this.boundaryConditionPropertiesComboBoxLabel.Size = new System.Drawing.Size(102, 13);
             this.boundaryConditionPropertiesComboBoxLabel.TabIndex = 3;
             this.boundaryConditionPropertiesComboBoxLabel.Text = "Boundary Condition:";
             // 
@@ -337,19 +315,17 @@
             this.boundaryConditionCAPropertiesComboBox.FormattingEnabled = true;
             this.boundaryConditionCAPropertiesComboBox.Items.AddRange(new object[] {
             "Periodic"});
-            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(91, 47);
-            this.boundaryConditionCAPropertiesComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
             this.boundaryConditionCAPropertiesComboBox.Name = "boundaryConditionCAPropertiesComboBox";
-            this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(132, 24);
+            this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.boundaryConditionCAPropertiesComboBox.TabIndex = 2;
             // 
             // neighbourhoodCAPropertiesComboBoxLabel
             // 
             this.neighbourhoodCAPropertiesComboBoxLabel.AutoSize = true;
-            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(8, 76);
-            this.neighbourhoodCAPropertiesComboBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 62);
             this.neighbourhoodCAPropertiesComboBoxLabel.Name = "neighbourhoodCAPropertiesComboBoxLabel";
-            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(110, 17);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(83, 13);
             this.neighbourhoodCAPropertiesComboBoxLabel.TabIndex = 1;
             this.neighbourhoodCAPropertiesComboBoxLabel.Text = "Neighbourhood:";
             // 
@@ -359,18 +335,16 @@
             this.neighbourhoodCAPropertiesComboBox.FormattingEnabled = true;
             this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
             "Moore"});
-            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(91, 96);
-            this.neighbourhoodCAPropertiesComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
             this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
-            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(132, 24);
+            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
             // 
             // runCAExecutionButton
             // 
-            this.runCAExecutionButton.Location = new System.Drawing.Point(8, 42);
-            this.runCAExecutionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.runCAExecutionButton.Location = new System.Drawing.Point(6, 34);
             this.runCAExecutionButton.Name = "runCAExecutionButton";
-            this.runCAExecutionButton.Size = new System.Drawing.Size(107, 28);
+            this.runCAExecutionButton.Size = new System.Drawing.Size(80, 23);
             this.runCAExecutionButton.TabIndex = 9;
             this.runCAExecutionButton.Text = "Run";
             this.runCAExecutionButton.UseVisualStyleBackColor = true;
@@ -378,10 +352,9 @@
             // 
             // stopCAExecutionButton
             // 
-            this.stopCAExecutionButton.Location = new System.Drawing.Point(117, 42);
-            this.stopCAExecutionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stopCAExecutionButton.Location = new System.Drawing.Point(88, 34);
             this.stopCAExecutionButton.Name = "stopCAExecutionButton";
-            this.stopCAExecutionButton.Size = new System.Drawing.Size(107, 28);
+            this.stopCAExecutionButton.Size = new System.Drawing.Size(80, 23);
             this.stopCAExecutionButton.TabIndex = 10;
             this.stopCAExecutionButton.Text = "Stop";
             this.stopCAExecutionButton.UseVisualStyleBackColor = true;
@@ -391,10 +364,9 @@
             // 
             this.caSimulationCAPropertiesLabel.AutoSize = true;
             this.caSimulationCAPropertiesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.caSimulationCAPropertiesLabel.Location = new System.Drawing.Point(12, 20);
-            this.caSimulationCAPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.caSimulationCAPropertiesLabel.Location = new System.Drawing.Point(9, 16);
             this.caSimulationCAPropertiesLabel.Name = "caSimulationCAPropertiesLabel";
-            this.caSimulationCAPropertiesLabel.Size = new System.Drawing.Size(124, 18);
+            this.caSimulationCAPropertiesLabel.Size = new System.Drawing.Size(105, 15);
             this.caSimulationCAPropertiesLabel.TabIndex = 11;
             this.caSimulationCAPropertiesLabel.Text = "CA Simulation: ";
             // 
@@ -404,21 +376,18 @@
             this.executionGroupBox.Controls.Add(this.caSimulationCAPropertiesLabel);
             this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
-            this.executionGroupBox.Location = new System.Drawing.Point(700, 388);
-            this.executionGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.executionGroupBox.Location = new System.Drawing.Point(525, 315);
             this.executionGroupBox.Name = "executionGroupBox";
-            this.executionGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.executionGroupBox.Size = new System.Drawing.Size(232, 123);
+            this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
             this.executionGroupBox.TabIndex = 14;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
             // 
             // caExecutionProgressBar
             // 
-            this.caExecutionProgressBar.Location = new System.Drawing.Point(8, 79);
-            this.caExecutionProgressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.caExecutionProgressBar.Location = new System.Drawing.Point(6, 64);
             this.caExecutionProgressBar.Name = "caExecutionProgressBar";
-            this.caExecutionProgressBar.Size = new System.Drawing.Size(224, 28);
+            this.caExecutionProgressBar.Size = new System.Drawing.Size(168, 23);
             this.caExecutionProgressBar.TabIndex = 12;
             // 
             // mainMenu1
@@ -464,6 +433,7 @@
             // 
             this.jsonSaveFileMenuItem.Index = 0;
             this.jsonSaveFileMenuItem.Text = "... to JSON";
+            this.jsonSaveFileMenuItem.Click += new System.EventHandler(this.jsonSaveFileMenuItem_Click);
             // 
             // bitmapSaveFileMenuItem
             // 
@@ -473,15 +443,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 642);
+            this.ClientSize = new System.Drawing.Size(711, 522);
             this.Controls.Add(this.executionGroupBox);
             this.Controls.Add(this.caGroupBox);
             this.Controls.Add(this.viewGroupBox);
             this.Controls.Add(this.gridPropertiesGroupBox);
             this.Controls.Add(this.viewPanel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
             this.Name = "Form1";
