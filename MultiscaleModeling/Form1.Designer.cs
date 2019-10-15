@@ -415,6 +415,7 @@
             // 
             this.jsonOpenFileMenuItem.Index = 0;
             this.jsonOpenFileMenuItem.Text = "... from JSON";
+            this.jsonOpenFileMenuItem.Click += new System.EventHandler(this.JsonOpenFileMenuItem_Click);
             // 
             // bitmapOpenFileMenuItem
             // 

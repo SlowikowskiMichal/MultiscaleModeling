@@ -120,12 +120,12 @@ namespace MultiscaleModeling
                 //Calculate pictureBox click position to grid position
                 int x = (int)(me.X / cellXSize) + currentPositionX;
                 int y = (int)(me.Y / cellYSize) + currentPositionY;
- /*               if (x >= Grid.SizeX || x < 0
+                if (x >= Grid.SizeX || x < 0
                     || y >= Grid.SizeY || y < 0)
                 {
                     return;
                 }
-*/             
+             
                 if(gridController.ChangeGridValue(x, y))
                 {
                     FillCell(x, y,nextImage, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
@@ -175,7 +175,9 @@ namespace MultiscaleModeling
         private async void RunCAExecutionButton_Click(object sender, EventArgs e)
         {
             if (running)
+            {
                 return;
+            }
             running = true;
             var progress = new Progress<int>(v =>
             {
@@ -192,6 +194,7 @@ namespace MultiscaleModeling
         }
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
+            gridController.StopExecution();
             SetGuiAsEnabled(!running);
         }
         private void NucleonAmoutCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -200,24 +203,6 @@ namespace MultiscaleModeling
         }
         private void BitmapSaveFileMenuItem_Click(object sender, EventArgs e)
         {
-            /*
-            Bitmap imageToSave = new Bitmap(Grid.SizeX, Grid.SizeY);
-            DrawGridOnImage(ref imageToSave);
-            SaveFileDialog saveBitmapDialog = new SaveFileDialog();
-            saveBitmapDialog.Filter = "Bitmap Image|*.bmp";
-            saveBitmapDialog.Title = "Save an Image File";
-            saveBitmapDialog.ShowDialog();
-
-            if (saveBitmapDialog.FileName != "")
-            {
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)saveBitmapDialog.OpenFile();
-                imageToSave.Save(fs,
-                  System.Drawing.Imaging.ImageFormat.Bmp);
-
-                fs.Close();
-            }
-            */
             Saver = new BitmapSaver();
             Saver.Save(gridController.GetCurrentGrid());
         }
@@ -252,6 +237,8 @@ namespace MultiscaleModeling
                     }
                 }
             }
+            viewPictureBox.Image = nextImage;
+            viewPictureBox.Refresh();
         }
         #endregion
         #region DO ZAOURANIA
@@ -317,7 +304,7 @@ namespace MultiscaleModeling
             Loader = new BitmapLoader();
             OpenFileDialog openBitmapDialog = new OpenFileDialog();
             openBitmapDialog.Filter = "Bitmap Image|*.bmp";
-            openBitmapDialog.Title = "Save an Image File";
+            openBitmapDialog.Title = "Open an Image File";
             openBitmapDialog.ShowDialog();
             if (openBitmapDialog.FileName != String.Empty) {
                 Loader.Load(openBitmapDialog.FileName, ref gridController);
@@ -329,6 +316,32 @@ namespace MultiscaleModeling
             }
             this.DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
+        }
+        public void StopCalculations()
+        {
+            lock (synLock)
+            {
+                running = false;
+            }
+        }
+
+        private void JsonOpenFileMenuItem_Click(object sender, EventArgs e)
+        {
+            Loader = new JSONLoader();
+            OpenFileDialog openJSONDialog = new OpenFileDialog();
+            openJSONDialog.Filter = "JSON file|*.json";
+            openJSONDialog.Title = "Open JSON file";
+            openJSONDialog.ShowDialog();
+            if (openJSONDialog.FileName != String.Empty)
+            {
+                Loader.Load(openJSONDialog.FileName, ref gridController);
+
+                widthSizeGridPropertiesNumericUpDown.Text = Grid.SizeX.ToString();
+                heightSizeGridPropertiesNumericUpDown.Text = Grid.SizeY.ToString();
+                nextImage = new Bitmap(Grid.SizeX, Grid.SizeY);
+                nucleonAmoutCAPropertiesNumericUpDown.Text = gridController.GetNucleonsPopulation().ToString();
+            }
+            this.DrawGridOnImage(ref nextImage);
         }
     }
 }

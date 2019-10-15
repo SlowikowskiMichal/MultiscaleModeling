@@ -128,6 +128,22 @@ namespace MultiscaleModeling.Controller
             }
         }
 
+        public bool ChangeGridValue(int x, int y, int id)
+        {
+            currentGrid.ChangeCellValue(x, y, id);
+
+            if (currentGrid.Cells[x, y].State == 0)
+            {
+                emptyCount++;
+                return false;
+            }
+            else
+            {
+                emptyCount--;
+                return true;
+            }
+        }
+
         public void ChangeCurrentNucleonID()
         {
             CurrentNucleonID++;
