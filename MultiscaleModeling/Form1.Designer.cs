@@ -74,6 +74,8 @@
             this.typeInclusionsComboBox = new System.Windows.Forms.ComboBox();
             this.valueInclusionsLabel = new System.Windows.Forms.Label();
             this.valueInclusionsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.amountInsclusionsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.amountInclusionsLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -89,6 +91,7 @@
             this.executionTabPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -390,7 +393,7 @@
             this.executionGroupBox.Controls.Add(this.caSimulationCAPropertiesLabel);
             this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
-            this.executionGroupBox.Location = new System.Drawing.Point(4, 6);
+            this.executionGroupBox.Location = new System.Drawing.Point(6, 140);
             this.executionGroupBox.Name = "executionGroupBox";
             this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
             this.executionGroupBox.TabIndex = 14;
@@ -494,14 +497,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.amountInsclusionsNumericUpDown);
+            this.groupBox1.Controls.Add(this.amountInclusionsLabel);
             this.groupBox1.Controls.Add(this.valueInclusionsNumericUpDown);
             this.groupBox1.Controls.Add(this.valueInclusionsLabel);
             this.groupBox1.Controls.Add(this.typeInclusionsComboBox);
             this.groupBox1.Controls.Add(this.tyoeInclusionsLabel);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(4, 112);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 115);
+            this.groupBox1.Size = new System.Drawing.Size(174, 128);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inclusions";
@@ -518,7 +523,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(88, 83);
+            this.button1.Location = new System.Drawing.Point(88, 98);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 23);
             this.button1.TabIndex = 9;
@@ -536,12 +541,13 @@
             this.typeInclusionsComboBox.Name = "typeInclusionsComboBox";
             this.typeInclusionsComboBox.Size = new System.Drawing.Size(104, 21);
             this.typeInclusionsComboBox.TabIndex = 12;
+            this.typeInclusionsComboBox.SelectedIndexChanged += new System.EventHandler(this.TypeInclusionsComboBox_SelectedIndexChanged);
             // 
             // valueInclusionsLabel
             // 
             this.valueInclusionsLabel.AutoSize = true;
             this.valueInclusionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valueInclusionsLabel.Location = new System.Drawing.Point(15, 59);
+            this.valueInclusionsLabel.Location = new System.Drawing.Point(15, 48);
             this.valueInclusionsLabel.Name = "valueInclusionsLabel";
             this.valueInclusionsLabel.Size = new System.Drawing.Size(43, 13);
             this.valueInclusionsLabel.TabIndex = 13;
@@ -549,10 +555,27 @@
             // 
             // valueInclusionsNumericUpDown
             // 
-            this.valueInclusionsNumericUpDown.Location = new System.Drawing.Point(64, 57);
+            this.valueInclusionsNumericUpDown.Location = new System.Drawing.Point(64, 46);
             this.valueInclusionsNumericUpDown.Name = "valueInclusionsNumericUpDown";
             this.valueInclusionsNumericUpDown.Size = new System.Drawing.Size(104, 20);
             this.valueInclusionsNumericUpDown.TabIndex = 14;
+            // 
+            // amountInsclusionsNumericUpDown
+            // 
+            this.amountInsclusionsNumericUpDown.Location = new System.Drawing.Point(64, 72);
+            this.amountInsclusionsNumericUpDown.Name = "amountInsclusionsNumericUpDown";
+            this.amountInsclusionsNumericUpDown.Size = new System.Drawing.Size(104, 20);
+            this.amountInsclusionsNumericUpDown.TabIndex = 16;
+            // 
+            // amountInclusionsLabel
+            // 
+            this.amountInclusionsLabel.AutoSize = true;
+            this.amountInclusionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountInclusionsLabel.Location = new System.Drawing.Point(15, 74);
+            this.amountInclusionsLabel.Name = "amountInclusionsLabel";
+            this.amountInclusionsLabel.Size = new System.Drawing.Size(46, 13);
+            this.amountInclusionsLabel.TabIndex = 15;
+            this.amountInclusionsLabel.Text = "Amount:";
             // 
             // Form1
             // 
@@ -587,6 +610,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -638,6 +662,8 @@
         private System.Windows.Forms.ComboBox typeInclusionsComboBox;
         private System.Windows.Forms.Label tyoeInclusionsLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown amountInsclusionsNumericUpDown;
+        private System.Windows.Forms.Label amountInclusionsLabel;
     }
 }
 

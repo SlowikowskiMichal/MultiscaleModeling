@@ -98,6 +98,7 @@ namespace MultiscaleModeling
             boundaryCondition = (BoundaryCondition)boundaryConditionCAPropertiesComboBox.SelectedIndex;
             neighbourhoodCAPropertiesComboBox.SelectedIndex = 0;
             neighborhood = implementedNeighborhood[neighbourhoodCAPropertiesComboBox.SelectedIndex];
+            typeInclusionsComboBox.SelectedIndex = 0;
             //FILL
             nPopulation = (int)nucleonAmoutCAPropertiesNumericUpDown.Value;
             //populateComboBox.SelectedIndex = 0;
@@ -342,6 +343,21 @@ namespace MultiscaleModeling
                 nucleonAmoutCAPropertiesNumericUpDown.Text = gridController.GetNucleonsPopulation().ToString();
             }
             this.DrawGridOnImage(ref nextImage);
+        }
+
+        private void TypeInclusionsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (typeInclusionsComboBox.SelectedIndex)
+            {
+                case 0:
+                    valueInclusionsLabel.Text = "Length:";
+                    break;
+                case 1:
+                    valueInclusionsLabel.Text = "Radius:";
+                    break;
+            }
+                
+            
         }
     }
 }
