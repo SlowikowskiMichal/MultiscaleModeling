@@ -126,7 +126,6 @@ namespace MultiscaleModeling
                 {
                     return;
                 }
-             
                 if(gridController.ChangeGridValue(x, y))
                 {
                     FillCell(x, y,nextImage, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
@@ -228,9 +227,13 @@ namespace MultiscaleModeling
             {
                 for (int y = currentPositionY; y < endPositionY; y++)
                 {
-                    if (gridController.GetCurrentGridCellState(x, y))
+                    if (gridController.GetCurrentGridCellState(x, y) == 1)
                     {
                         FillCell(x, y, imageToDrawOn, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x, y) % knownColors.Count()]));
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 2)
+                    {
+                        FillCell(x, y, imageToDrawOn, Color.Black);
                     }
                     else
                     {
@@ -358,6 +361,17 @@ namespace MultiscaleModeling
             }
                 
             
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            gridController.GenerateInclusions(typeInclusionsComboBox.SelectedIndex, 
+                Decimal.ToInt32(valueInclusionsNumericUpDown.Value), 
+                Decimal.ToInt32(amountInsclusionsNumericUpDown.Value)
+            );
+
+            DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
         }
     }
 }

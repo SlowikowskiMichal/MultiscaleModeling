@@ -8,7 +8,7 @@ namespace MultiscaleModeling.Model
 {
     class Cell
     {
-        public int State { get; private set; }
+        public int State { get; set; }
         public int Id { get; set; }
         public bool Recrystallized { get; set; }
 

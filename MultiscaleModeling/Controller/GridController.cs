@@ -4,7 +4,8 @@ using System.Linq;
 using MultiscaleModeling.Model;
 using System.Threading;
 using MultiscaleModeling.Model.Neighbourhood;
-
+using System.Windows.Forms;
+using MultiscaleModeling.Model.Inclusions;
 namespace MultiscaleModeling.Controller
 {
     class GridController
@@ -25,6 +26,10 @@ namespace MultiscaleModeling.Controller
         #region NUCLEONS
         int nucleonsPopulation;
         public int CurrentNucleonID { get; private set; }
+        #endregion
+
+        #region INCLUSIONS
+        InclusionManager InclusionManager;
         #endregion
 
         #region B/N CONDITIONS
@@ -83,9 +88,9 @@ namespace MultiscaleModeling.Controller
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public bool GetCurrentGridCellState(int x, int y)
+        public int GetCurrentGridCellState(int x, int y)
         {
-            return currentGrid.Cells[x, y].State != 0;
+            return currentGrid.Cells[x, y].State;
         }
 
         public int GetCurrentGridCellId(int x, int y)
@@ -164,9 +169,6 @@ namespace MultiscaleModeling.Controller
             Random r = new Random();
             for (int i = 0; i < nucleonsPopulation;)
             {
-
-                
-
                 start.Add(new Point(r.Next(0, Grid.SizeX),r.Next(0, Grid.SizeY)));
                 i++;
             }
@@ -302,6 +304,22 @@ namespace MultiscaleModeling.Controller
                     emptyCount--;
                 }
                 currentID++;
+            }
+        }
+
+        /// <summary>
+        /// Generates inclusions which don't take part in growth process
+        /// </summary>
+        /// <param name="selectedIndex">0 - Square, 1 - Circle</param>
+        /// <param name="value">Length/Radius of inclusion</param>
+        /// <param name="amount">Amount of inclusions</param>
+        internal void GenerateInclusions(int selectedIndex, int value, int amount)
+        {
+
+            if(selectedIndex == 0)
+            {
+                InclusionManager = new SquareInclusionManager();
+                InclusionManager.GenerateInclusions(ref currentGrid, amount, value);
             }
         }
         #endregion
