@@ -29,7 +29,6 @@ namespace MultiscaleModeling
         int currentPositionY = 0;
         #endregion
         #region IMAGE
-        List<string> knownColors = Enum.GetNames(typeof(KnownColor)).ToList();
         readonly Neighbourhood[] implementedNeighborhood = {new MooresNeighbourhood()};
         Color BackgroundColor = Color.White;
         Bitmap nextImage;
@@ -68,9 +67,6 @@ namespace MultiscaleModeling
             gridController.SetNeighbourhood(celluralAutomataProperties.GetNeighbourhood());
             
             //IMAGE
-            knownColors.RemoveAll(color => color == "White" || color == "Black"
-                    || color == "Transparent");
-            Shuffle(knownColors);
             brush = new SolidBrush(Color.White);
             //GRID VIEW
             zoom = viewZoomTrackBar.Value;
@@ -109,7 +105,7 @@ namespace MultiscaleModeling
                 }
                 if(gridController.ChangeGridValue(x, y))
                 {
-                    FillCell(x, y,nextImage, Color.FromName(knownColors[gridController.CurrentNucleonID % knownColors.Count()]));
+                    FillCell(x, y,nextImage, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.CurrentNucleonID % ColorManager.indexcolors.Count()]));
                 }
                 else
                 {
@@ -209,7 +205,7 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x, y) == 1)
                     {
-                        FillCell(x, y, imageToDrawOn, Color.FromName(knownColors[gridController.GetCurrentGridCellId(x, y) % knownColors.Count()]));
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.GetCurrentGridCellId(x, y) % ColorManager.indexcolors.Count()]));
                     }
                     else if (gridController.GetCurrentGridCellState(x, y) == 2)
                     {

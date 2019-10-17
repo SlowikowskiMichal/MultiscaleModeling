@@ -12,13 +12,8 @@ namespace MultiscaleModeling.Controller.FileIO.Export
 {
     class BitmapSaver : ISaver
     {
-        List<string> knownColors = Enum.GetNames(typeof(KnownColor)).ToList();
-
         public BitmapSaver()
         {
-            knownColors.RemoveAll(color => color == "White" || color == "Black"
-        || color == "Transparent");
-            Shuffle(knownColors);
         }
 
         public void Save(Grid grid)
@@ -59,8 +54,8 @@ namespace MultiscaleModeling.Controller.FileIO.Export
                 byte* row = (byte*)bitmapData.Scan0 + (y * bitmapData.Stride);
                 for (int x = 0; x < width; x++)
                 {
-                    Color color = grid.Cells[x, y].State == 0 ? Color.White : 
-                        Color.FromName(knownColors[grid.Cells[x, y].Id % knownColors.Count()]);
+                    Color color = grid.Cells[x, y].State == 0 ? Color.White :
+                        System.Drawing.ColorTranslator.FromHtml(ColorManager.indexcolors[grid.Cells[x, y].Id % ColorManager.indexcolors.Count()]);
 
 
                     row[x * PixelSize] = color.B;   //Blue  0-255

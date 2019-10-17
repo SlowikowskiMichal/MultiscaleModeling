@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CelluralAutomataProperties.cs" />
+    <Compile Include="Controller\ColorManager.cs" />
     <Compile Include="Controller\FileIO\Export\BitmapSaver.cs" />
     <Compile Include="Controller\FileIO\Export\ISaver.cs" />
     <Compile Include="Controller\FileIO\Export\JSONSaver.cs" />
