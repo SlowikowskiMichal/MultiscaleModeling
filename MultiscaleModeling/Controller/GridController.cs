@@ -307,12 +307,15 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
             int currentID = 0;
             this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
+            int grainState;
 
-            foreach (List<Point> l in grains.Values)
+            foreach (int key in grains.Keys)
             {
-                foreach(Point p in l)
+                grainState = key == -16777216 ? 2 : 1; //If black color then it is inclusion
+
+                foreach(Point p in grains[key])
                 {
-                    currentGrid.ChangeCellValue(p.X, p.Y,currentID);
+                    currentGrid.ChangeCellValue(p.X, p.Y,currentID,grainState);
                     emptyCount--;
                 }
                 currentID++;

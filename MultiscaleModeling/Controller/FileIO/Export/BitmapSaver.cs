@@ -54,9 +54,18 @@ namespace MultiscaleModeling.Controller.FileIO.Export
                 byte* row = (byte*)bitmapData.Scan0 + (y * bitmapData.Stride);
                 for (int x = 0; x < width; x++)
                 {
-                    Color color = grid.Cells[x, y].State == 0 ? Color.White :
-                        System.Drawing.ColorTranslator.FromHtml(ColorManager.indexcolors[grid.Cells[x, y].Id % ColorManager.indexcolors.Count()]);
-
+                    Color color;
+                    if (grid.Cells[x, y].State == 0)
+                    {
+                         color = Color.White;
+                    } else if(grid.Cells[x,y].State == 1)
+                    {
+                        color = ColorTranslator.FromHtml(ColorManager.indexcolors[grid.Cells[x, y].Id % ColorManager.indexcolors.Count()]);
+                    }
+                    else
+                    {
+                        color = Color.Black;
+                    }
 
                     row[x * PixelSize] = color.B;   //Blue  0-255
                     row[x * PixelSize + 1] = color.G; //Green 0-255
@@ -64,6 +73,7 @@ namespace MultiscaleModeling.Controller.FileIO.Export
                     row[x * PixelSize + 3] = color.A;  //Alpha 0-255
                 }
             }
+
             imageToSave.UnlockBits(bitmapData);
 
             return imageToSave;
