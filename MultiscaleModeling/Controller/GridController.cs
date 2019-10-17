@@ -247,18 +247,30 @@ namespace MultiscaleModeling.Controller
         {
             int nThreads = 4;
             Thread[] calculations = new Thread[nThreads];
-            int x = Grid.SizeX / 2;
-            int y = Grid.SizeY / 2;
+            int halfSizeX = Grid.SizeX / 2;
+            int halfSizeY = Grid.SizeY / 2;
             int gridSize = Grid.SizeX * Grid.SizeY;
             running = true;
 
-            long current = DateTime.Now.Ticks;
+            emptyCount = Grid.SizeX * Grid.SizeY;
+
+            for(int x = 0; x < Grid.SizeX; x++)
+            {
+                for(int y = 0; y < Grid.SizeY; y++)
+                {
+                    if(currentGrid.Cells[x,y].State != 0)
+                    {
+                        emptyCount--;
+                    }
+                }
+            }
+
             while (running && emptyCount > 0)
             {
-                calculations[0] = new Thread(() => CalculateNextStep(0, 0, x, y));
-                calculations[1] = new Thread(() => CalculateNextStep(x, 0, Grid.SizeX, y));
-                calculations[2] = new Thread(() => CalculateNextStep(0, y, x, Grid.SizeY));
-                calculations[3] = new Thread(() => CalculateNextStep(x, y, Grid.SizeX, Grid.SizeY));
+                calculations[0] = new Thread(() => CalculateNextStep(0, 0, halfSizeX, halfSizeY));
+                calculations[1] = new Thread(() => CalculateNextStep(halfSizeX, 0, Grid.SizeX, halfSizeY));
+                calculations[2] = new Thread(() => CalculateNextStep(0, halfSizeY, halfSizeX, Grid.SizeY));
+                calculations[3] = new Thread(() => CalculateNextStep(halfSizeX, halfSizeY, Grid.SizeX, Grid.SizeY));
                 foreach (Thread task in calculations)
                 {
                     task.Start();
@@ -319,8 +331,12 @@ namespace MultiscaleModeling.Controller
             if(selectedIndex == 0)
             {
                 InclusionManager = new SquareInclusionManager();
-                InclusionManager.GenerateInclusions(ref currentGrid, amount, value);
             }
+            else if (selectedIndex == 1)
+            {
+                InclusionManager = new CircuralInclusionManager();
+            }
+            InclusionManager.GenerateInclusions(ref currentGrid, amount, value, Neighbourhood, BoundaryCondition);
         }
         #endregion
 

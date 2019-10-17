@@ -112,7 +112,7 @@ namespace MultiscaleModeling.Model
                 {
                     if (this.Cells[i, j].State != other.Cells[i, j].State)
                     {
-                        this.Cells[i, j].ChangeState();
+                        this.Cells[i, j].ChangeState(other.Cells[i, j].State);
                         this.Cells[i, j].Id = other.Cells[i, j].Id;
                     }
                 }
@@ -127,7 +127,7 @@ namespace MultiscaleModeling.Model
                 {
                     if (this.Cells[i, j].State != other.Cells[i, j].State)
                     {
-                        this.Cells[i, j].ChangeState();
+                        this.Cells[i, j].ChangeState(other.Cells[i, j].State);
                         this.Cells[i, j].Id = other.Cells[i, j].Id;
                     }
                 }
@@ -140,7 +140,7 @@ namespace MultiscaleModeling.Model
             {
                 if (this.Cells[p.X, p.Y].State != other.Cells[p.X, p.Y].State)
                 {
-                    this.Cells[p.X, p.Y].ChangeState();
+                    this.Cells[p.X, p.Y].ChangeState(other.Cells[p.X, p.Y].State);
                     this.Cells[p.X, p.Y].Id = other.Cells[p.X, p.Y].Id;
                 }
             }

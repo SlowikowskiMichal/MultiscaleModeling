@@ -8,12 +8,9 @@ namespace MultiscaleModeling.Model.Inclusions
 {
     class SquareInclusionManager : InclusionManager
     {
-        public bool GenerateInclusions(ref Grid grid, int amount, int value)
+        public override void ChangeGridCellsToInclusion(ref Grid grid, int amount, int value, List<Point> inclusionPoints)
         {
-
-            /*
-
-            foreach (Point p in start)
+            foreach (Point p in inclusionPoints)
             {
                 for (int x = Math.Max(p.X - value, 0); x < Math.Min(p.X + value, Grid.SizeX - 1); x++)
                 {
@@ -24,8 +21,6 @@ namespace MultiscaleModeling.Model.Inclusions
                     }
                 }
             }
-            */
-            return true;
         }
     }
 }
