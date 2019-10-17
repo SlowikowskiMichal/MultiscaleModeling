@@ -10,14 +10,8 @@ namespace MultiscaleModeling.Model.Inclusions
     {
         public bool GenerateInclusions(ref Grid grid, int amount, int value)
         {
-            int gridSize = Grid.SizeX * Grid.SizeY;
-            List<Model.Point> start = new List<Model.Point>();
-            Random r = new Random();
-            for (int i = 0; i < amount; i++)
-            {
-                start.Add(new Point(r.Next(0, Grid.SizeX), r.Next(0, Grid.SizeY)));
-            }
 
+            /*
 
             foreach (Point p in start)
             {
@@ -30,7 +24,7 @@ namespace MultiscaleModeling.Model.Inclusions
                     }
                 }
             }
-
+            */
             return true;
         }
     }
