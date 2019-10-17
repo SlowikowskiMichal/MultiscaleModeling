@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MultiscaleModeling.Model;
@@ -29,9 +25,6 @@ namespace MultiscaleModeling
         const int sizeY = 1;
         float cellXSize;
         float cellYSize;
-        Grid currentGrid;
-        Grid nextStepGrid;
-        int emptyCount = 0;
         int currentPositionX = 0;
         int currentPositionY = 0;
         #endregion
@@ -46,13 +39,6 @@ namespace MultiscaleModeling
         int zoom;
         bool drawGrid;
         #endregion
-        #region GRID OPTIONS
-        BoundaryCondition boundaryCondition;
-        Neighbourhood neighborhood;
-        #endregion
-        //FILL
-        int idZiarno = 0;
-        int nPopulation;
         //SIMULATION
         int mcStep = 0;
         bool running = false;
@@ -95,13 +81,8 @@ namespace MultiscaleModeling
 
             //GRID OPTIONS
             boundaryConditionCAPropertiesComboBox.SelectedIndex = 0;
-            boundaryCondition = (BoundaryCondition)boundaryConditionCAPropertiesComboBox.SelectedIndex;
             neighbourhoodCAPropertiesComboBox.SelectedIndex = 0;
-            neighborhood = implementedNeighborhood[neighbourhoodCAPropertiesComboBox.SelectedIndex];
             typeInclusionsComboBox.SelectedIndex = 0;
-            //FILL
-            nPopulation = (int)nucleonAmoutCAPropertiesNumericUpDown.Value;
-            //populateComboBox.SelectedIndex = 0;
             viewPictureBox.Size = viewPanel.Size;
             SetImageSize();
         }
@@ -132,7 +113,6 @@ namespace MultiscaleModeling
                 }
                 else
                 {
-                    emptyCount++;
                     FillCell(x, y, nextImage, BackgroundColor);
                 }
             }
@@ -363,7 +343,7 @@ namespace MultiscaleModeling
             
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void GenerateInclusionsButton_Click(object sender, EventArgs e)
         {
             gridController.GenerateInclusions(typeInclusionsComboBox.SelectedIndex, 
                 Decimal.ToInt32(valueInclusionsNumericUpDown.Value), 
