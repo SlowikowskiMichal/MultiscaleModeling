@@ -67,7 +67,7 @@ namespace MultiscaleModeling.Controller
         }
         public GridController(int gridWidth, int gridHeight)
         {
-            currentGrid = new Grid(gridWidth,gridHeight);
+            currentGrid = new Grid(gridWidth, gridHeight);
             nextStepGrid = new Grid(gridWidth, gridHeight);
             nucleonsPopulation = 1;
             CurrentNucleonID = 0;
@@ -169,7 +169,7 @@ namespace MultiscaleModeling.Controller
             Random r = new Random();
             for (int i = 0; i < nucleonsPopulation;)
             {
-                start.Add(new Point(r.Next(0, Grid.SizeX),r.Next(0, Grid.SizeY)));
+                start.Add(new Point(r.Next(0, Grid.SizeX), r.Next(0, Grid.SizeY)));
                 i++;
             }
             Populate(start, nucleonsPopulation);
@@ -184,15 +184,14 @@ namespace MultiscaleModeling.Controller
                 CurrentNucleonID = CurrentNucleonID % nPopulation;
                 emptyCount--;
             }
-    
+
         }
         void CalculateNextStep(int startX, int startY, int endX, int endY)
         {
             Random r = new Random();
             nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
             List<Model.Point> n;
-            List<int> a = new List<int>();
-
+            Dictionary<int, int> cellIDCount = new Dictionary<int, int>();
             for (int x = startX; x < endX; x++)
             {
                 for (int y = startY; y < endY; y++)
@@ -203,35 +202,54 @@ namespace MultiscaleModeling.Controller
                     }
 
                     n = Neighbourhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, BoundaryCondition);
-                    a.Clear();
 
-                    n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1).ForEach(p => a.Add(currentGrid.Cells[p.X, p.Y].Id));
+                    int cellID = 0;
 
-                    Dictionary<int, int> counts = a.GroupBy(v => v)
-                                      .ToDictionary(g => g.Key,
-                                                    g => g.Count());
-                    int max = 0;
-                    int k = 0;
-                    foreach (int key in counts.Keys)
+                    Dictionary<int, int> counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
+                        .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
+                        .ToDictionary(v => v.Key, v => v.Count());
+
+                    if (counts.Any(e => e.Value > 5)) //RULE 1
                     {
-                        if (max < counts[key])
+                        cellID = counts.Max()
+                    }
+                    else // RULE 2
+                    {
+                        counts = n.Where((p, i) => i == 1 || i == 3 || i == 4 || i == 6)
+                            .ToList().FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
+                            .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
+                            .ToDictionary(v => v.Key, v => v.Count());
+
+                        if (counts.Any(e => e.Value > 3))
                         {
-                            max = counts[key];
-                            k = key;
+
                         }
-                        else if (max == counts[key] && r.NextDouble() > 0.5)
+                        else // RULE 3
                         {
-                            k = key;
+                            counts = n.Where((p, i) => i == 0 || i == 2 || i == 5 || i == 7)
+                                .ToList().FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
+                                .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
+                                .ToDictionary(v => v.Key, v => v.Count());
+                            if (counts.Any(e => e.Value > 3))
+                            {
+
+                            }
+                            else // RULE 4
+                            {
+                                counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
+                                    .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
+                                    .ToDictionary(v => v.Key, v => v.Count());
+                            }
                         }
                     }
 
-                    if (max > 0)
+                    if (cellID > 0)
                     {
                         lock (synLock)
                         {
                             emptyCount--;
                             nextStepGrid.Cells[x, y].ChangeState();
-                            nextStepGrid.Cells[x, y].Id = k;
+                            nextStepGrid.Cells[x, y].Id = cellID;
                         }
                     }
                 }
@@ -254,11 +272,11 @@ namespace MultiscaleModeling.Controller
 
             emptyCount = Grid.SizeX * Grid.SizeY;
 
-            for(int x = 0; x < Grid.SizeX; x++)
+            for (int x = 0; x < Grid.SizeX; x++)
             {
-                for(int y = 0; y < Grid.SizeY; y++)
+                for (int y = 0; y < Grid.SizeY; y++)
                 {
-                    if(currentGrid.Cells[x,y].State != 0)
+                    if (currentGrid.Cells[x, y].State != 0)
                     {
                         emptyCount--;
                     }
@@ -280,14 +298,14 @@ namespace MultiscaleModeling.Controller
                     task.Join();
                 }
                 currentGrid.Copy(nextStepGrid);
-                progress.Report((gridSize - emptyCount) * 100 / gridSize );
+                progress.Report((gridSize - emptyCount) * 100 / gridSize);
             }
             running = false;
         }
 
         public void StopExecution()
         {
-            lock(synLock)
+            lock (synLock)
             {
                 running = false;
             }
@@ -313,9 +331,9 @@ namespace MultiscaleModeling.Controller
             {
                 grainState = key == -16777216 ? 2 : 1; //If black color then it is inclusion
 
-                foreach(Point p in grains[key])
+                foreach (Point p in grains[key])
                 {
-                    currentGrid.ChangeCellValue(p.X, p.Y,currentID,grainState);
+                    currentGrid.ChangeCellValue(p.X, p.Y, currentID, grainState);
                     emptyCount--;
                 }
                 currentID++;
@@ -331,7 +349,7 @@ namespace MultiscaleModeling.Controller
         internal void GenerateInclusions(int selectedIndex, int value, int amount)
         {
 
-            if(selectedIndex == 0)
+            if (selectedIndex == 0)
             {
                 InclusionManager = new SquareInclusionManager();
             }
