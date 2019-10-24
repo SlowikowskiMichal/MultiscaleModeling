@@ -26,6 +26,7 @@ namespace MultiscaleModeling.Controller
         #region NUCLEONS
         int nucleonsPopulation;
         public int CurrentNucleonID { get; private set; }
+        public int ProbabilityOfChange;
         #endregion
 
         #region INCLUSIONS
@@ -64,6 +65,7 @@ namespace MultiscaleModeling.Controller
             nucleonsPopulation = 1;
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
+            ProbabilityOfChange = 100;
         }
         public GridController(int gridWidth, int gridHeight)
         {
@@ -72,6 +74,7 @@ namespace MultiscaleModeling.Controller
             nucleonsPopulation = 1;
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
+            ProbabilityOfChange = 100;
         }
         public GridController(int gridWidth, int gridHeight, int nucleonsPopulation)
         {
@@ -80,6 +83,7 @@ namespace MultiscaleModeling.Controller
             this.nucleonsPopulation = nucleonsPopulation;
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
+            ProbabilityOfChange = 100;
         }
         #endregion
         /// <summary>
@@ -209,9 +213,14 @@ namespace MultiscaleModeling.Controller
                         .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
                         .ToDictionary(v => v.Key, v => v.Count());
 
+                    if(counts.Count == 0)
+                    {
+                        continue;
+                    }
+
                     if (counts.Any(e => e.Value > 5)) //RULE 1
                     {
-                        cellID = counts.Max()
+                        cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                     }
                     else // RULE 2
                     {
@@ -222,7 +231,7 @@ namespace MultiscaleModeling.Controller
 
                         if (counts.Any(e => e.Value > 3))
                         {
-
+                            cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                         }
                         else // RULE 3
                         {
@@ -232,13 +241,17 @@ namespace MultiscaleModeling.Controller
                                 .ToDictionary(v => v.Key, v => v.Count());
                             if (counts.Any(e => e.Value > 3))
                             {
-
+                                cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                             }
                             else // RULE 4
                             {
                                 counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
                                     .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
                                     .ToDictionary(v => v.Key, v => v.Count());
+                                if (ProbabilityOfChange >= r.Next(100))
+                                {
+                                    cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
+                                }
                             }
                         }
                     }
