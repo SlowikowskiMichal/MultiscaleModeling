@@ -196,10 +196,12 @@ namespace MultiscaleModeling.Controller
             nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
             List<Model.Point> n;
             Dictionary<int, int> cellIDCount = new Dictionary<int, int>();
+            bool changeValue = false;
             for (int x = startX; x < endX; x++)
             {
                 for (int y = startY; y < endY; y++)
                 {
+                    changeValue = false;
                     if (currentGrid.Cells[x, y].State != 0)
                     {
                         continue;
@@ -220,6 +222,7 @@ namespace MultiscaleModeling.Controller
 
                     if (counts.Any(e => e.Value > 5)) //RULE 1
                     {
+                        changeValue = true;
                         cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                     }
                     else // RULE 2
@@ -231,6 +234,7 @@ namespace MultiscaleModeling.Controller
 
                         if (counts.Any(e => e.Value > 3))
                         {
+                            changeValue = true;
                             cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                         }
                         else // RULE 3
@@ -241,22 +245,24 @@ namespace MultiscaleModeling.Controller
                                 .ToDictionary(v => v.Key, v => v.Count());
                             if (counts.Any(e => e.Value > 3))
                             {
+                                changeValue = true;
                                 cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                             }
                             else // RULE 4
                             {
-                                counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1 && currentGrid.Cells[p.X, p.Y].Id != 0)
+                                counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
                                     .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
                                     .ToDictionary(v => v.Key, v => v.Count());
                                 if (ProbabilityOfChange >= r.Next(100) && counts.Count > 0)
                                 {
+                                    changeValue = true;
                                     cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                                 }
                             }
                         }
                     }
 
-                    if (cellID > 0)
+                    if (changeValue)
                     {
                         lock (synLock)
                         {
