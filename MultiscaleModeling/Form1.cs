@@ -93,23 +93,32 @@ namespace MultiscaleModeling
                 return;
             }
             MouseEventArgs me = (MouseEventArgs)e;
+            //Calculate pictureBox click position to grid position
+            int x = (int)(me.X / cellXSize) + currentPositionX;
+            int y = (int)(me.Y / cellYSize) + currentPositionY;
+            if (x >= Grid.SizeX || x < 0
+                || y >= Grid.SizeY || y < 0)
+            {
+                return;
+            }
             if (me.Button == MouseButtons.Left)
             {
-                //Calculate pictureBox click position to grid position
-                int x = (int)(me.X / cellXSize) + currentPositionX;
-                int y = (int)(me.Y / cellYSize) + currentPositionY;
-                if (x >= Grid.SizeX || x < 0
-                    || y >= Grid.SizeY || y < 0)
+
+                if (gridController.emptyCount == 0)
                 {
-                    return;
-                }
-                if(gridController.ChangeGridValue(x, y))
-                {
-                    FillCell(x, y,nextImage, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.CurrentNucleonID % ColorManager.indexcolors.Count()]));
+                    gridController.selectGrainForDP(x, y);
+                    DrawGridOnImage(ref nextImage);
                 }
                 else
                 {
-                    FillCell(x, y, nextImage, BackgroundColor);
+                    if (gridController.ChangeGridValue(x, y))
+                    {
+                        FillCell(x, y, nextImage, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.CurrentNucleonID % ColorManager.indexcolors.Count()]));
+                    }
+                    else
+                    {
+                        FillCell(x, y, nextImage, BackgroundColor);
+                    }
                 }
             }
             else
@@ -210,6 +219,10 @@ namespace MultiscaleModeling
                     else if (gridController.GetCurrentGridCellState(x, y) == 2)
                     {
                         FillCell(x, y, imageToDrawOn, Color.Black);
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 3)
+                    {
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.dpColor));
                     }
                     else
                     {
@@ -353,6 +366,13 @@ namespace MultiscaleModeling
         private void ProbabilityCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             gridController.ProbabilityOfChange = Decimal.ToInt32(probabilityCAPropertiesNumericUpDown.Value);
+        }
+
+        private void ClearSubstructureButton_Click(object sender, EventArgs e)
+        {
+            gridController.ClearUnselectedGrains();
+            DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
         }
     }
 }

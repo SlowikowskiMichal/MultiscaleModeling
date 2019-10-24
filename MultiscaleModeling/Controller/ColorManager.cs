@@ -9,7 +9,7 @@ namespace MultiscaleModeling.Controller
     static class ColorManager
     {
         public static readonly String[] indexcolors = new String[]{
-        "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059", //"#000000", 
+        "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059", //"#000000",  - inclusions "#FFFF00", - DP-steel
         "#FFDBE5", "#7A4900", "#0000A6", "#63FFAC", "#B79762", "#004D43", "#8FB0FF", "#997D87",
         "#5A0007", "#809693", "#FEFFE6", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80",
         "#61615A", "#BA0900", "#6B7900", "#00C2A0", "#FFAA92", "#FF90C9", "#B903AA", "#D16100",
@@ -138,5 +138,6 @@ namespace MultiscaleModeling.Controller
         "#51A288", "#2C656A", "#4D5C5E", "#C9403A", "#DDD7F3", "#005844", "#B4A200", "#488F69",
         "#858182", "#D4E9B9", "#3D7397", "#CAE8CE", "#D60034", "#AA6746", "#9E5585", "#BA6200"
     };
+        public static readonly string dpColor = "#FFFF00";
 }
 }

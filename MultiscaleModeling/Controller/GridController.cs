@@ -20,7 +20,7 @@ namespace MultiscaleModeling.Controller
         #region GRID
         Grid currentGrid;
         Grid nextStepGrid;
-        int emptyCount = 0;
+        public int emptyCount { get; private set; }
         #endregion
 
         #region NUCLEONS
@@ -114,6 +114,28 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
         }
 
+        internal void selectGrainForDP(int cellPosX, int cellPosY)
+        {
+            if (currentGrid.Cells[cellPosX, cellPosY].State == 2)
+            {
+                return;
+            }
+
+            int idToChange = currentGrid.Cells[cellPosX, cellPosY].Id;
+
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    if(currentGrid.Cells[x, y].Id == idToChange)
+                    {
+                        currentGrid.Cells[x, y].ChangeState(3);
+                        currentGrid.Cells[x, y].Id = -2;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Return true if cell changed status to aggregaded
         /// </summary>
@@ -166,15 +188,29 @@ namespace MultiscaleModeling.Controller
                 return;
             }
             nucleonsPopulation = nPopulation;
-            ClearGrid();
+            //ClearGrid();
             int gridSize = Grid.SizeX * Grid.SizeY;
             List<Model.Point> start = new List<Model.Point>();
-
+            Point buff;
             Random r = new Random();
+            int failedCounter = 0;
             for (int i = 0; i < nucleonsPopulation;)
             {
-                start.Add(new Point(r.Next(0, Grid.SizeX), r.Next(0, Grid.SizeY)));
-                i++;
+                buff = new Point(r.Next(0, Grid.SizeX), r.Next(0, Grid.SizeY));
+                if (currentGrid.Cells[buff.X,buff.Y].State == 0)
+                {
+                    start.Add(buff);
+                    i++;
+                    failedCounter = 0;
+                }
+                else
+                {
+                    failedCounter++;
+                    if(failedCounter > 10)
+                    {
+                        break;
+                    }
+                }
             }
             Populate(start, nucleonsPopulation);
         }
@@ -182,8 +218,7 @@ namespace MultiscaleModeling.Controller
         {
             foreach (Model.Point p in start)
             {
-                currentGrid.ChangeCellValue(p.X, p.Y);
-                currentGrid.Cells[p.X, p.Y].Id = CurrentNucleonID;
+                currentGrid.ChangeCellValue(p.X, p.Y, CurrentNucleonID, 1);
                 CurrentNucleonID++;
                 CurrentNucleonID = CurrentNucleonID % nPopulation;
                 emptyCount--;
@@ -364,6 +399,20 @@ namespace MultiscaleModeling.Controller
             else
             {
                 this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
+            }
+        }
+
+        internal void ClearUnselectedGrains()
+        {
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    if (currentGrid.Cells[x, y].State != 3 && currentGrid.Cells[x, y].State != 2)
+                    {
+                        currentGrid.ChangeCellValue(x, y, 0, 0);
+                    }
+                }
             }
         }
 
