@@ -50,8 +50,8 @@ namespace MultiscaleModeling.Model.Inclusions
                     neighbourhoodPoints = neighbourhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, boundaryCondition);
 
                     if(neighbourhoodPoints.Any(p =>
-                        grid.Cells[p.X, p.Y].Id != grid.Cells[x, y].Id
-                        || grid.Cells[p.X, p.Y].State == 0
+                        (grid.Cells[p.X, p.Y].Id != grid.Cells[x, y].Id
+                        || grid.Cells[p.X, p.Y].State == 0) && grid.Cells[x,y].Id != 2
                         )
                     )
                     {

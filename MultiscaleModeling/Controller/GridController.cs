@@ -245,10 +245,10 @@ namespace MultiscaleModeling.Controller
                             }
                             else // RULE 4
                             {
-                                counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1)
+                                counts = n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1 && currentGrid.Cells[p.X, p.Y].Id != 0)
                                     .GroupBy(p => currentGrid.Cells[p.X, p.Y].Id)
                                     .ToDictionary(v => v.Key, v => v.Count());
-                                if (ProbabilityOfChange >= r.Next(100))
+                                if (ProbabilityOfChange >= r.Next(100) && counts.Count > 0)
                                 {
                                     cellID = counts.Aggregate((l, v) => l.Value > v.Value ? l : v).Key;
                                 }
@@ -261,7 +261,7 @@ namespace MultiscaleModeling.Controller
                         lock (synLock)
                         {
                             emptyCount--;
-                            nextStepGrid.Cells[x, y].ChangeState();
+                            nextStepGrid.Cells[x, y].ChangeState(1);
                             nextStepGrid.Cells[x, y].Id = cellID;
                         }
                     }
@@ -337,19 +337,33 @@ namespace MultiscaleModeling.Controller
         {
             emptyCount = Grid.SizeX * Grid.SizeY;
             int currentID = 0;
-            this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
+            bool inclusionsPresent = false;
+            
             int grainState;
 
             foreach (int key in grains.Keys)
             {
                 grainState = key == -16777216 ? 2 : 1; //If black color then it is inclusion
 
+                if(grainState == 2)
+                {
+                    inclusionsPresent = true;
+                }
                 foreach (Point p in grains[key])
                 {
                     currentGrid.ChangeCellValue(p.X, p.Y, currentID, grainState);
                     emptyCount--;
                 }
                 currentID++;
+            }
+
+            if(inclusionsPresent)
+            {
+                this.nucleonsPopulation = grains.Keys.Count-1 > 0 ? grains.Keys.Count-1 : 1;
+            }
+            else
+            {
+                this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
             }
         }
 
