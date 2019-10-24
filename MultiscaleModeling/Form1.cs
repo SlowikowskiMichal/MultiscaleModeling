@@ -349,5 +349,10 @@ namespace MultiscaleModeling
             DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
         }
+
+        private void ProbabilityCAPropertiesNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            gridController.ProbabilityOfChange = Decimal.ToInt32(probabilityCAPropertiesNumericUpDown.Value);
+        }
     }
 }

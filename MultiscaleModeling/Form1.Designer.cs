@@ -76,6 +76,8 @@
             this.typeInclusionsComboBox = new System.Windows.Forms.ComboBox();
             this.tyoeInclusionsLabel = new System.Windows.Forms.Label();
             this.generateInclusionsButton = new System.Windows.Forms.Button();
+            this.probabilityCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.probabilityCAPropertiesLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -92,6 +94,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -121,7 +124,7 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(4, 309);
+            this.viewGroupBox.Location = new System.Drawing.Point(4, 377);
             this.viewGroupBox.Name = "viewGroupBox";
             this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
@@ -261,6 +264,8 @@
             // caGroupBox
             // 
             this.caGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.caGroupBox.Controls.Add(this.probabilityCAPropertiesNumericUpDown);
+            this.caGroupBox.Controls.Add(this.probabilityCAPropertiesLabel);
             this.caGroupBox.Controls.Add(this.nucleonAmoutCAPropertiesNumericUpDown);
             this.caGroupBox.Controls.Add(this.randomPlacementButton);
             this.caGroupBox.Controls.Add(this.label1);
@@ -270,7 +275,7 @@
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
             this.caGroupBox.Location = new System.Drawing.Point(4, 129);
             this.caGroupBox.Name = "caGroupBox";
-            this.caGroupBox.Size = new System.Drawing.Size(174, 174);
+            this.caGroupBox.Size = new System.Drawing.Size(174, 214);
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
@@ -578,6 +583,33 @@
             this.generateInclusionsButton.UseVisualStyleBackColor = true;
             this.generateInclusionsButton.Click += new System.EventHandler(this.GenerateInclusionsButton_Click);
             // 
+            // probabilityCAPropertiesNumericUpDown
+            // 
+            this.probabilityCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 186);
+            this.probabilityCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.probabilityCAPropertiesNumericUpDown.Name = "probabilityCAPropertiesNumericUpDown";
+            this.probabilityCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.probabilityCAPropertiesNumericUpDown.TabIndex = 10;
+            this.probabilityCAPropertiesNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.probabilityCAPropertiesNumericUpDown.ValueChanged += new System.EventHandler(this.ProbabilityCAPropertiesNumericUpDown_ValueChanged);
+            // 
+            // probabilityCAPropertiesLabel
+            // 
+            this.probabilityCAPropertiesLabel.AutoSize = true;
+            this.probabilityCAPropertiesLabel.Location = new System.Drawing.Point(6, 170);
+            this.probabilityCAPropertiesLabel.Name = "probabilityCAPropertiesLabel";
+            this.probabilityCAPropertiesLabel.Size = new System.Drawing.Size(120, 13);
+            this.probabilityCAPropertiesLabel.TabIndex = 9;
+            this.probabilityCAPropertiesLabel.Text = "Probality of cell change:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -612,6 +644,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -665,6 +698,8 @@
         private System.Windows.Forms.Button generateInclusionsButton;
         private System.Windows.Forms.NumericUpDown amountInsclusionsNumericUpDown;
         private System.Windows.Forms.Label amountInclusionsLabel;
+        private System.Windows.Forms.NumericUpDown probabilityCAPropertiesNumericUpDown;
+        private System.Windows.Forms.Label probabilityCAPropertiesLabel;
     }
 }
 
