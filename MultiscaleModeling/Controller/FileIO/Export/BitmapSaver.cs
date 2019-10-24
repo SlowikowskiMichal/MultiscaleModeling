@@ -62,6 +62,10 @@ namespace MultiscaleModeling.Controller.FileIO.Export
                     {
                         color = ColorTranslator.FromHtml(ColorManager.indexcolors[grid.Cells[x, y].Id % ColorManager.indexcolors.Count()]);
                     }
+                    else if (grid.Cells[x, y].State == 3)
+                    {
+                        color = ColorTranslator.FromHtml(ColorManager.dpColor);
+                    }
                     else
                     {
                         color = Color.Black;

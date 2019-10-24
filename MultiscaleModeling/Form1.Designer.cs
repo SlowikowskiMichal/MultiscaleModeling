@@ -44,6 +44,8 @@
             this.widthSizeGridPropertiesLabel = new System.Windows.Forms.Label();
             this.sizegGridPropertiesSLabel = new System.Windows.Forms.Label();
             this.caGroupBox = new System.Windows.Forms.GroupBox();
+            this.probabilityCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.probabilityCAPropertiesLabel = new System.Windows.Forms.Label();
             this.nucleonAmoutCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.randomPlacementButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,8 +78,10 @@
             this.typeInclusionsComboBox = new System.Windows.Forms.ComboBox();
             this.tyoeInclusionsLabel = new System.Windows.Forms.Label();
             this.generateInclusionsButton = new System.Windows.Forms.Button();
-            this.probabilityCAPropertiesNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.probabilityCAPropertiesLabel = new System.Windows.Forms.Label();
+            this.substructureTabPage = new System.Windows.Forms.TabPage();
+            this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
+            this.clearSubstructureButton = new System.Windows.Forms.Button();
+            this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -86,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.heightSizeGridPropertiesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).BeginInit();
             this.caGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).BeginInit();
             this.executionGroupBox.SuspendLayout();
             this.menuTabControl.SuspendLayout();
@@ -94,7 +99,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).BeginInit();
+            this.substructureTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -279,6 +284,33 @@
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
+            // 
+            // probabilityCAPropertiesNumericUpDown
+            // 
+            this.probabilityCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 186);
+            this.probabilityCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.probabilityCAPropertiesNumericUpDown.Name = "probabilityCAPropertiesNumericUpDown";
+            this.probabilityCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.probabilityCAPropertiesNumericUpDown.TabIndex = 10;
+            this.probabilityCAPropertiesNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.probabilityCAPropertiesNumericUpDown.ValueChanged += new System.EventHandler(this.ProbabilityCAPropertiesNumericUpDown_ValueChanged);
+            // 
+            // probabilityCAPropertiesLabel
+            // 
+            this.probabilityCAPropertiesLabel.AutoSize = true;
+            this.probabilityCAPropertiesLabel.Location = new System.Drawing.Point(6, 170);
+            this.probabilityCAPropertiesLabel.Name = "probabilityCAPropertiesLabel";
+            this.probabilityCAPropertiesLabel.Size = new System.Drawing.Size(120, 13);
+            this.probabilityCAPropertiesLabel.TabIndex = 9;
+            this.probabilityCAPropertiesLabel.Text = "Probality of cell change:";
             // 
             // nucleonAmoutCAPropertiesNumericUpDown
             // 
@@ -469,6 +501,7 @@
             // 
             this.menuTabControl.Controls.Add(this.propertiesTabPage);
             this.menuTabControl.Controls.Add(this.executionTabPage);
+            this.menuTabControl.Controls.Add(this.substructureTabPage);
             this.menuTabControl.Location = new System.Drawing.Point(515, 12);
             this.menuTabControl.Name = "menuTabControl";
             this.menuTabControl.SelectedIndex = 0;
@@ -583,32 +616,48 @@
             this.generateInclusionsButton.UseVisualStyleBackColor = true;
             this.generateInclusionsButton.Click += new System.EventHandler(this.GenerateInclusionsButton_Click);
             // 
-            // probabilityCAPropertiesNumericUpDown
+            // substructureTabPage
             // 
-            this.probabilityCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 186);
-            this.probabilityCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.probabilityCAPropertiesNumericUpDown.Name = "probabilityCAPropertiesNumericUpDown";
-            this.probabilityCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.probabilityCAPropertiesNumericUpDown.TabIndex = 10;
-            this.probabilityCAPropertiesNumericUpDown.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.probabilityCAPropertiesNumericUpDown.ValueChanged += new System.EventHandler(this.ProbabilityCAPropertiesNumericUpDown_ValueChanged);
+            this.substructureTabPage.Controls.Add(this.selectionTypeSubstructureLabel);
+            this.substructureTabPage.Controls.Add(this.selectionTypeSubstructureComboBox);
+            this.substructureTabPage.Controls.Add(this.clearSubstructureButton);
+            this.substructureTabPage.Location = new System.Drawing.Point(4, 22);
+            this.substructureTabPage.Name = "substructureTabPage";
+            this.substructureTabPage.Size = new System.Drawing.Size(184, 474);
+            this.substructureTabPage.TabIndex = 2;
+            this.substructureTabPage.Text = "Substructure";
+            this.substructureTabPage.UseVisualStyleBackColor = true;
             // 
-            // probabilityCAPropertiesLabel
+            // selectionTypeSubstructureComboBox
             // 
-            this.probabilityCAPropertiesLabel.AutoSize = true;
-            this.probabilityCAPropertiesLabel.Location = new System.Drawing.Point(6, 170);
-            this.probabilityCAPropertiesLabel.Name = "probabilityCAPropertiesLabel";
-            this.probabilityCAPropertiesLabel.Size = new System.Drawing.Size(120, 13);
-            this.probabilityCAPropertiesLabel.TabIndex = 9;
-            this.probabilityCAPropertiesLabel.Text = "Probality of cell change:";
+            this.selectionTypeSubstructureComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectionTypeSubstructureComboBox.FormattingEnabled = true;
+            this.selectionTypeSubstructureComboBox.Items.AddRange(new object[] {
+            "Substructure",
+            "Dualphase"});
+            this.selectionTypeSubstructureComboBox.Location = new System.Drawing.Point(3, 20);
+            this.selectionTypeSubstructureComboBox.Name = "selectionTypeSubstructureComboBox";
+            this.selectionTypeSubstructureComboBox.Size = new System.Drawing.Size(177, 21);
+            this.selectionTypeSubstructureComboBox.TabIndex = 1;
+            // 
+            // clearSubstructureButton
+            // 
+            this.clearSubstructureButton.Location = new System.Drawing.Point(3, 47);
+            this.clearSubstructureButton.Name = "clearSubstructureButton";
+            this.clearSubstructureButton.Size = new System.Drawing.Size(177, 23);
+            this.clearSubstructureButton.TabIndex = 0;
+            this.clearSubstructureButton.Text = "Clear and leave selected grains";
+            this.clearSubstructureButton.UseVisualStyleBackColor = true;
+            this.clearSubstructureButton.Click += new System.EventHandler(this.ClearSubstructureButton_Click);
+            // 
+            // selectionTypeSubstructureLabel
+            // 
+            this.selectionTypeSubstructureLabel.AutoSize = true;
+            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(4, 4);
+            this.selectionTypeSubstructureLabel.Name = "selectionTypeSubstructureLabel";
+            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(81, 13);
+            this.selectionTypeSubstructureLabel.TabIndex = 2;
+            this.selectionTypeSubstructureLabel.Text = "Selection Type:";
             // 
             // Form1
             // 
@@ -634,6 +683,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.widthSizeGridPropertiesNumericUpDown)).EndInit();
             this.caGroupBox.ResumeLayout(false);
             this.caGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nucleonAmoutCAPropertiesNumericUpDown)).EndInit();
             this.executionGroupBox.ResumeLayout(false);
             this.executionGroupBox.PerformLayout();
@@ -644,7 +694,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.probabilityCAPropertiesNumericUpDown)).EndInit();
+            this.substructureTabPage.ResumeLayout(false);
+            this.substructureTabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -700,6 +751,10 @@
         private System.Windows.Forms.Label amountInclusionsLabel;
         private System.Windows.Forms.NumericUpDown probabilityCAPropertiesNumericUpDown;
         private System.Windows.Forms.Label probabilityCAPropertiesLabel;
+        private System.Windows.Forms.TabPage substructureTabPage;
+        private System.Windows.Forms.Button clearSubstructureButton;
+        private System.Windows.Forms.ComboBox selectionTypeSubstructureComboBox;
+        private System.Windows.Forms.Label selectionTypeSubstructureLabel;
     }
 }
 
