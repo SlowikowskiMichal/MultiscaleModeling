@@ -332,7 +332,7 @@ namespace MultiscaleModeling
                     valueInclusionsLabel.Text = "Length:";
                     break;
                 case 1:
-                    valueInclusionsLabel.Text = "Radius:";
+                    valueInclusionsLabel.Text = "Diameter:";
                     break;
             }
                 
