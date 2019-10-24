@@ -114,7 +114,7 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
         }
 
-        internal void selectGrainForDP(int cellPosX, int cellPosY)
+        internal void selectGrainForDP(int cellPosX, int cellPosY, int selectionType)
         {
             if (currentGrid.Cells[cellPosX, cellPosY].State == 2)
             {
@@ -122,15 +122,21 @@ namespace MultiscaleModeling.Controller
             }
 
             int idToChange = currentGrid.Cells[cellPosX, cellPosY].Id;
-
+            int stateToChangeTo = 3;
+            int idToChangeTo = -2;
+            if (selectionType == 0)
+            {
+                idToChangeTo = idToChange;
+                stateToChangeTo = 4;
+            }
             for (int x = 0; x < Grid.SizeX; x++)
             {
                 for (int y = 0; y < Grid.SizeY; y++)
                 {
-                    if(currentGrid.Cells[x, y].Id == idToChange)
+                    if (currentGrid.Cells[x, y].Id == idToChange)
                     {
-                        currentGrid.Cells[x, y].ChangeState(3);
-                        currentGrid.Cells[x, y].Id = -2;
+                        currentGrid.Cells[x, y].ChangeState(stateToChangeTo);
+                        currentGrid.Cells[x, y].Id = idToChangeTo;
                     }
                 }
             }
@@ -379,6 +385,7 @@ namespace MultiscaleModeling.Controller
             foreach (int key in grains.Keys)
             {
                 grainState = key == -16777216 ? 2 : 1; //If black color then it is inclusion
+                grainState = key != -256 ? grainState : 3;
 
                 if(grainState == 2)
                 {
@@ -408,7 +415,7 @@ namespace MultiscaleModeling.Controller
             {
                 for (int y = 0; y < Grid.SizeY; y++)
                 {
-                    if (currentGrid.Cells[x, y].State != 3 && currentGrid.Cells[x, y].State != 2)
+                    if (currentGrid.Cells[x, y].State != 3 && currentGrid.Cells[x, y].State != 2 && currentGrid.Cells[x, y].State != 4)
                     {
                         currentGrid.ChangeCellValue(x, y, 0, 0);
                     }

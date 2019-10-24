@@ -79,8 +79,9 @@
             this.tyoeInclusionsLabel = new System.Windows.Forms.Label();
             this.generateInclusionsButton = new System.Windows.Forms.Button();
             this.substructureTabPage = new System.Windows.Forms.TabPage();
+            this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -617,7 +618,8 @@
             // 
             // substructureTabPage
             // 
-            this.substructureTabPage.Controls.Add(this.comboBox1);
+            this.substructureTabPage.Controls.Add(this.selectionTypeSubstructureLabel);
+            this.substructureTabPage.Controls.Add(this.selectionTypeSubstructureComboBox);
             this.substructureTabPage.Controls.Add(this.clearSubstructureButton);
             this.substructureTabPage.Location = new System.Drawing.Point(4, 22);
             this.substructureTabPage.Name = "substructureTabPage";
@@ -626,9 +628,21 @@
             this.substructureTabPage.Text = "Substructure";
             this.substructureTabPage.UseVisualStyleBackColor = true;
             // 
+            // selectionTypeSubstructureComboBox
+            // 
+            this.selectionTypeSubstructureComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectionTypeSubstructureComboBox.FormattingEnabled = true;
+            this.selectionTypeSubstructureComboBox.Items.AddRange(new object[] {
+            "Substructure",
+            "Dualphase"});
+            this.selectionTypeSubstructureComboBox.Location = new System.Drawing.Point(3, 20);
+            this.selectionTypeSubstructureComboBox.Name = "selectionTypeSubstructureComboBox";
+            this.selectionTypeSubstructureComboBox.Size = new System.Drawing.Size(177, 21);
+            this.selectionTypeSubstructureComboBox.TabIndex = 1;
+            // 
             // clearSubstructureButton
             // 
-            this.clearSubstructureButton.Location = new System.Drawing.Point(4, 4);
+            this.clearSubstructureButton.Location = new System.Drawing.Point(3, 47);
             this.clearSubstructureButton.Name = "clearSubstructureButton";
             this.clearSubstructureButton.Size = new System.Drawing.Size(177, 23);
             this.clearSubstructureButton.TabIndex = 0;
@@ -636,17 +650,14 @@
             this.clearSubstructureButton.UseVisualStyleBackColor = true;
             this.clearSubstructureButton.Click += new System.EventHandler(this.ClearSubstructureButton_Click);
             // 
-            // comboBox1
+            // selectionTypeSubstructureLabel
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Substructure",
-            "Dualphase"});
-            this.comboBox1.Location = new System.Drawing.Point(4, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(177, 21);
-            this.comboBox1.TabIndex = 1;
+            this.selectionTypeSubstructureLabel.AutoSize = true;
+            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(4, 4);
+            this.selectionTypeSubstructureLabel.Name = "selectionTypeSubstructureLabel";
+            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(81, 13);
+            this.selectionTypeSubstructureLabel.TabIndex = 2;
+            this.selectionTypeSubstructureLabel.Text = "Selection Type:";
             // 
             // Form1
             // 
@@ -684,6 +695,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).EndInit();
             this.substructureTabPage.ResumeLayout(false);
+            this.substructureTabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -741,7 +753,8 @@
         private System.Windows.Forms.Label probabilityCAPropertiesLabel;
         private System.Windows.Forms.TabPage substructureTabPage;
         private System.Windows.Forms.Button clearSubstructureButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox selectionTypeSubstructureComboBox;
+        private System.Windows.Forms.Label selectionTypeSubstructureLabel;
     }
 }
 

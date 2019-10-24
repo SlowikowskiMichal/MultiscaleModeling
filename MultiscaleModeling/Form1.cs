@@ -74,6 +74,7 @@ namespace MultiscaleModeling
             cellYSize = sizeY * zoom;
             drawGrid = viewGridCheckBox.Checked;
 
+            selectionTypeSubstructureComboBox.SelectedIndex = 0;
 
             //GRID OPTIONS
             boundaryConditionCAPropertiesComboBox.SelectedIndex = 0;
@@ -106,7 +107,7 @@ namespace MultiscaleModeling
 
                 if (gridController.emptyCount == 0)
                 {
-                    gridController.selectGrainForDP(x, y);
+                    gridController.selectGrainForDP(x, y, selectionTypeSubstructureComboBox.SelectedIndex);
                     DrawGridOnImage(ref nextImage);
                 }
                 else
@@ -212,7 +213,7 @@ namespace MultiscaleModeling
             {
                 for (int y = currentPositionY; y < endPositionY; y++)
                 {
-                    if (gridController.GetCurrentGridCellState(x, y) == 1)
+                    if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
                     {
                         FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.GetCurrentGridCellId(x, y) % ColorManager.indexcolors.Count()]));
                     }
