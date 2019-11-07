@@ -79,9 +79,16 @@
             this.tyoeInclusionsLabel = new System.Windows.Forms.Label();
             this.generateInclusionsButton = new System.Windows.Forms.Button();
             this.substructureTabPage = new System.Windows.Forms.TabPage();
+            this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
             this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
-            this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
+            this.grainBoundariesTabPage = new System.Windows.Forms.TabPage();
+            this.propertiesGrainBoundariesGroupBox = new System.Windows.Forms.GroupBox();
+            this.selectionModePropertiesGrainBoundariesComboBox = new System.Windows.Forms.ComboBox();
+            this.gbPercentPropertiesGrainBoundariesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.generatePropertiesGrainBoundariesButtonButton = new System.Windows.Forms.Button();
+            this.gbPercentPropertiesGrainBoundariesLabel = new System.Windows.Forms.Label();
+            this.selectionModePropertiesGrainBoundariesLabel = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -100,6 +107,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.amountInsclusionsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).BeginInit();
             this.substructureTabPage.SuspendLayout();
+            this.grainBoundariesTabPage.SuspendLayout();
+            this.propertiesGrainBoundariesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbPercentPropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -502,6 +512,7 @@
             this.menuTabControl.Controls.Add(this.propertiesTabPage);
             this.menuTabControl.Controls.Add(this.executionTabPage);
             this.menuTabControl.Controls.Add(this.substructureTabPage);
+            this.menuTabControl.Controls.Add(this.grainBoundariesTabPage);
             this.menuTabControl.Location = new System.Drawing.Point(515, 12);
             this.menuTabControl.Name = "menuTabControl";
             this.menuTabControl.SelectedIndex = 0;
@@ -628,6 +639,15 @@
             this.substructureTabPage.Text = "Substructure";
             this.substructureTabPage.UseVisualStyleBackColor = true;
             // 
+            // selectionTypeSubstructureLabel
+            // 
+            this.selectionTypeSubstructureLabel.AutoSize = true;
+            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(4, 4);
+            this.selectionTypeSubstructureLabel.Name = "selectionTypeSubstructureLabel";
+            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(81, 13);
+            this.selectionTypeSubstructureLabel.TabIndex = 2;
+            this.selectionTypeSubstructureLabel.Text = "Selection Type:";
+            // 
             // selectionTypeSubstructureComboBox
             // 
             this.selectionTypeSubstructureComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -650,14 +670,75 @@
             this.clearSubstructureButton.UseVisualStyleBackColor = true;
             this.clearSubstructureButton.Click += new System.EventHandler(this.ClearSubstructureButton_Click);
             // 
-            // selectionTypeSubstructureLabel
+            // grainBoundariesTabPage
             // 
-            this.selectionTypeSubstructureLabel.AutoSize = true;
-            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(4, 4);
-            this.selectionTypeSubstructureLabel.Name = "selectionTypeSubstructureLabel";
-            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(81, 13);
-            this.selectionTypeSubstructureLabel.TabIndex = 2;
-            this.selectionTypeSubstructureLabel.Text = "Selection Type:";
+            this.grainBoundariesTabPage.Controls.Add(this.propertiesGrainBoundariesGroupBox);
+            this.grainBoundariesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.grainBoundariesTabPage.Name = "grainBoundariesTabPage";
+            this.grainBoundariesTabPage.Size = new System.Drawing.Size(184, 474);
+            this.grainBoundariesTabPage.TabIndex = 3;
+            this.grainBoundariesTabPage.Text = "Grain Boundaries";
+            this.grainBoundariesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // propertiesGrainBoundariesGroupBox
+            // 
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.selectionModePropertiesGrainBoundariesLabel);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.gbPercentPropertiesGrainBoundariesLabel);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.generatePropertiesGrainBoundariesButtonButton);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.gbPercentPropertiesGrainBoundariesNumericUpDown);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.selectionModePropertiesGrainBoundariesComboBox);
+            this.propertiesGrainBoundariesGroupBox.Location = new System.Drawing.Point(4, 4);
+            this.propertiesGrainBoundariesGroupBox.Name = "propertiesGrainBoundariesGroupBox";
+            this.propertiesGrainBoundariesGroupBox.Size = new System.Drawing.Size(174, 121);
+            this.propertiesGrainBoundariesGroupBox.TabIndex = 0;
+            this.propertiesGrainBoundariesGroupBox.TabStop = false;
+            this.propertiesGrainBoundariesGroupBox.Text = "Properites";
+            // 
+            // selectionModePropertiesGrainBoundariesComboBox
+            // 
+            this.selectionModePropertiesGrainBoundariesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectionModePropertiesGrainBoundariesComboBox.FormattingEnabled = true;
+            this.selectionModePropertiesGrainBoundariesComboBox.Items.AddRange(new object[] {
+            "All grains",
+            "Point and click"});
+            this.selectionModePropertiesGrainBoundariesComboBox.Location = new System.Drawing.Point(47, 32);
+            this.selectionModePropertiesGrainBoundariesComboBox.Name = "selectionModePropertiesGrainBoundariesComboBox";
+            this.selectionModePropertiesGrainBoundariesComboBox.Size = new System.Drawing.Size(121, 21);
+            this.selectionModePropertiesGrainBoundariesComboBox.TabIndex = 0;
+            // 
+            // gbPercentPropertiesGrainBoundariesNumericUpDown
+            // 
+            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Location = new System.Drawing.Point(47, 59);
+            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Name = "gbPercentPropertiesGrainBoundariesNumericUpDown";
+            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.gbPercentPropertiesGrainBoundariesNumericUpDown.TabIndex = 1;
+            // 
+            // generatePropertiesGrainBoundariesButtonButton
+            // 
+            this.generatePropertiesGrainBoundariesButtonButton.Location = new System.Drawing.Point(47, 85);
+            this.generatePropertiesGrainBoundariesButtonButton.Name = "generatePropertiesGrainBoundariesButtonButton";
+            this.generatePropertiesGrainBoundariesButtonButton.Size = new System.Drawing.Size(121, 23);
+            this.generatePropertiesGrainBoundariesButtonButton.TabIndex = 2;
+            this.generatePropertiesGrainBoundariesButtonButton.Text = "Generate";
+            this.generatePropertiesGrainBoundariesButtonButton.UseVisualStyleBackColor = true;
+            // 
+            // gbPercentPropertiesGrainBoundariesLabel
+            // 
+            this.gbPercentPropertiesGrainBoundariesLabel.AutoSize = true;
+            this.gbPercentPropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(5, 61);
+            this.gbPercentPropertiesGrainBoundariesLabel.Name = "gbPercentPropertiesGrainBoundariesLabel";
+            this.gbPercentPropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(36, 13);
+            this.gbPercentPropertiesGrainBoundariesLabel.TabIndex = 3;
+            this.gbPercentPropertiesGrainBoundariesLabel.Text = "GB %:";
+            // 
+            // selectionModePropertiesGrainBoundariesLabel
+            // 
+            this.selectionModePropertiesGrainBoundariesLabel.AutoSize = true;
+            this.selectionModePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(6, 16);
+            this.selectionModePropertiesGrainBoundariesLabel.Name = "selectionModePropertiesGrainBoundariesLabel";
+            this.selectionModePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(83, 13);
+            this.selectionModePropertiesGrainBoundariesLabel.TabIndex = 4;
+            this.selectionModePropertiesGrainBoundariesLabel.Text = "Selection mode:";
             // 
             // Form1
             // 
@@ -696,6 +777,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.valueInclusionsNumericUpDown)).EndInit();
             this.substructureTabPage.ResumeLayout(false);
             this.substructureTabPage.PerformLayout();
+            this.grainBoundariesTabPage.ResumeLayout(false);
+            this.propertiesGrainBoundariesGroupBox.ResumeLayout(false);
+            this.propertiesGrainBoundariesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbPercentPropertiesGrainBoundariesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -755,6 +840,13 @@
         private System.Windows.Forms.Button clearSubstructureButton;
         private System.Windows.Forms.ComboBox selectionTypeSubstructureComboBox;
         private System.Windows.Forms.Label selectionTypeSubstructureLabel;
+        private System.Windows.Forms.TabPage grainBoundariesTabPage;
+        private System.Windows.Forms.GroupBox propertiesGrainBoundariesGroupBox;
+        private System.Windows.Forms.Label selectionModePropertiesGrainBoundariesLabel;
+        private System.Windows.Forms.Label gbPercentPropertiesGrainBoundariesLabel;
+        private System.Windows.Forms.Button generatePropertiesGrainBoundariesButtonButton;
+        private System.Windows.Forms.NumericUpDown gbPercentPropertiesGrainBoundariesNumericUpDown;
+        private System.Windows.Forms.ComboBox selectionModePropertiesGrainBoundariesComboBox;
     }
 }
 
