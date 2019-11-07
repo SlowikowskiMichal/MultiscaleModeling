@@ -415,6 +415,37 @@ namespace MultiscaleModeling.Controller
             }
         }
 
+        internal string GetBoundaryPercentSize()
+        {
+            string output = "";
+            int gbSize = 0;
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    if(currentGrid.Cells[x,y].State == 2)
+                    {
+                        gbSize++;
+                    }
+                }
+            }
+            gbSize *= 100;
+            int percent = gbSize/(Grid.SizeX * Grid.SizeY);
+            output = string.Format($"{0}%", percent);
+
+            return output;
+        }
+
+        internal void GeneratePointBoundaries(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GenerateAllBoundaries(int size)
+        {
+            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
+        }
+
         internal void ClearUnselectedGrains()
         {
             for (int x = 0; x < Grid.SizeX; x++)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiscaleModeling.Model
 {
-    class Cell
+    public class Cell
     {
         public int State { get; set; }
         public int Id { get; set; }

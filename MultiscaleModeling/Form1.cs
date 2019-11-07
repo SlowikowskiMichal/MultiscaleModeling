@@ -82,6 +82,8 @@ namespace MultiscaleModeling
             typeInclusionsComboBox.SelectedIndex = 0;
             viewPictureBox.Size = viewPanel.Size;
             SetImageSize();
+
+            selectionModePropertiesGrainBoundariesComboBox.SelectedIndex = 0;
         }
 
         //GUI METHODS
@@ -374,6 +376,32 @@ namespace MultiscaleModeling
             gridController.ClearUnselectedGrains();
             DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
+        }
+
+        private void GeneratePropertiesGrainBoundariesButtonButton_Click(object sender, EventArgs e)
+        {
+            if(selectionModePropertiesGrainBoundariesComboBox.SelectedIndex == 0)
+            {
+                gridController.GenerateAllBoundaries(decimal.ToInt32(sizePropertiesGrainBoundariesNumericUpDown.Value));
+            }
+
+            gbPercentTextBox.Text = gridController.GetBoundaryPercentSize();
+
+            DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
+        }
+
+        private void SelectionModePropertiesGrainBoundariesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (selectionModePropertiesGrainBoundariesComboBox.SelectedIndex)
+            {
+                case 0:
+                    generatePropertiesGrainBoundariesButtonButton.Enabled = true;
+                    break;
+                case 1:
+                    generatePropertiesGrainBoundariesButtonButton.Enabled = false;
+                    break;
+            }
         }
     }
 }

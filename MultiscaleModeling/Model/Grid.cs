@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiscaleModeling.Model
 {
-    class Grid
+    public class Grid
     {
         public Cell[,] Cells { get; private set; }
         public static int SizeX { get => _sizeX; }

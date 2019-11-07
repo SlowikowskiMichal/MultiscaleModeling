@@ -85,10 +85,12 @@
             this.grainBoundariesTabPage = new System.Windows.Forms.TabPage();
             this.propertiesGrainBoundariesGroupBox = new System.Windows.Forms.GroupBox();
             this.selectionModePropertiesGrainBoundariesComboBox = new System.Windows.Forms.ComboBox();
-            this.gbPercentPropertiesGrainBoundariesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.sizePropertiesGrainBoundariesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.generatePropertiesGrainBoundariesButtonButton = new System.Windows.Forms.Button();
             this.gbPercentPropertiesGrainBoundariesLabel = new System.Windows.Forms.Label();
             this.selectionModePropertiesGrainBoundariesLabel = new System.Windows.Forms.Label();
+            this.sizePropertiesGrainBoundariesLabel = new System.Windows.Forms.Label();
+            this.gbPercentTextBox = new System.Windows.Forms.TextBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -109,7 +111,7 @@
             this.substructureTabPage.SuspendLayout();
             this.grainBoundariesTabPage.SuspendLayout();
             this.propertiesGrainBoundariesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gbPercentPropertiesGrainBoundariesNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -682,14 +684,16 @@
             // 
             // propertiesGrainBoundariesGroupBox
             // 
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.gbPercentTextBox);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.sizePropertiesGrainBoundariesLabel);
             this.propertiesGrainBoundariesGroupBox.Controls.Add(this.selectionModePropertiesGrainBoundariesLabel);
             this.propertiesGrainBoundariesGroupBox.Controls.Add(this.gbPercentPropertiesGrainBoundariesLabel);
             this.propertiesGrainBoundariesGroupBox.Controls.Add(this.generatePropertiesGrainBoundariesButtonButton);
-            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.gbPercentPropertiesGrainBoundariesNumericUpDown);
+            this.propertiesGrainBoundariesGroupBox.Controls.Add(this.sizePropertiesGrainBoundariesNumericUpDown);
             this.propertiesGrainBoundariesGroupBox.Controls.Add(this.selectionModePropertiesGrainBoundariesComboBox);
             this.propertiesGrainBoundariesGroupBox.Location = new System.Drawing.Point(4, 4);
             this.propertiesGrainBoundariesGroupBox.Name = "propertiesGrainBoundariesGroupBox";
-            this.propertiesGrainBoundariesGroupBox.Size = new System.Drawing.Size(174, 121);
+            this.propertiesGrainBoundariesGroupBox.Size = new System.Drawing.Size(174, 143);
             this.propertiesGrainBoundariesGroupBox.TabIndex = 0;
             this.propertiesGrainBoundariesGroupBox.TabStop = false;
             this.propertiesGrainBoundariesGroupBox.Text = "Properites";
@@ -705,27 +709,39 @@
             this.selectionModePropertiesGrainBoundariesComboBox.Name = "selectionModePropertiesGrainBoundariesComboBox";
             this.selectionModePropertiesGrainBoundariesComboBox.Size = new System.Drawing.Size(121, 21);
             this.selectionModePropertiesGrainBoundariesComboBox.TabIndex = 0;
+            this.selectionModePropertiesGrainBoundariesComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectionModePropertiesGrainBoundariesComboBox_SelectedIndexChanged);
             // 
-            // gbPercentPropertiesGrainBoundariesNumericUpDown
+            // sizePropertiesGrainBoundariesNumericUpDown
             // 
-            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Location = new System.Drawing.Point(47, 59);
-            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Name = "gbPercentPropertiesGrainBoundariesNumericUpDown";
-            this.gbPercentPropertiesGrainBoundariesNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.gbPercentPropertiesGrainBoundariesNumericUpDown.TabIndex = 1;
+            this.sizePropertiesGrainBoundariesNumericUpDown.Location = new System.Drawing.Point(47, 59);
+            this.sizePropertiesGrainBoundariesNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.sizePropertiesGrainBoundariesNumericUpDown.Name = "sizePropertiesGrainBoundariesNumericUpDown";
+            this.sizePropertiesGrainBoundariesNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.sizePropertiesGrainBoundariesNumericUpDown.TabIndex = 1;
+            this.sizePropertiesGrainBoundariesNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // generatePropertiesGrainBoundariesButtonButton
             // 
-            this.generatePropertiesGrainBoundariesButtonButton.Location = new System.Drawing.Point(47, 85);
+            this.generatePropertiesGrainBoundariesButtonButton.Location = new System.Drawing.Point(46, 111);
             this.generatePropertiesGrainBoundariesButtonButton.Name = "generatePropertiesGrainBoundariesButtonButton";
             this.generatePropertiesGrainBoundariesButtonButton.Size = new System.Drawing.Size(121, 23);
             this.generatePropertiesGrainBoundariesButtonButton.TabIndex = 2;
             this.generatePropertiesGrainBoundariesButtonButton.Text = "Generate";
             this.generatePropertiesGrainBoundariesButtonButton.UseVisualStyleBackColor = true;
+            this.generatePropertiesGrainBoundariesButtonButton.Click += new System.EventHandler(this.GeneratePropertiesGrainBoundariesButtonButton_Click);
             // 
             // gbPercentPropertiesGrainBoundariesLabel
             // 
             this.gbPercentPropertiesGrainBoundariesLabel.AutoSize = true;
-            this.gbPercentPropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(5, 61);
+            this.gbPercentPropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(6, 88);
             this.gbPercentPropertiesGrainBoundariesLabel.Name = "gbPercentPropertiesGrainBoundariesLabel";
             this.gbPercentPropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(36, 13);
             this.gbPercentPropertiesGrainBoundariesLabel.TabIndex = 3;
@@ -739,6 +755,23 @@
             this.selectionModePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(83, 13);
             this.selectionModePropertiesGrainBoundariesLabel.TabIndex = 4;
             this.selectionModePropertiesGrainBoundariesLabel.Text = "Selection mode:";
+            // 
+            // sizePropertiesGrainBoundariesLabel
+            // 
+            this.sizePropertiesGrainBoundariesLabel.AutoSize = true;
+            this.sizePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(6, 61);
+            this.sizePropertiesGrainBoundariesLabel.Name = "sizePropertiesGrainBoundariesLabel";
+            this.sizePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(30, 13);
+            this.sizePropertiesGrainBoundariesLabel.TabIndex = 5;
+            this.sizePropertiesGrainBoundariesLabel.Text = "Size:";
+            // 
+            // gbPercentTextBox
+            // 
+            this.gbPercentTextBox.Enabled = false;
+            this.gbPercentTextBox.Location = new System.Drawing.Point(47, 85);
+            this.gbPercentTextBox.Name = "gbPercentTextBox";
+            this.gbPercentTextBox.Size = new System.Drawing.Size(120, 20);
+            this.gbPercentTextBox.TabIndex = 6;
             // 
             // Form1
             // 
@@ -780,7 +813,7 @@
             this.grainBoundariesTabPage.ResumeLayout(false);
             this.propertiesGrainBoundariesGroupBox.ResumeLayout(false);
             this.propertiesGrainBoundariesGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gbPercentPropertiesGrainBoundariesNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -845,8 +878,10 @@
         private System.Windows.Forms.Label selectionModePropertiesGrainBoundariesLabel;
         private System.Windows.Forms.Label gbPercentPropertiesGrainBoundariesLabel;
         private System.Windows.Forms.Button generatePropertiesGrainBoundariesButtonButton;
-        private System.Windows.Forms.NumericUpDown gbPercentPropertiesGrainBoundariesNumericUpDown;
+        private System.Windows.Forms.NumericUpDown sizePropertiesGrainBoundariesNumericUpDown;
         private System.Windows.Forms.ComboBox selectionModePropertiesGrainBoundariesComboBox;
+        private System.Windows.Forms.TextBox gbPercentTextBox;
+        private System.Windows.Forms.Label sizePropertiesGrainBoundariesLabel;
     }
 }
 
