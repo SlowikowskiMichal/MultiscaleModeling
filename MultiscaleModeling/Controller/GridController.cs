@@ -142,6 +142,12 @@ namespace MultiscaleModeling.Controller
             }
         }
 
+        internal void GenerateCellBoundary(int x, int y, int size)
+        {
+            nextStepGrid.Copy(currentGrid);
+            currentGrid = GrainBoundary.GenerateSelectedGrainCellBoundary(nextStepGrid, x,y, size);
+        }
+
         /// <summary>
         /// Return true if cell changed status to aggregaded
         /// </summary>
@@ -418,7 +424,7 @@ namespace MultiscaleModeling.Controller
         internal string GetBoundaryPercentSize()
         {
             string output = "";
-            int gbSize = 0;
+            float gbSize = 0f;
             for (int x = 0; x < Grid.SizeX; x++)
             {
                 for (int y = 0; y < Grid.SizeY; y++)
@@ -430,8 +436,8 @@ namespace MultiscaleModeling.Controller
                 }
             }
             gbSize *= 100;
-            int percent = gbSize/(Grid.SizeX * Grid.SizeY);
-            output = string.Format($"{0}%", percent);
+            float percent = gbSize/(float)(Grid.SizeX * Grid.SizeY);
+            output = string.Format((int)percent+"%");
 
             return output;
         }
@@ -443,7 +449,8 @@ namespace MultiscaleModeling.Controller
 
         internal void GenerateAllBoundaries(int size)
         {
-            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
+            nextStepGrid.Copy(currentGrid);
+            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(nextStepGrid, size);
         }
 
         internal void ClearUnselectedGrains()

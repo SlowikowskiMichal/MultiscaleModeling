@@ -104,29 +104,41 @@ namespace MultiscaleModeling
             {
                 return;
             }
-            if (me.Button == MouseButtons.Left)
+            if(selectionModePropertiesGrainBoundariesComboBox.SelectedIndex == 1)
             {
+                gridController.GenerateCellBoundary(x, y, decimal.ToInt32(sizePropertiesGrainBoundariesNumericUpDown.Value));
+                gbPercentTextBox.Text = gridController.GetBoundaryPercentSize();
 
-                if (gridController.emptyCount == 0)
-                {
-                    gridController.selectGrainForDP(x, y, selectionTypeSubstructureComboBox.SelectedIndex);
-                    DrawGridOnImage(ref nextImage);
-                }
-                else
-                {
-                    if (gridController.ChangeGridValue(x, y))
-                    {
-                        FillCell(x, y, nextImage, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.CurrentNucleonID % ColorManager.indexcolors.Count()]));
-                    }
-                    else
-                    {
-                        FillCell(x, y, nextImage, BackgroundColor);
-                    }
-                }
+                DrawGridOnImage(ref nextImage);
+                viewPictureBox.Refresh();
+
             }
             else
             {
-                gridController.ChangeCurrentNucleonID();
+                if (me.Button == MouseButtons.Left)
+                {
+
+                    if (gridController.emptyCount == 0)
+                    {
+                        gridController.selectGrainForDP(x, y, selectionTypeSubstructureComboBox.SelectedIndex);
+                        DrawGridOnImage(ref nextImage);
+                    }
+                    else
+                    {
+                        if (gridController.ChangeGridValue(x, y))
+                        {
+                            FillCell(x, y, nextImage, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.CurrentNucleonID % ColorManager.indexcolors.Count()]));
+                        }
+                        else
+                        {
+                            FillCell(x, y, nextImage, BackgroundColor);
+                        }
+                    }
+                }
+                else
+                {
+                    gridController.ChangeCurrentNucleonID();
+                }
             }
 
             viewPictureBox.Image = nextImage;

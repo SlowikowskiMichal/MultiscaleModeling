@@ -39,15 +39,64 @@ namespace MultiscaleModeling.Model
                         {
                             if(grid.Cells[i,j].Id != currentID && grid.Cells[i, j].State != 2)
                             {
-                                grid.Cells[x, y].State = 2;
-                                grid.Cells[x, y].Id = -1;
+                                bufferGrid.Cells[x, y].State = 2;
+                                bufferGrid.Cells[x, y].Id = -1;
                             }
                         }
                     }
                 }
             }
 
-            return grid;
+            return bufferGrid;
+        }
+
+        internal static Grid GenerateSelectedGrainCellBoundary(Grid grid, int x, int y, int size)
+        {
+            Grid bufferGrid = new Grid(Grid.SizeX, Grid.SizeY);
+            bufferGrid.Copy(grid);
+            Neighbourhood.Neighbourhood neighbourhood = new Neighbourhood.MooresNeighbourhood();
+            int minX;
+            int maxX;
+            int minY;
+            int maxY;
+            int maxGridXIndex = Grid.SizeX - 1;
+            int maxGridYIndex = Grid.SizeY - 1;
+
+            int cellID = grid.Cells[x, y].Id;
+            int top = y;
+            List<Point> listOfPoints = new List<Point>();
+
+            for (int j = 0; j < Grid.SizeY; j++)
+            {
+                for (int i = 0; i < Grid.SizeX; i++)
+                {
+                    if(grid.Cells[i, j].Id == cellID)
+                    {
+                        listOfPoints.Add(new Point(i, j));
+                    }
+                }
+            }
+            foreach(Point p in listOfPoints)
+            {
+                List<Point> n = neighbourhood.GetNeighborhood(p.X,p.Y,Grid.SizeX,Grid.SizeY,Neighbourhood.BoundaryCondition.Periodic);
+                foreach(Point c in n.Where(a => grid.Cells[a.X,a.Y].Id != cellID && grid.Cells[a.X, a.Y].State != 2))
+                {
+                    minX = Math.Max(0, c.X - size);
+                    minY = Math.Max(0, c.Y - size);
+                    maxX = Math.Min(maxGridXIndex, c.X + size);
+                    maxY = Math.Min(maxGridYIndex, c.Y + size);
+                    for (int i = minX; i < maxX; i++)
+                    {
+                        for (int j = minY; j < maxY; j++)
+                        {
+                            bufferGrid.Cells[i, j].State = 2;
+                            bufferGrid.Cells[i, j].Id = -1;
+                        }
+                    }
+                }
+            }
+
+            return bufferGrid;
         }
     }
 }
