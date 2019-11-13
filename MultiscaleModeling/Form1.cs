@@ -86,6 +86,46 @@ namespace MultiscaleModeling
             selectionModePropertiesGrainBoundariesComboBox.SelectedIndex = 0;
         }
 
+
+        public int DeterminateClickOnPictureBoxMode()
+        {
+            string beg = "Mouse mode: ";
+            if (running || mcRunning)
+            {
+                mouseModeLabel.Text = beg+"CA is running, can't click on grid";
+                return 0;
+            }
+            //Calculate pictureBox click position to grid position
+
+            if (selectionModePropertiesGrainBoundariesComboBox.SelectedIndex == 1)
+            {
+                mouseModeLabel.Text = beg + "Selected grain boundary";
+                return 4;
+            }
+            else
+            {
+                if (gridController.emptyCount == 0)
+                {
+                    if(selectionTypeSubstructureComboBox.SelectedIndex == 0)
+                    {
+                        mouseModeLabel.Text = beg + "Select Substructure";
+                        return 2;
+                    }
+                    else
+                    {
+                        mouseModeLabel.Text = beg + "Select DP";
+                        return 3;
+                    }
+                    
+                }
+                else
+                {
+                    mouseModeLabel.Text = beg + "Drawing on grid";
+                    return 1;
+                }
+            }
+        }
+
         //GUI METHODS
         //PICTURE BOX METHODS
         #region GUI ACTIONS
@@ -157,6 +197,7 @@ namespace MultiscaleModeling
             gridController.ResizeGrid(sizeX, sizeY);
 
             SetImageSize();
+            DeterminateClickOnPictureBoxMode();
         }
         private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
@@ -165,6 +206,7 @@ namespace MultiscaleModeling
 
             viewPictureBox.Image = nextImage;
             viewPictureBox.Refresh();
+            DeterminateClickOnPictureBoxMode();
         }
         private void RandomPlacementButton_Click(object sender, EventArgs e)
         {
@@ -183,14 +225,15 @@ namespace MultiscaleModeling
             {
                 caExecutionProgressBar.Value = Math.Abs(v);
             });
-
+            int rule = neighbourhoodCAPropertiesComboBox.SelectedIndex;
             SetGuiAsEnabled(false);
-            await Task.Factory.StartNew(() => gridController.Continue(progress),
+            await Task.Factory.StartNew(() => gridController.Continue(progress,rule),
                             TaskCreationOptions.LongRunning);
             this.DrawGridOnImage(ref nextImage);
             viewPictureBox.Refresh();
             running = false;
             SetGuiAsEnabled(true);
+            DeterminateClickOnPictureBoxMode();
         }
         private void StopCAExecutionButton_Click(object sender, EventArgs e)
         {
@@ -245,6 +288,7 @@ namespace MultiscaleModeling
                     }
                 }
             }
+            DeterminateClickOnPictureBoxMode();
             viewPictureBox.Image = nextImage;
             viewPictureBox.Refresh();
         }
@@ -414,6 +458,12 @@ namespace MultiscaleModeling
                     generatePropertiesGrainBoundariesButtonButton.Enabled = false;
                     break;
             }
+            DeterminateClickOnPictureBoxMode();
+        }
+
+        private void selectionTypeSubstructureComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeterminateClickOnPictureBoxMode();
         }
     }
 }

@@ -237,7 +237,7 @@ namespace MultiscaleModeling.Controller
             }
 
         }
-        void CalculateNextStep(int startX, int startY, int endX, int endY)
+        void CalculateNextStepWithFourMooreRules(int startX, int startY, int endX, int endY)
         {
             Random r = new Random();
             nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
@@ -321,13 +321,63 @@ namespace MultiscaleModeling.Controller
                 }
             }
         }
+        void CalculateNextStepStandard(int startX, int startY, int endX, int endY)
+        {
+            Random r = new Random();
+            nextStepGrid.Copy(currentGrid, startX, startY, endX, endY);
+            List<Point> n;
+            List<int> a = new List<int>();
 
+            for (int x = startX; x < endX; x++)
+            {
+                for (int y = startY; y < endY; y++)
+                {
+                    if (currentGrid.Cells[x, y].State != 0)
+                    {
+                        continue;
+                    }
+
+                    n = Neighbourhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, BoundaryCondition);
+                    a.Clear();
+
+                    n.FindAll(p => currentGrid.Cells[p.X, p.Y].State == 1).ForEach(p => a.Add(currentGrid.Cells[p.X, p.Y].Id));
+
+                    Dictionary<int, int> counts = a.GroupBy(v => v)
+                                      .ToDictionary(g => g.Key,
+                                                    g => g.Count());
+                    int max = 0;
+                    int k = 0;
+                    foreach (int key in counts.Keys)
+                    {
+                        if (max < counts[key])
+                        {
+                            max = counts[key];
+                            k = key;
+                        }
+                        else if (max == counts[key] && r.NextDouble() > 0.5)
+                        {
+                            k = key;
+                        }
+                    }
+
+                    if (max > 0)
+                    {
+                        lock (synLock)
+                        {
+                            emptyCount--;
+                            nextStepGrid.Cells[x, y].ChangeState(1);
+                            nextStepGrid.Cells[x, y].Id = k;
+                        }
+                    }
+                }
+            }
+        }
         internal void SetNucleonsPopulationDecimal(int v)
         {
             nucleonsPopulation = v;
         }
 
-        public void Continue(IProgress<int> progress)
+        public void Continue(IProgress<int> progress, int rule)
         {
             int nThreads = 4;
             Thread[] calculations = new Thread[nThreads];
@@ -349,12 +399,22 @@ namespace MultiscaleModeling.Controller
                 }
             }
 
+            Action<int, int, int, int> calculation;
+            if(rule == 0)
+            {
+                calculation = CalculateNextStepStandard;
+            }
+            else
+            {
+                calculation = CalculateNextStepWithFourMooreRules;
+            }
+
             while (running && emptyCount > 0)
             {
-                calculations[0] = new Thread(() => CalculateNextStep(0, 0, halfSizeX, halfSizeY));
-                calculations[1] = new Thread(() => CalculateNextStep(halfSizeX, 0, Grid.SizeX, halfSizeY));
-                calculations[2] = new Thread(() => CalculateNextStep(0, halfSizeY, halfSizeX, Grid.SizeY));
-                calculations[3] = new Thread(() => CalculateNextStep(halfSizeX, halfSizeY, Grid.SizeX, Grid.SizeY));
+                calculations[0] = new Thread(() => calculation(0, 0, halfSizeX, halfSizeY));
+                calculations[1] = new Thread(() => calculation(halfSizeX, 0, Grid.SizeX, halfSizeY));
+                calculations[2] = new Thread(() => calculation(0, halfSizeY, halfSizeX, Grid.SizeY));
+                calculations[3] = new Thread(() => calculation(halfSizeX, halfSizeY, Grid.SizeX, Grid.SizeY));
                 foreach (Thread task in calculations)
                 {
                     task.Start();
