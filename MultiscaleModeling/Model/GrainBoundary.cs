@@ -19,8 +19,8 @@ namespace MultiscaleModeling.Model
             int maxX;
             int minY;
             int maxY;
-            int maxGridXIndex = Grid.SizeX - 1;
-            int maxGridYIndex = Grid.SizeY - 1;
+            int maxGridXIndex = Grid.SizeX;
+            int maxGridYIndex = Grid.SizeY;
             for (int y = 0; y < Grid.SizeY; y++)
             {
                 for(int x = 0; x < Grid.SizeX; x++)
@@ -39,8 +39,8 @@ namespace MultiscaleModeling.Model
                         {
                             if(grid.Cells[i,j].Id != currentID && grid.Cells[i, j].State != 2)
                             {
-                                bufferGrid.Cells[x, y].State = 2;
-                                bufferGrid.Cells[x, y].Id = -1;
+                                bufferGrid.Cells[i, j].State = 2;
+                                bufferGrid.Cells[i, j].Id = -1;
                             }
                         }
                     }

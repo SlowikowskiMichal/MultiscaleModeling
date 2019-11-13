@@ -449,12 +449,14 @@ namespace MultiscaleModeling.Controller
 
         internal void GenerateAllBoundaries(int size)
         {
-            nextStepGrid.Copy(currentGrid);
-            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(nextStepGrid, size);
+            //nextStepGrid.Copy(currentGrid);
+            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
         }
 
         internal void ClearUnselectedGrains()
         {
+            emptyCount = Grid.SizeX * Grid.SizeY;
+
             for (int x = 0; x < Grid.SizeX; x++)
             {
                 for (int y = 0; y < Grid.SizeY; y++)
@@ -462,6 +464,7 @@ namespace MultiscaleModeling.Controller
                     if (currentGrid.Cells[x, y].State != 3 && currentGrid.Cells[x, y].State != 2 && currentGrid.Cells[x, y].State != 4)
                     {
                         currentGrid.ChangeCellValue(x, y, 0, 0);
+                        emptyCount--;
                     }
                 }
             }
