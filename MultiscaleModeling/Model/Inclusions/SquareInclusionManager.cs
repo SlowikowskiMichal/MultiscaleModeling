@@ -12,9 +12,9 @@ namespace MultiscaleModeling.Model.Inclusions
         {
             foreach (Point p in inclusionPoints)
             {
-                for (int x = Math.Max(p.X - value, 0); x < Math.Min(p.X + value, Grid.SizeX - 1); x++)
+                for (int x = Math.Max(p.X - value, 0); x < Math.Min(p.X + value, Grid.SizeX); x++)
                 {
-                    for (int y = Math.Max(p.Y - value, 0); y < Math.Min(p.Y + value, Grid.SizeY - 1); y++)
+                    for (int y = Math.Max(p.Y - value, 0); y < Math.Min(p.Y + value, Grid.SizeY); y++)
                     {
                         grid.Cells[x, y].State = 2;
                         grid.Cells[x, y].Id = -1;

@@ -211,7 +211,7 @@
             this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 74);
             this.heightSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.heightSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            6000,
             0,
             0,
             0});
@@ -229,7 +229,7 @@
             this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 47);
             this.widthSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.widthSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            6000,
             0,
             0,
             0});
@@ -515,12 +515,14 @@
             // jsonOpenFileMenuItem
             // 
             this.jsonOpenFileMenuItem.Index = 0;
+            this.jsonOpenFileMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftO;
             this.jsonOpenFileMenuItem.Text = "... from JSON";
             this.jsonOpenFileMenuItem.Click += new System.EventHandler(this.JsonOpenFileMenuItem_Click);
             // 
             // bitmapOpenFileMenuItem
             // 
             this.bitmapOpenFileMenuItem.Index = 1;
+            this.bitmapOpenFileMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
             this.bitmapOpenFileMenuItem.Text = "... from BITMAP";
             this.bitmapOpenFileMenuItem.Click += new System.EventHandler(this.bitmapOpenFileMenuItem_Click);
             // 
@@ -535,12 +537,14 @@
             // jsonSaveFileMenuItem
             // 
             this.jsonSaveFileMenuItem.Index = 0;
+            this.jsonSaveFileMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftS;
             this.jsonSaveFileMenuItem.Text = "... to JSON";
             this.jsonSaveFileMenuItem.Click += new System.EventHandler(this.jsonSaveFileMenuItem_Click);
             // 
             // bitmapSaveFileMenuItem
             // 
             this.bitmapSaveFileMenuItem.Index = 1;
+            this.bitmapSaveFileMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
             this.bitmapSaveFileMenuItem.Text = "... to BITMAP";
             this.bitmapSaveFileMenuItem.Click += new System.EventHandler(this.BitmapSaveFileMenuItem_Click);
             // 
