@@ -465,5 +465,14 @@ namespace MultiscaleModeling
         {
             DeterminateClickOnPictureBoxMode();
         }
+
+        private void RandomStatesMonteCarloButton_Click(object sender, EventArgs e)
+        {
+            {
+                gridController.RandomAllPopulate((int)stateMonteCarloNumericUpDown.Value);
+                DrawGridOnImage(ref nextImage);
+                viewPictureBox.Refresh();
+            }
+        }
     }
 }

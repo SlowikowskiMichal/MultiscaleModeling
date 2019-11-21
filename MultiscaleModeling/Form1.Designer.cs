@@ -91,7 +91,20 @@
             this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
             this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.randomStatesMonteCarloButton = new System.Windows.Forms.Button();
+            this.stateAmountMonteCarloLlabel = new System.Windows.Forms.Label();
             this.mouseModeLabel = new System.Windows.Forms.Label();
+            this.runMonteCarloButton = new System.Windows.Forms.Button();
+            this.stopMonteCarloButton = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.iterationsMonteCarloLabel = new System.Windows.Forms.Label();
+            this.runIterationsMonteCarloButton = new System.Windows.Forms.Button();
+            this.propertiesMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
+            this.executionMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
+            this.currentIterationMonteCarloLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -113,15 +126,19 @@
             this.grainBoundariesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.substructureGroupBox.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.propertiesMonteCarloGroupBox.SuspendLayout();
+            this.executionMonteCarloGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // viewPanel
             // 
             this.viewPanel.Controls.Add(this.viewPictureBox);
-            this.viewPanel.Location = new System.Drawing.Point(12, 15);
-            this.viewPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.viewPanel.Location = new System.Drawing.Point(9, 12);
             this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(667, 615);
+            this.viewPanel.Size = new System.Drawing.Size(500, 500);
             this.viewPanel.TabIndex = 0;
             // 
             // viewPictureBox
@@ -130,9 +147,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.viewPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.viewPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.viewPictureBox.Name = "viewPictureBox";
-            this.viewPictureBox.Size = new System.Drawing.Size(133, 123);
+            this.viewPictureBox.Size = new System.Drawing.Size(100, 100);
             this.viewPictureBox.TabIndex = 0;
             this.viewPictureBox.TabStop = false;
             this.viewPictureBox.Click += new System.EventHandler(this.ViewPictureBox_Click);
@@ -144,11 +160,9 @@
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(5, 464);
-            this.viewGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.viewGroupBox.Location = new System.Drawing.Point(4, 377);
             this.viewGroupBox.Name = "viewGroupBox";
-            this.viewGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.viewGroupBox.Size = new System.Drawing.Size(232, 112);
+            this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
@@ -159,10 +173,9 @@
             this.viewGridCheckBox.AllowDrop = true;
             this.viewGridCheckBox.AutoSize = true;
             this.viewGridCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.viewGridCheckBox.Location = new System.Drawing.Point(16, 86);
-            this.viewGridCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.viewGridCheckBox.Location = new System.Drawing.Point(12, 70);
             this.viewGridCheckBox.Name = "viewGridCheckBox";
-            this.viewGridCheckBox.Size = new System.Drawing.Size(187, 21);
+            this.viewGridCheckBox.Size = new System.Drawing.Size(145, 17);
             this.viewGridCheckBox.TabIndex = 2;
             this.viewGridCheckBox.Text = "Show Grid Between Cells";
             this.viewGridCheckBox.UseVisualStyleBackColor = true;
@@ -170,20 +183,18 @@
             // viewZoomTrackBarLabel
             // 
             this.viewZoomTrackBarLabel.AutoSize = true;
-            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(16, 25);
-            this.viewZoomTrackBarLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(12, 20);
             this.viewZoomTrackBarLabel.Name = "viewZoomTrackBarLabel";
-            this.viewZoomTrackBarLabel.Size = new System.Drawing.Size(44, 17);
+            this.viewZoomTrackBarLabel.Size = new System.Drawing.Size(34, 13);
             this.viewZoomTrackBarLabel.TabIndex = 1;
             this.viewZoomTrackBarLabel.Text = "Zoom";
             // 
             // viewZoomTrackBar
             // 
-            this.viewZoomTrackBar.Location = new System.Drawing.Point(71, 23);
-            this.viewZoomTrackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.viewZoomTrackBar.Location = new System.Drawing.Point(53, 19);
             this.viewZoomTrackBar.Minimum = 1;
             this.viewZoomTrackBar.Name = "viewZoomTrackBar";
-            this.viewZoomTrackBar.Size = new System.Drawing.Size(139, 56);
+            this.viewZoomTrackBar.Size = new System.Drawing.Size(104, 45);
             this.viewZoomTrackBar.TabIndex = 0;
             this.viewZoomTrackBar.Value = 1;
             // 
@@ -197,26 +208,23 @@
             this.gridPropertiesGroupBox.Controls.Add(this.heightSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.widthSizeGridPropertiesLabel);
             this.gridPropertiesGroupBox.Controls.Add(this.sizegGridPropertiesSLabel);
-            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(5, 7);
-            this.gridPropertiesGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.gridPropertiesGroupBox.Location = new System.Drawing.Point(4, 6);
             this.gridPropertiesGroupBox.Name = "gridPropertiesGroupBox";
-            this.gridPropertiesGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.gridPropertiesGroupBox.Size = new System.Drawing.Size(232, 144);
+            this.gridPropertiesGroupBox.Size = new System.Drawing.Size(174, 117);
             this.gridPropertiesGroupBox.TabIndex = 2;
             this.gridPropertiesGroupBox.TabStop = false;
             this.gridPropertiesGroupBox.Text = "Grid Properties";
             // 
             // heightSizeGridPropertiesNumericUpDown
             // 
-            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 74);
-            this.heightSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.heightSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 60);
             this.heightSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.heightSizeGridPropertiesNumericUpDown.Name = "heightSizeGridPropertiesNumericUpDown";
-            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.heightSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.heightSizeGridPropertiesNumericUpDown.TabIndex = 10;
             this.heightSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
             500,
@@ -226,15 +234,14 @@
             // 
             // widthSizeGridPropertiesNumericUpDown
             // 
-            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 47);
-            this.widthSizeGridPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.widthSizeGridPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 38);
             this.widthSizeGridPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.widthSizeGridPropertiesNumericUpDown.Name = "widthSizeGridPropertiesNumericUpDown";
-            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.widthSizeGridPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.widthSizeGridPropertiesNumericUpDown.TabIndex = 9;
             this.widthSizeGridPropertiesNumericUpDown.Value = new decimal(new int[] {
             500,
@@ -244,10 +251,9 @@
             // 
             // clearSizeGridPropertiesButton
             // 
-            this.clearSizeGridPropertiesButton.Location = new System.Drawing.Point(124, 105);
-            this.clearSizeGridPropertiesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.clearSizeGridPropertiesButton.Location = new System.Drawing.Point(93, 85);
             this.clearSizeGridPropertiesButton.Name = "clearSizeGridPropertiesButton";
-            this.clearSizeGridPropertiesButton.Size = new System.Drawing.Size(100, 28);
+            this.clearSizeGridPropertiesButton.Size = new System.Drawing.Size(75, 23);
             this.clearSizeGridPropertiesButton.TabIndex = 7;
             this.clearSizeGridPropertiesButton.Text = "Clear";
             this.clearSizeGridPropertiesButton.UseVisualStyleBackColor = true;
@@ -255,10 +261,9 @@
             // 
             // resizeSizeGridPropertiesButton
             // 
-            this.resizeSizeGridPropertiesButton.Location = new System.Drawing.Point(16, 105);
-            this.resizeSizeGridPropertiesButton.Margin = new System.Windows.Forms.Padding(4);
+            this.resizeSizeGridPropertiesButton.Location = new System.Drawing.Point(12, 85);
             this.resizeSizeGridPropertiesButton.Name = "resizeSizeGridPropertiesButton";
-            this.resizeSizeGridPropertiesButton.Size = new System.Drawing.Size(100, 28);
+            this.resizeSizeGridPropertiesButton.Size = new System.Drawing.Size(75, 23);
             this.resizeSizeGridPropertiesButton.TabIndex = 6;
             this.resizeSizeGridPropertiesButton.Text = "Resize";
             this.resizeSizeGridPropertiesButton.UseVisualStyleBackColor = true;
@@ -267,20 +272,18 @@
             // heightSizeGridPropertiesLabel
             // 
             this.heightSizeGridPropertiesLabel.AutoSize = true;
-            this.heightSizeGridPropertiesLabel.Location = new System.Drawing.Point(24, 76);
-            this.heightSizeGridPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.heightSizeGridPropertiesLabel.Location = new System.Drawing.Point(18, 62);
             this.heightSizeGridPropertiesLabel.Name = "heightSizeGridPropertiesLabel";
-            this.heightSizeGridPropertiesLabel.Size = new System.Drawing.Size(58, 17);
+            this.heightSizeGridPropertiesLabel.Size = new System.Drawing.Size(47, 13);
             this.heightSizeGridPropertiesLabel.TabIndex = 3;
             this.heightSizeGridPropertiesLabel.Text = "• Height";
             // 
             // widthSizeGridPropertiesLabel
             // 
             this.widthSizeGridPropertiesLabel.AutoSize = true;
-            this.widthSizeGridPropertiesLabel.Location = new System.Drawing.Point(24, 49);
-            this.widthSizeGridPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.widthSizeGridPropertiesLabel.Location = new System.Drawing.Point(18, 40);
             this.widthSizeGridPropertiesLabel.Name = "widthSizeGridPropertiesLabel";
-            this.widthSizeGridPropertiesLabel.Size = new System.Drawing.Size(53, 17);
+            this.widthSizeGridPropertiesLabel.Size = new System.Drawing.Size(44, 13);
             this.widthSizeGridPropertiesLabel.TabIndex = 2;
             this.widthSizeGridPropertiesLabel.Text = "• Width";
             // 
@@ -288,10 +291,9 @@
             // 
             this.sizegGridPropertiesSLabel.AutoSize = true;
             this.sizegGridPropertiesSLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sizegGridPropertiesSLabel.Location = new System.Drawing.Point(12, 20);
-            this.sizegGridPropertiesSLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sizegGridPropertiesSLabel.Location = new System.Drawing.Point(9, 16);
             this.sizegGridPropertiesSLabel.Name = "sizegGridPropertiesSLabel";
-            this.sizegGridPropertiesSLabel.Size = new System.Drawing.Size(46, 18);
+            this.sizegGridPropertiesSLabel.Size = new System.Drawing.Size(39, 15);
             this.sizegGridPropertiesSLabel.TabIndex = 0;
             this.sizegGridPropertiesSLabel.Text = "Size:";
             // 
@@ -307,26 +309,23 @@
             this.caGroupBox.Controls.Add(this.boundaryConditionCAPropertiesComboBox);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBoxLabel);
             this.caGroupBox.Controls.Add(this.neighbourhoodCAPropertiesComboBox);
-            this.caGroupBox.Location = new System.Drawing.Point(5, 159);
-            this.caGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.caGroupBox.Location = new System.Drawing.Point(4, 129);
             this.caGroupBox.Name = "caGroupBox";
-            this.caGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.caGroupBox.Size = new System.Drawing.Size(232, 263);
+            this.caGroupBox.Size = new System.Drawing.Size(174, 214);
             this.caGroupBox.TabIndex = 3;
             this.caGroupBox.TabStop = false;
             this.caGroupBox.Text = "Cellural Automata Properties";
             // 
             // probabilityCAPropertiesNumericUpDown
             // 
-            this.probabilityCAPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 229);
-            this.probabilityCAPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.probabilityCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 186);
             this.probabilityCAPropertiesNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.probabilityCAPropertiesNumericUpDown.Name = "probabilityCAPropertiesNumericUpDown";
-            this.probabilityCAPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.probabilityCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.probabilityCAPropertiesNumericUpDown.TabIndex = 10;
             this.probabilityCAPropertiesNumericUpDown.Value = new decimal(new int[] {
             100,
@@ -338,17 +337,15 @@
             // probabilityCAPropertiesLabel
             // 
             this.probabilityCAPropertiesLabel.AutoSize = true;
-            this.probabilityCAPropertiesLabel.Location = new System.Drawing.Point(8, 209);
-            this.probabilityCAPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.probabilityCAPropertiesLabel.Location = new System.Drawing.Point(6, 170);
             this.probabilityCAPropertiesLabel.Name = "probabilityCAPropertiesLabel";
-            this.probabilityCAPropertiesLabel.Size = new System.Drawing.Size(159, 17);
+            this.probabilityCAPropertiesLabel.Size = new System.Drawing.Size(120, 13);
             this.probabilityCAPropertiesLabel.TabIndex = 9;
             this.probabilityCAPropertiesLabel.Text = "Probality of cell change:";
             // 
             // nucleonAmoutCAPropertiesNumericUpDown
             // 
-            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(91, 145);
-            this.nucleonAmoutCAPropertiesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Location = new System.Drawing.Point(68, 118);
             this.nucleonAmoutCAPropertiesNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -360,7 +357,7 @@
             0,
             0});
             this.nucleonAmoutCAPropertiesNumericUpDown.Name = "nucleonAmoutCAPropertiesNumericUpDown";
-            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(133, 22);
+            this.nucleonAmoutCAPropertiesNumericUpDown.Size = new System.Drawing.Size(100, 20);
             this.nucleonAmoutCAPropertiesNumericUpDown.TabIndex = 8;
             this.nucleonAmoutCAPropertiesNumericUpDown.Value = new decimal(new int[] {
             5,
@@ -371,10 +368,9 @@
             // 
             // randomPlacementButton
             // 
-            this.randomPlacementButton.Location = new System.Drawing.Point(12, 177);
-            this.randomPlacementButton.Margin = new System.Windows.Forms.Padding(4);
+            this.randomPlacementButton.Location = new System.Drawing.Point(9, 144);
             this.randomPlacementButton.Name = "randomPlacementButton";
-            this.randomPlacementButton.Size = new System.Drawing.Size(212, 28);
+            this.randomPlacementButton.Size = new System.Drawing.Size(159, 23);
             this.randomPlacementButton.TabIndex = 7;
             this.randomPlacementButton.Text = "Random nucleon placement";
             this.randomPlacementButton.UseVisualStyleBackColor = true;
@@ -383,20 +379,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 126);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 102);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 17);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Nucleon Amout:";
             // 
             // boundaryConditionPropertiesComboBoxLabel
             // 
             this.boundaryConditionPropertiesComboBoxLabel.AutoSize = true;
-            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(8, 27);
-            this.boundaryConditionPropertiesComboBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.boundaryConditionPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 22);
             this.boundaryConditionPropertiesComboBoxLabel.Name = "boundaryConditionPropertiesComboBoxLabel";
-            this.boundaryConditionPropertiesComboBoxLabel.Size = new System.Drawing.Size(136, 17);
+            this.boundaryConditionPropertiesComboBoxLabel.Size = new System.Drawing.Size(102, 13);
             this.boundaryConditionPropertiesComboBoxLabel.TabIndex = 3;
             this.boundaryConditionPropertiesComboBoxLabel.Text = "Boundary Condition:";
             // 
@@ -406,19 +400,17 @@
             this.boundaryConditionCAPropertiesComboBox.FormattingEnabled = true;
             this.boundaryConditionCAPropertiesComboBox.Items.AddRange(new object[] {
             "Periodic"});
-            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(91, 47);
-            this.boundaryConditionCAPropertiesComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.boundaryConditionCAPropertiesComboBox.Location = new System.Drawing.Point(68, 38);
             this.boundaryConditionCAPropertiesComboBox.Name = "boundaryConditionCAPropertiesComboBox";
-            this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(132, 24);
+            this.boundaryConditionCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.boundaryConditionCAPropertiesComboBox.TabIndex = 2;
             // 
             // neighbourhoodCAPropertiesComboBoxLabel
             // 
             this.neighbourhoodCAPropertiesComboBoxLabel.AutoSize = true;
-            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(8, 76);
-            this.neighbourhoodCAPropertiesComboBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Location = new System.Drawing.Point(6, 62);
             this.neighbourhoodCAPropertiesComboBoxLabel.Name = "neighbourhoodCAPropertiesComboBoxLabel";
-            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(110, 17);
+            this.neighbourhoodCAPropertiesComboBoxLabel.Size = new System.Drawing.Size(83, 13);
             this.neighbourhoodCAPropertiesComboBoxLabel.TabIndex = 1;
             this.neighbourhoodCAPropertiesComboBoxLabel.Text = "Neighbourhood:";
             // 
@@ -429,18 +421,16 @@
             this.neighbourhoodCAPropertiesComboBox.Items.AddRange(new object[] {
             "Simple Moore",
             "Moore 4 rules"});
-            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(91, 96);
-            this.neighbourhoodCAPropertiesComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.neighbourhoodCAPropertiesComboBox.Location = new System.Drawing.Point(68, 78);
             this.neighbourhoodCAPropertiesComboBox.Name = "neighbourhoodCAPropertiesComboBox";
-            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(132, 24);
+            this.neighbourhoodCAPropertiesComboBox.Size = new System.Drawing.Size(100, 21);
             this.neighbourhoodCAPropertiesComboBox.TabIndex = 0;
             // 
             // runCAExecutionButton
             // 
-            this.runCAExecutionButton.Location = new System.Drawing.Point(8, 42);
-            this.runCAExecutionButton.Margin = new System.Windows.Forms.Padding(4);
+            this.runCAExecutionButton.Location = new System.Drawing.Point(6, 34);
             this.runCAExecutionButton.Name = "runCAExecutionButton";
-            this.runCAExecutionButton.Size = new System.Drawing.Size(107, 28);
+            this.runCAExecutionButton.Size = new System.Drawing.Size(80, 23);
             this.runCAExecutionButton.TabIndex = 9;
             this.runCAExecutionButton.Text = "Run";
             this.runCAExecutionButton.UseVisualStyleBackColor = true;
@@ -448,10 +438,9 @@
             // 
             // stopCAExecutionButton
             // 
-            this.stopCAExecutionButton.Location = new System.Drawing.Point(117, 42);
-            this.stopCAExecutionButton.Margin = new System.Windows.Forms.Padding(4);
+            this.stopCAExecutionButton.Location = new System.Drawing.Point(88, 34);
             this.stopCAExecutionButton.Name = "stopCAExecutionButton";
-            this.stopCAExecutionButton.Size = new System.Drawing.Size(107, 28);
+            this.stopCAExecutionButton.Size = new System.Drawing.Size(80, 23);
             this.stopCAExecutionButton.TabIndex = 10;
             this.stopCAExecutionButton.Text = "Stop";
             this.stopCAExecutionButton.UseVisualStyleBackColor = true;
@@ -461,10 +450,9 @@
             // 
             this.caSimulationCAPropertiesLabel.AutoSize = true;
             this.caSimulationCAPropertiesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.caSimulationCAPropertiesLabel.Location = new System.Drawing.Point(12, 20);
-            this.caSimulationCAPropertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.caSimulationCAPropertiesLabel.Location = new System.Drawing.Point(9, 16);
             this.caSimulationCAPropertiesLabel.Name = "caSimulationCAPropertiesLabel";
-            this.caSimulationCAPropertiesLabel.Size = new System.Drawing.Size(124, 18);
+            this.caSimulationCAPropertiesLabel.Size = new System.Drawing.Size(105, 15);
             this.caSimulationCAPropertiesLabel.TabIndex = 11;
             this.caSimulationCAPropertiesLabel.Text = "CA Simulation: ";
             // 
@@ -474,21 +462,18 @@
             this.executionGroupBox.Controls.Add(this.caSimulationCAPropertiesLabel);
             this.executionGroupBox.Controls.Add(this.runCAExecutionButton);
             this.executionGroupBox.Controls.Add(this.stopCAExecutionButton);
-            this.executionGroupBox.Location = new System.Drawing.Point(8, 172);
-            this.executionGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.executionGroupBox.Location = new System.Drawing.Point(6, 140);
             this.executionGroupBox.Name = "executionGroupBox";
-            this.executionGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.executionGroupBox.Size = new System.Drawing.Size(232, 123);
+            this.executionGroupBox.Size = new System.Drawing.Size(174, 100);
             this.executionGroupBox.TabIndex = 14;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
             // 
             // caExecutionProgressBar
             // 
-            this.caExecutionProgressBar.Location = new System.Drawing.Point(8, 79);
-            this.caExecutionProgressBar.Margin = new System.Windows.Forms.Padding(4);
+            this.caExecutionProgressBar.Location = new System.Drawing.Point(6, 64);
             this.caExecutionProgressBar.Name = "caExecutionProgressBar";
-            this.caExecutionProgressBar.Size = new System.Drawing.Size(216, 28);
+            this.caExecutionProgressBar.Size = new System.Drawing.Size(162, 23);
             this.caExecutionProgressBar.TabIndex = 12;
             // 
             // mainMenu1
@@ -549,11 +534,11 @@
             this.menuTabControl.Controls.Add(this.propertiesTabPage);
             this.menuTabControl.Controls.Add(this.executionTabPage);
             this.menuTabControl.Controls.Add(this.substructureTabPage);
-            this.menuTabControl.Location = new System.Drawing.Point(687, 15);
-            this.menuTabControl.Margin = new System.Windows.Forms.Padding(4);
+            this.menuTabControl.Controls.Add(this.tabPage1);
+            this.menuTabControl.Location = new System.Drawing.Point(515, 12);
             this.menuTabControl.Name = "menuTabControl";
             this.menuTabControl.SelectedIndex = 0;
-            this.menuTabControl.Size = new System.Drawing.Size(256, 594);
+            this.menuTabControl.Size = new System.Drawing.Size(192, 483);
             this.menuTabControl.TabIndex = 15;
             // 
             // propertiesTabPage
@@ -561,11 +546,10 @@
             this.propertiesTabPage.Controls.Add(this.gridPropertiesGroupBox);
             this.propertiesTabPage.Controls.Add(this.caGroupBox);
             this.propertiesTabPage.Controls.Add(this.viewGroupBox);
-            this.propertiesTabPage.Location = new System.Drawing.Point(4, 25);
-            this.propertiesTabPage.Margin = new System.Windows.Forms.Padding(4);
+            this.propertiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.propertiesTabPage.Name = "propertiesTabPage";
-            this.propertiesTabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.propertiesTabPage.Size = new System.Drawing.Size(248, 565);
+            this.propertiesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.propertiesTabPage.Size = new System.Drawing.Size(184, 457);
             this.propertiesTabPage.TabIndex = 0;
             this.propertiesTabPage.Text = "Properties";
             this.propertiesTabPage.UseVisualStyleBackColor = true;
@@ -574,11 +558,10 @@
             // 
             this.executionTabPage.Controls.Add(this.groupBox1);
             this.executionTabPage.Controls.Add(this.executionGroupBox);
-            this.executionTabPage.Location = new System.Drawing.Point(4, 25);
-            this.executionTabPage.Margin = new System.Windows.Forms.Padding(4);
+            this.executionTabPage.Location = new System.Drawing.Point(4, 22);
             this.executionTabPage.Name = "executionTabPage";
-            this.executionTabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.executionTabPage.Size = new System.Drawing.Size(248, 565);
+            this.executionTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.executionTabPage.Size = new System.Drawing.Size(184, 457);
             this.executionTabPage.TabIndex = 1;
             this.executionTabPage.Text = "Execution";
             this.executionTabPage.UseVisualStyleBackColor = true;
@@ -592,50 +575,44 @@
             this.groupBox1.Controls.Add(this.typeInclusionsComboBox);
             this.groupBox1.Controls.Add(this.tyoeInclusionsLabel);
             this.groupBox1.Controls.Add(this.generateInclusionsButton);
-            this.groupBox1.Location = new System.Drawing.Point(8, 7);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(232, 158);
+            this.groupBox1.Size = new System.Drawing.Size(174, 128);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inclusions";
             // 
             // amountInsclusionsNumericUpDown
             // 
-            this.amountInsclusionsNumericUpDown.Location = new System.Drawing.Point(85, 89);
-            this.amountInsclusionsNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.amountInsclusionsNumericUpDown.Location = new System.Drawing.Point(64, 72);
             this.amountInsclusionsNumericUpDown.Name = "amountInsclusionsNumericUpDown";
-            this.amountInsclusionsNumericUpDown.Size = new System.Drawing.Size(139, 22);
+            this.amountInsclusionsNumericUpDown.Size = new System.Drawing.Size(104, 20);
             this.amountInsclusionsNumericUpDown.TabIndex = 16;
             // 
             // amountInclusionsLabel
             // 
             this.amountInclusionsLabel.AutoSize = true;
             this.amountInclusionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountInclusionsLabel.Location = new System.Drawing.Point(20, 91);
-            this.amountInclusionsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.amountInclusionsLabel.Location = new System.Drawing.Point(15, 74);
             this.amountInclusionsLabel.Name = "amountInclusionsLabel";
-            this.amountInclusionsLabel.Size = new System.Drawing.Size(60, 17);
+            this.amountInclusionsLabel.Size = new System.Drawing.Size(46, 13);
             this.amountInclusionsLabel.TabIndex = 15;
             this.amountInclusionsLabel.Text = "Amount:";
             // 
             // valueInclusionsNumericUpDown
             // 
-            this.valueInclusionsNumericUpDown.Location = new System.Drawing.Point(85, 57);
-            this.valueInclusionsNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.valueInclusionsNumericUpDown.Location = new System.Drawing.Point(64, 46);
             this.valueInclusionsNumericUpDown.Name = "valueInclusionsNumericUpDown";
-            this.valueInclusionsNumericUpDown.Size = new System.Drawing.Size(139, 22);
+            this.valueInclusionsNumericUpDown.Size = new System.Drawing.Size(104, 20);
             this.valueInclusionsNumericUpDown.TabIndex = 14;
             // 
             // valueInclusionsLabel
             // 
             this.valueInclusionsLabel.AutoSize = true;
             this.valueInclusionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valueInclusionsLabel.Location = new System.Drawing.Point(20, 59);
-            this.valueInclusionsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.valueInclusionsLabel.Location = new System.Drawing.Point(15, 48);
             this.valueInclusionsLabel.Name = "valueInclusionsLabel";
-            this.valueInclusionsLabel.Size = new System.Drawing.Size(56, 17);
+            this.valueInclusionsLabel.Size = new System.Drawing.Size(43, 13);
             this.valueInclusionsLabel.TabIndex = 13;
             this.valueInclusionsLabel.Text = "Length:";
             // 
@@ -646,10 +623,9 @@
             this.typeInclusionsComboBox.Items.AddRange(new object[] {
             "Square",
             "Circle"});
-            this.typeInclusionsComboBox.Location = new System.Drawing.Point(85, 23);
-            this.typeInclusionsComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.typeInclusionsComboBox.Location = new System.Drawing.Point(64, 19);
             this.typeInclusionsComboBox.Name = "typeInclusionsComboBox";
-            this.typeInclusionsComboBox.Size = new System.Drawing.Size(137, 24);
+            this.typeInclusionsComboBox.Size = new System.Drawing.Size(104, 21);
             this.typeInclusionsComboBox.TabIndex = 12;
             this.typeInclusionsComboBox.SelectedIndexChanged += new System.EventHandler(this.TypeInclusionsComboBox_SelectedIndexChanged);
             // 
@@ -657,19 +633,17 @@
             // 
             this.tyoeInclusionsLabel.AutoSize = true;
             this.tyoeInclusionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tyoeInclusionsLabel.Location = new System.Drawing.Point(32, 27);
-            this.tyoeInclusionsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tyoeInclusionsLabel.Location = new System.Drawing.Point(24, 22);
             this.tyoeInclusionsLabel.Name = "tyoeInclusionsLabel";
-            this.tyoeInclusionsLabel.Size = new System.Drawing.Size(44, 17);
+            this.tyoeInclusionsLabel.Size = new System.Drawing.Size(34, 13);
             this.tyoeInclusionsLabel.TabIndex = 11;
             this.tyoeInclusionsLabel.Text = "Type:";
             // 
             // generateInclusionsButton
             // 
-            this.generateInclusionsButton.Location = new System.Drawing.Point(117, 121);
-            this.generateInclusionsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.generateInclusionsButton.Location = new System.Drawing.Point(88, 98);
             this.generateInclusionsButton.Name = "generateInclusionsButton";
-            this.generateInclusionsButton.Size = new System.Drawing.Size(107, 28);
+            this.generateInclusionsButton.Size = new System.Drawing.Size(80, 23);
             this.generateInclusionsButton.TabIndex = 9;
             this.generateInclusionsButton.Text = "Generate";
             this.generateInclusionsButton.UseVisualStyleBackColor = true;
@@ -680,10 +654,9 @@
             this.substructureTabPage.Controls.Add(this.grainBoundariesGroupBox);
             this.substructureTabPage.Controls.Add(this.substructureGroupBox);
             this.substructureTabPage.Controls.Add(this.clearSubstructureButton);
-            this.substructureTabPage.Location = new System.Drawing.Point(4, 25);
-            this.substructureTabPage.Margin = new System.Windows.Forms.Padding(4);
+            this.substructureTabPage.Location = new System.Drawing.Point(4, 22);
             this.substructureTabPage.Name = "substructureTabPage";
-            this.substructureTabPage.Size = new System.Drawing.Size(248, 565);
+            this.substructureTabPage.Size = new System.Drawing.Size(184, 457);
             this.substructureTabPage.TabIndex = 2;
             this.substructureTabPage.Text = "Post processing";
             this.substructureTabPage.UseVisualStyleBackColor = true;
@@ -697,11 +670,9 @@
             this.grainBoundariesGroupBox.Controls.Add(this.generatePropertiesGrainBoundariesButtonButton);
             this.grainBoundariesGroupBox.Controls.Add(this.sizePropertiesGrainBoundariesNumericUpDown);
             this.grainBoundariesGroupBox.Controls.Add(this.selectionModePropertiesGrainBoundariesComboBox);
-            this.grainBoundariesGroupBox.Location = new System.Drawing.Point(8, 105);
-            this.grainBoundariesGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.grainBoundariesGroupBox.Location = new System.Drawing.Point(6, 85);
             this.grainBoundariesGroupBox.Name = "grainBoundariesGroupBox";
-            this.grainBoundariesGroupBox.Padding = new System.Windows.Forms.Padding(4);
-            this.grainBoundariesGroupBox.Size = new System.Drawing.Size(232, 188);
+            this.grainBoundariesGroupBox.Size = new System.Drawing.Size(174, 153);
             this.grainBoundariesGroupBox.TabIndex = 4;
             this.grainBoundariesGroupBox.TabStop = false;
             this.grainBoundariesGroupBox.Text = "Grain Boundaries";
@@ -709,48 +680,43 @@
             // gbPercentTextBox
             // 
             this.gbPercentTextBox.Enabled = false;
-            this.gbPercentTextBox.Location = new System.Drawing.Point(64, 118);
-            this.gbPercentTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.gbPercentTextBox.Location = new System.Drawing.Point(48, 96);
             this.gbPercentTextBox.Name = "gbPercentTextBox";
-            this.gbPercentTextBox.Size = new System.Drawing.Size(159, 22);
+            this.gbPercentTextBox.Size = new System.Drawing.Size(120, 20);
             this.gbPercentTextBox.TabIndex = 6;
             // 
             // sizePropertiesGrainBoundariesLabel
             // 
             this.sizePropertiesGrainBoundariesLabel.AutoSize = true;
-            this.sizePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(9, 88);
-            this.sizePropertiesGrainBoundariesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sizePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(7, 72);
             this.sizePropertiesGrainBoundariesLabel.Name = "sizePropertiesGrainBoundariesLabel";
-            this.sizePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(39, 17);
+            this.sizePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(30, 13);
             this.sizePropertiesGrainBoundariesLabel.TabIndex = 5;
             this.sizePropertiesGrainBoundariesLabel.Text = "Size:";
             // 
             // selectionModePropertiesGrainBoundariesLabel
             // 
             this.selectionModePropertiesGrainBoundariesLabel.AutoSize = true;
-            this.selectionModePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(10, 33);
-            this.selectionModePropertiesGrainBoundariesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.selectionModePropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(8, 27);
             this.selectionModePropertiesGrainBoundariesLabel.Name = "selectionModePropertiesGrainBoundariesLabel";
-            this.selectionModePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(109, 17);
+            this.selectionModePropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(83, 13);
             this.selectionModePropertiesGrainBoundariesLabel.TabIndex = 4;
             this.selectionModePropertiesGrainBoundariesLabel.Text = "Selection mode:";
             // 
             // gbPercentPropertiesGrainBoundariesLabel
             // 
             this.gbPercentPropertiesGrainBoundariesLabel.AutoSize = true;
-            this.gbPercentPropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(9, 121);
-            this.gbPercentPropertiesGrainBoundariesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.gbPercentPropertiesGrainBoundariesLabel.Location = new System.Drawing.Point(7, 98);
             this.gbPercentPropertiesGrainBoundariesLabel.Name = "gbPercentPropertiesGrainBoundariesLabel";
-            this.gbPercentPropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(48, 17);
+            this.gbPercentPropertiesGrainBoundariesLabel.Size = new System.Drawing.Size(36, 13);
             this.gbPercentPropertiesGrainBoundariesLabel.TabIndex = 3;
             this.gbPercentPropertiesGrainBoundariesLabel.Text = "GB %:";
             // 
             // generatePropertiesGrainBoundariesButtonButton
             // 
-            this.generatePropertiesGrainBoundariesButtonButton.Location = new System.Drawing.Point(62, 150);
-            this.generatePropertiesGrainBoundariesButtonButton.Margin = new System.Windows.Forms.Padding(4);
+            this.generatePropertiesGrainBoundariesButtonButton.Location = new System.Drawing.Point(46, 122);
             this.generatePropertiesGrainBoundariesButtonButton.Name = "generatePropertiesGrainBoundariesButtonButton";
-            this.generatePropertiesGrainBoundariesButtonButton.Size = new System.Drawing.Size(161, 28);
+            this.generatePropertiesGrainBoundariesButtonButton.Size = new System.Drawing.Size(121, 23);
             this.generatePropertiesGrainBoundariesButtonButton.TabIndex = 2;
             this.generatePropertiesGrainBoundariesButtonButton.Text = "Generate";
             this.generatePropertiesGrainBoundariesButtonButton.UseVisualStyleBackColor = true;
@@ -758,15 +724,14 @@
             // 
             // sizePropertiesGrainBoundariesNumericUpDown
             // 
-            this.sizePropertiesGrainBoundariesNumericUpDown.Location = new System.Drawing.Point(64, 86);
-            this.sizePropertiesGrainBoundariesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.sizePropertiesGrainBoundariesNumericUpDown.Location = new System.Drawing.Point(48, 70);
             this.sizePropertiesGrainBoundariesNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.sizePropertiesGrainBoundariesNumericUpDown.Name = "sizePropertiesGrainBoundariesNumericUpDown";
-            this.sizePropertiesGrainBoundariesNumericUpDown.Size = new System.Drawing.Size(160, 22);
+            this.sizePropertiesGrainBoundariesNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.sizePropertiesGrainBoundariesNumericUpDown.TabIndex = 1;
             this.sizePropertiesGrainBoundariesNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -781,10 +746,9 @@
             this.selectionModePropertiesGrainBoundariesComboBox.Items.AddRange(new object[] {
             "All grains",
             "Point and click"});
-            this.selectionModePropertiesGrainBoundariesComboBox.Location = new System.Drawing.Point(64, 54);
-            this.selectionModePropertiesGrainBoundariesComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.selectionModePropertiesGrainBoundariesComboBox.Location = new System.Drawing.Point(48, 44);
             this.selectionModePropertiesGrainBoundariesComboBox.Name = "selectionModePropertiesGrainBoundariesComboBox";
-            this.selectionModePropertiesGrainBoundariesComboBox.Size = new System.Drawing.Size(160, 24);
+            this.selectionModePropertiesGrainBoundariesComboBox.Size = new System.Drawing.Size(121, 21);
             this.selectionModePropertiesGrainBoundariesComboBox.TabIndex = 0;
             this.selectionModePropertiesGrainBoundariesComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectionModePropertiesGrainBoundariesComboBox_SelectedIndexChanged);
             // 
@@ -792,9 +756,11 @@
             // 
             this.substructureGroupBox.Controls.Add(this.selectionTypeSubstructureLabel);
             this.substructureGroupBox.Controls.Add(this.selectionTypeSubstructureComboBox);
-            this.substructureGroupBox.Location = new System.Drawing.Point(8, 3);
+            this.substructureGroupBox.Location = new System.Drawing.Point(6, 2);
+            this.substructureGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.substructureGroupBox.Name = "substructureGroupBox";
-            this.substructureGroupBox.Size = new System.Drawing.Size(232, 95);
+            this.substructureGroupBox.Padding = new System.Windows.Forms.Padding(2);
+            this.substructureGroupBox.Size = new System.Drawing.Size(174, 77);
             this.substructureGroupBox.TabIndex = 3;
             this.substructureGroupBox.TabStop = false;
             this.substructureGroupBox.Text = "Substructure";
@@ -802,10 +768,9 @@
             // selectionTypeSubstructureLabel
             // 
             this.selectionTypeSubstructureLabel.AutoSize = true;
-            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(7, 27);
-            this.selectionTypeSubstructureLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.selectionTypeSubstructureLabel.Location = new System.Drawing.Point(5, 22);
             this.selectionTypeSubstructureLabel.Name = "selectionTypeSubstructureLabel";
-            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(109, 17);
+            this.selectionTypeSubstructureLabel.Size = new System.Drawing.Size(83, 13);
             this.selectionTypeSubstructureLabel.TabIndex = 2;
             this.selectionTypeSubstructureLabel.Text = "Selection mode:";
             // 
@@ -816,41 +781,194 @@
             this.selectionTypeSubstructureComboBox.Items.AddRange(new object[] {
             "Substructure",
             "Dualphase"});
-            this.selectionTypeSubstructureComboBox.Location = new System.Drawing.Point(72, 48);
-            this.selectionTypeSubstructureComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.selectionTypeSubstructureComboBox.Location = new System.Drawing.Point(54, 39);
             this.selectionTypeSubstructureComboBox.Name = "selectionTypeSubstructureComboBox";
-            this.selectionTypeSubstructureComboBox.Size = new System.Drawing.Size(158, 24);
+            this.selectionTypeSubstructureComboBox.Size = new System.Drawing.Size(120, 21);
             this.selectionTypeSubstructureComboBox.TabIndex = 1;
             this.selectionTypeSubstructureComboBox.SelectedIndexChanged += new System.EventHandler(this.selectionTypeSubstructureComboBox_SelectedIndexChanged);
             // 
             // clearSubstructureButton
             // 
-            this.clearSubstructureButton.Location = new System.Drawing.Point(8, 301);
-            this.clearSubstructureButton.Margin = new System.Windows.Forms.Padding(4);
+            this.clearSubstructureButton.Location = new System.Drawing.Point(6, 245);
             this.clearSubstructureButton.Name = "clearSubstructureButton";
-            this.clearSubstructureButton.Size = new System.Drawing.Size(232, 28);
+            this.clearSubstructureButton.Size = new System.Drawing.Size(174, 23);
             this.clearSubstructureButton.TabIndex = 0;
             this.clearSubstructureButton.Text = "Clear and leave selected grains";
             this.clearSubstructureButton.UseVisualStyleBackColor = true;
             this.clearSubstructureButton.Click += new System.EventHandler(this.ClearSubstructureButton_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.executionMonteCarloGroupBox);
+            this.tabPage1.Controls.Add(this.propertiesMonteCarloGroupBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(184, 457);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Monte Carlo";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // stateMonteCarloNumericUpDown
+            // 
+            this.stateMonteCarloNumericUpDown.Location = new System.Drawing.Point(68, 32);
+            this.stateMonteCarloNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.stateMonteCarloNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.stateMonteCarloNumericUpDown.Name = "stateMonteCarloNumericUpDown";
+            this.stateMonteCarloNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.stateMonteCarloNumericUpDown.TabIndex = 11;
+            this.stateMonteCarloNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // randomStatesMonteCarloButton
+            // 
+            this.randomStatesMonteCarloButton.Location = new System.Drawing.Point(6, 58);
+            this.randomStatesMonteCarloButton.Name = "randomStatesMonteCarloButton";
+            this.randomStatesMonteCarloButton.Size = new System.Drawing.Size(162, 23);
+            this.randomStatesMonteCarloButton.TabIndex = 10;
+            this.randomStatesMonteCarloButton.Text = "Random states placement";
+            this.randomStatesMonteCarloButton.UseVisualStyleBackColor = true;
+            this.randomStatesMonteCarloButton.Click += new System.EventHandler(this.RandomStatesMonteCarloButton_Click);
+            // 
+            // stateAmountMonteCarloLlabel
+            // 
+            this.stateAmountMonteCarloLlabel.AutoSize = true;
+            this.stateAmountMonteCarloLlabel.Location = new System.Drawing.Point(6, 16);
+            this.stateAmountMonteCarloLlabel.Name = "stateAmountMonteCarloLlabel";
+            this.stateAmountMonteCarloLlabel.Size = new System.Drawing.Size(79, 13);
+            this.stateAmountMonteCarloLlabel.TabIndex = 9;
+            this.stateAmountMonteCarloLlabel.Text = "States Amount:";
+            // 
             // mouseModeLabel
             // 
-            this.mouseModeLabel.Location = new System.Drawing.Point(688, 613);
+            this.mouseModeLabel.Location = new System.Drawing.Point(516, 498);
+            this.mouseModeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.mouseModeLabel.Name = "mouseModeLabel";
-            this.mouseModeLabel.Size = new System.Drawing.Size(255, 20);
+            this.mouseModeLabel.Size = new System.Drawing.Size(191, 16);
             this.mouseModeLabel.TabIndex = 16;
             this.mouseModeLabel.Text = "Mouse mode:";
             // 
+            // runMonteCarloButton
+            // 
+            this.runMonteCarloButton.Location = new System.Drawing.Point(6, 71);
+            this.runMonteCarloButton.Name = "runMonteCarloButton";
+            this.runMonteCarloButton.Size = new System.Drawing.Size(81, 23);
+            this.runMonteCarloButton.TabIndex = 17;
+            this.runMonteCarloButton.Text = "Run";
+            this.runMonteCarloButton.UseVisualStyleBackColor = true;
+            // 
+            // stopMonteCarloButton
+            // 
+            this.stopMonteCarloButton.Location = new System.Drawing.Point(93, 71);
+            this.stopMonteCarloButton.Name = "stopMonteCarloButton";
+            this.stopMonteCarloButton.Size = new System.Drawing.Size(78, 23);
+            this.stopMonteCarloButton.TabIndex = 18;
+            this.stopMonteCarloButton.Text = "Stop";
+            this.stopMonteCarloButton.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(71, 16);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown1.TabIndex = 20;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // iterationsMonteCarloLabel
+            // 
+            this.iterationsMonteCarloLabel.AutoSize = true;
+            this.iterationsMonteCarloLabel.Location = new System.Drawing.Point(8, 18);
+            this.iterationsMonteCarloLabel.Name = "iterationsMonteCarloLabel";
+            this.iterationsMonteCarloLabel.Size = new System.Drawing.Size(53, 13);
+            this.iterationsMonteCarloLabel.TabIndex = 19;
+            this.iterationsMonteCarloLabel.Text = "Iterations:";
+            // 
+            // runIterationsMonteCarloButton
+            // 
+            this.runIterationsMonteCarloButton.Location = new System.Drawing.Point(6, 42);
+            this.runIterationsMonteCarloButton.Name = "runIterationsMonteCarloButton";
+            this.runIterationsMonteCarloButton.Size = new System.Drawing.Size(165, 23);
+            this.runIterationsMonteCarloButton.TabIndex = 21;
+            this.runIterationsMonteCarloButton.Text = "Run Iterations";
+            this.runIterationsMonteCarloButton.UseVisualStyleBackColor = true;
+            // 
+            // propertiesMonteCarloGroupBox
+            // 
+            this.propertiesMonteCarloGroupBox.Controls.Add(this.stateAmountMonteCarloLlabel);
+            this.propertiesMonteCarloGroupBox.Controls.Add(this.randomStatesMonteCarloButton);
+            this.propertiesMonteCarloGroupBox.Controls.Add(this.stateMonteCarloNumericUpDown);
+            this.propertiesMonteCarloGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.propertiesMonteCarloGroupBox.Name = "propertiesMonteCarloGroupBox";
+            this.propertiesMonteCarloGroupBox.Size = new System.Drawing.Size(175, 91);
+            this.propertiesMonteCarloGroupBox.TabIndex = 22;
+            this.propertiesMonteCarloGroupBox.TabStop = false;
+            this.propertiesMonteCarloGroupBox.Text = "Properties";
+            // 
+            // executionMonteCarloGroupBox
+            // 
+            this.executionMonteCarloGroupBox.Controls.Add(this.textBox1);
+            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationMonteCarloLabel);
+            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsMonteCarloLabel);
+            this.executionMonteCarloGroupBox.Controls.Add(this.numericUpDown1);
+            this.executionMonteCarloGroupBox.Controls.Add(this.stopMonteCarloButton);
+            this.executionMonteCarloGroupBox.Controls.Add(this.runIterationsMonteCarloButton);
+            this.executionMonteCarloGroupBox.Controls.Add(this.runMonteCarloButton);
+            this.executionMonteCarloGroupBox.Location = new System.Drawing.Point(4, 104);
+            this.executionMonteCarloGroupBox.Name = "executionMonteCarloGroupBox";
+            this.executionMonteCarloGroupBox.Size = new System.Drawing.Size(177, 134);
+            this.executionMonteCarloGroupBox.TabIndex = 23;
+            this.executionMonteCarloGroupBox.TabStop = false;
+            this.executionMonteCarloGroupBox.Text = "Execution";
+            // 
+            // currentIterationMonteCarloLabel
+            // 
+            this.currentIterationMonteCarloLabel.AutoSize = true;
+            this.currentIterationMonteCarloLabel.Location = new System.Drawing.Point(3, 109);
+            this.currentIterationMonteCarloLabel.Name = "currentIterationMonteCarloLabel";
+            this.currentIterationMonteCarloLabel.Size = new System.Drawing.Size(88, 13);
+            this.currentIterationMonteCarloLabel.TabIndex = 22;
+            this.currentIterationMonteCarloLabel.Text = "Current Iteration: ";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(95, 106);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(76, 20);
+            this.textBox1.TabIndex = 23;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 642);
+            this.ClientSize = new System.Drawing.Size(712, 522);
             this.Controls.Add(this.mouseModeLabel);
             this.Controls.Add(this.menuTabControl);
             this.Controls.Add(this.viewPanel);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
             this.Name = "Form1";
@@ -885,6 +1003,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).EndInit();
             this.substructureGroupBox.ResumeLayout(false);
             this.substructureGroupBox.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.propertiesMonteCarloGroupBox.ResumeLayout(false);
+            this.propertiesMonteCarloGroupBox.PerformLayout();
+            this.executionMonteCarloGroupBox.ResumeLayout(false);
+            this.executionMonteCarloGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -954,6 +1079,19 @@
         private System.Windows.Forms.ComboBox selectionModePropertiesGrainBoundariesComboBox;
         private System.Windows.Forms.GroupBox substructureGroupBox;
         private System.Windows.Forms.Label mouseModeLabel;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.NumericUpDown stateMonteCarloNumericUpDown;
+        private System.Windows.Forms.Button randomStatesMonteCarloButton;
+        private System.Windows.Forms.Label stateAmountMonteCarloLlabel;
+        private System.Windows.Forms.GroupBox executionMonteCarloGroupBox;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label currentIterationMonteCarloLabel;
+        private System.Windows.Forms.Label iterationsMonteCarloLabel;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button stopMonteCarloButton;
+        private System.Windows.Forms.Button runIterationsMonteCarloButton;
+        private System.Windows.Forms.Button runMonteCarloButton;
+        private System.Windows.Forms.GroupBox propertiesMonteCarloGroupBox;
     }
 }
 

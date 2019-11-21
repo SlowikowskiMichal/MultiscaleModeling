@@ -502,6 +502,21 @@ namespace MultiscaleModeling.Controller
             return output;
         }
 
+        internal void RandomAllPopulate(int statesAmount)
+        {
+            Random r = new Random();
+            for(int x = 0; x < Grid.SizeX; x++)
+            {
+                for(int y = 0; y < Grid.SizeY; y++)
+                {
+                    nextStepGrid.Cells[x, y].Id = r.Next(0, statesAmount);
+                    nextStepGrid.Cells[x, y].State = 1;
+                }
+            }
+
+            currentGrid.Copy(nextStepGrid);
+        }
+
         internal void GeneratePointBoundaries(int x, int y)
         {
             throw new NotImplementedException();
