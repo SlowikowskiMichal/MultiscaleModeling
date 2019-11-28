@@ -72,6 +72,7 @@
     <Compile Include="Model\Inclusions\CircuralInclusionManager.cs" />
     <Compile Include="Model\Inclusions\InclusionManager.cs" />
     <Compile Include="Model\Inclusions\SquareInclusionManager.cs" />
+    <Compile Include="Model\MonteCarloEngine.cs" />
     <Compile Include="Model\Neighborhood\MooresNeighbourhood.cs" />
     <Compile Include="Model\Neighborhood\Neighbourhood.cs" />
     <Compile Include="Model\Neighborhood\NeumannNeighbourhood.cs" />

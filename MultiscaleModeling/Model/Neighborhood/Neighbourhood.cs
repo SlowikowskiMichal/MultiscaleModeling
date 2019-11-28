@@ -10,7 +10,7 @@ namespace MultiscaleModeling.Model.Neighbourhood
 
     abstract class Neighbourhood
     {
-        public abstract List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryCondition condition);
+        public abstract List<Point> GetNeighborhood(int CellX, int CellY, int SizeX, int SizeY, BoundaryCondition condition = 0);
 
         protected void CheckForBoundaryCondition(List<Point> cellNeighborIndexes, int SizeX, int SizeY, BoundaryCondition boundary)
         {

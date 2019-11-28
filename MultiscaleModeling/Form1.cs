@@ -203,6 +203,7 @@ namespace MultiscaleModeling
         {
             gridController.ClearGrid();
             DrawGridOnImage(ref nextImage);
+            currentIterationNumberMonteCarloTextBox.Text = "0";
 
             viewPictureBox.Image = nextImage;
             viewPictureBox.Refresh();
@@ -272,7 +273,8 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
                     {
-                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[gridController.GetCurrentGridCellId(x, y) % ColorManager.indexcolors.Count()]));
+                        int color = gridController.GetCurrentGridCellId(x, y);
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[color % ColorManager.indexcolors.Count()]));
                     }
                     else if (gridController.GetCurrentGridCellState(x, y) == 2)
                     {
@@ -473,6 +475,57 @@ namespace MultiscaleModeling
                 DrawGridOnImage(ref nextImage);
                 viewPictureBox.Refresh();
             }
+        }
+
+        private async void RunIterationsMonteCarloButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+            {
+                return;
+            }
+            running = true;
+            var progress = new Progress<string>(v =>
+            {
+                currentIterationNumberMonteCarloTextBox.Text = v;
+            });
+            
+            SetGuiAsEnabled(false);
+            await Task.Factory.StartNew(() => gridController.RunIterationsMonteCarlo(progress, decimal.ToInt32(iterationsNumberNumericUpDown.Value)),
+                            TaskCreationOptions.LongRunning);
+
+            this.DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
+            running = false;
+            SetGuiAsEnabled(true);
+            DeterminateClickOnPictureBoxMode();
+        }
+
+        private async void RunMonteCarloButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+            {
+                return;
+            }
+            running = true;
+
+
+            SetGuiAsEnabled(false);
+            await Task.Factory.StartNew(() => gridController.RunMonteCarlo(),
+                            TaskCreationOptions.LongRunning);
+            
+            currentIterationNumberMonteCarloTextBox.Text = gridController.GetMonteCarloIteration().ToString();
+            this.DrawGridOnImage(ref nextImage);
+            viewPictureBox.Refresh();
+
+            running = false;
+            SetGuiAsEnabled(true);
+            DeterminateClickOnPictureBoxMode();
+        }
+
+        private void StopMonteCarloButton_Click(object sender, EventArgs e)
+        {
+            gridController.StopExecution();
+            SetGuiAsEnabled(!running);
         }
     }
 }

@@ -38,6 +38,10 @@ namespace MultiscaleModeling.Controller
         public BoundaryCondition BoundaryCondition { get; private set; }
         #endregion
 
+        #region MONTECARLO
+        MonteCarloEngine mcEngine;
+        #endregion
+
         #endregion
 
         #region GETTERS SETTERS
@@ -66,6 +70,7 @@ namespace MultiscaleModeling.Controller
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
+            mcEngine = new MonteCarloEngine();
         }
         public GridController(int gridWidth, int gridHeight)
         {
@@ -75,6 +80,7 @@ namespace MultiscaleModeling.Controller
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
+            mcEngine = new MonteCarloEngine();
         }
         public GridController(int gridWidth, int gridHeight, int nucleonsPopulation)
         {
@@ -84,6 +90,7 @@ namespace MultiscaleModeling.Controller
             CurrentNucleonID = 0;
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
+            mcEngine = new MonteCarloEngine();
         }
         #endregion
         /// <summary>
@@ -109,6 +116,7 @@ namespace MultiscaleModeling.Controller
         }
         public void ClearGrid()
         {
+            mcEngine.ResetCurrentIteration();
             currentGrid.Clear();
             nextStepGrid.Clear();
             emptyCount = Grid.SizeX * Grid.SizeY;
@@ -509,12 +517,15 @@ namespace MultiscaleModeling.Controller
             {
                 for(int y = 0; y < Grid.SizeY; y++)
                 {
-                    nextStepGrid.Cells[x, y].Id = r.Next(0, statesAmount);
-                    nextStepGrid.Cells[x, y].State = 1;
+                    if (currentGrid.Cells[x, y].State == 0)
+                    {
+                        currentGrid.Cells[x, y].Id = r.Next(0, statesAmount);
+                        currentGrid.Cells[x, y].State = 1;
+                    }
                 }
             }
-
-            currentGrid.Copy(nextStepGrid);
+            emptyCount = 0;
+            nextStepGrid.Copy(nextStepGrid);
         }
 
         internal void GeneratePointBoundaries(int x, int y)
@@ -543,6 +554,31 @@ namespace MultiscaleModeling.Controller
                     }
                 }
             }
+        }
+
+        internal int GetMonteCarloIteration()
+        {
+            return mcEngine.currentIteration;
+        }
+
+        internal void RunIterationsMonteCarlo(IProgress<string> progress, int maxIterations)
+        {
+            Thread t = new Thread(() => RunMonteCarlo());
+            running = true;
+            while(running && mcEngine.currentIteration < maxIterations)
+            {
+                t = new Thread(() => RunMonteCarlo());
+                t.Start();
+                t.Join();
+                progress.Report(mcEngine.currentIteration.ToString());
+            }
+            
+        }
+
+        internal void RunMonteCarlo()
+        {
+            mcEngine.Run(ref currentGrid);
+            mcEngine.NextIteration();
         }
 
         /// <summary>

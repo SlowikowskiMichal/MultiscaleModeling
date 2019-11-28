@@ -98,13 +98,13 @@
             this.mouseModeLabel = new System.Windows.Forms.Label();
             this.runMonteCarloButton = new System.Windows.Forms.Button();
             this.stopMonteCarloButton = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.iterationsNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.iterationsMonteCarloLabel = new System.Windows.Forms.Label();
             this.runIterationsMonteCarloButton = new System.Windows.Forms.Button();
             this.propertiesMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
             this.executionMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
             this.currentIterationMonteCarloLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.currentIterationNumberMonteCarloTextBox = new System.Windows.Forms.TextBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -128,7 +128,7 @@
             this.substructureGroupBox.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).BeginInit();
             this.propertiesMonteCarloGroupBox.SuspendLayout();
             this.executionMonteCarloGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -866,6 +866,7 @@
             this.runMonteCarloButton.TabIndex = 17;
             this.runMonteCarloButton.Text = "Run";
             this.runMonteCarloButton.UseVisualStyleBackColor = true;
+            this.runMonteCarloButton.Click += new System.EventHandler(this.RunMonteCarloButton_Click);
             // 
             // stopMonteCarloButton
             // 
@@ -875,24 +876,25 @@
             this.stopMonteCarloButton.TabIndex = 18;
             this.stopMonteCarloButton.Text = "Stop";
             this.stopMonteCarloButton.UseVisualStyleBackColor = true;
+            this.stopMonteCarloButton.Click += new System.EventHandler(this.StopMonteCarloButton_Click);
             // 
-            // numericUpDown1
+            // iterationsNumberNumericUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(71, 16);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.iterationsNumberNumericUpDown.Location = new System.Drawing.Point(71, 16);
+            this.iterationsNumberNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.iterationsNumberNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDown1.TabIndex = 20;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.iterationsNumberNumericUpDown.Name = "iterationsNumberNumericUpDown";
+            this.iterationsNumberNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.iterationsNumberNumericUpDown.TabIndex = 20;
+            this.iterationsNumberNumericUpDown.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -915,6 +917,7 @@
             this.runIterationsMonteCarloButton.TabIndex = 21;
             this.runIterationsMonteCarloButton.Text = "Run Iterations";
             this.runIterationsMonteCarloButton.UseVisualStyleBackColor = true;
+            this.runIterationsMonteCarloButton.Click += new System.EventHandler(this.RunIterationsMonteCarloButton_Click);
             // 
             // propertiesMonteCarloGroupBox
             // 
@@ -930,10 +933,10 @@
             // 
             // executionMonteCarloGroupBox
             // 
-            this.executionMonteCarloGroupBox.Controls.Add(this.textBox1);
+            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationNumberMonteCarloTextBox);
             this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationMonteCarloLabel);
             this.executionMonteCarloGroupBox.Controls.Add(this.iterationsMonteCarloLabel);
-            this.executionMonteCarloGroupBox.Controls.Add(this.numericUpDown1);
+            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsNumberNumericUpDown);
             this.executionMonteCarloGroupBox.Controls.Add(this.stopMonteCarloButton);
             this.executionMonteCarloGroupBox.Controls.Add(this.runIterationsMonteCarloButton);
             this.executionMonteCarloGroupBox.Controls.Add(this.runMonteCarloButton);
@@ -953,13 +956,13 @@
             this.currentIterationMonteCarloLabel.TabIndex = 22;
             this.currentIterationMonteCarloLabel.Text = "Current Iteration: ";
             // 
-            // textBox1
+            // currentIterationNumberMonteCarloTextBox
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(95, 106);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(76, 20);
-            this.textBox1.TabIndex = 23;
+            this.currentIterationNumberMonteCarloTextBox.Enabled = false;
+            this.currentIterationNumberMonteCarloTextBox.Location = new System.Drawing.Point(95, 106);
+            this.currentIterationNumberMonteCarloTextBox.Name = "currentIterationNumberMonteCarloTextBox";
+            this.currentIterationNumberMonteCarloTextBox.Size = new System.Drawing.Size(76, 20);
+            this.currentIterationNumberMonteCarloTextBox.TabIndex = 23;
             // 
             // Form1
             // 
@@ -1005,7 +1008,7 @@
             this.substructureGroupBox.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).EndInit();
             this.propertiesMonteCarloGroupBox.ResumeLayout(false);
             this.propertiesMonteCarloGroupBox.PerformLayout();
             this.executionMonteCarloGroupBox.ResumeLayout(false);
@@ -1084,10 +1087,10 @@
         private System.Windows.Forms.Button randomStatesMonteCarloButton;
         private System.Windows.Forms.Label stateAmountMonteCarloLlabel;
         private System.Windows.Forms.GroupBox executionMonteCarloGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox currentIterationNumberMonteCarloTextBox;
         private System.Windows.Forms.Label currentIterationMonteCarloLabel;
         private System.Windows.Forms.Label iterationsMonteCarloLabel;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown iterationsNumberNumericUpDown;
         private System.Windows.Forms.Button stopMonteCarloButton;
         private System.Windows.Forms.Button runIterationsMonteCarloButton;
         private System.Windows.Forms.Button runMonteCarloButton;
