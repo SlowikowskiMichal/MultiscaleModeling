@@ -93,7 +93,7 @@
             this.selectionTypeSubstructureLabel = new System.Windows.Forms.Label();
             this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.monteCarloTabPage = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gbSizePropertiesMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -116,6 +116,25 @@
             this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.mouseModeLabel = new System.Windows.Forms.Label();
             this.energyNeighborhoodRadioButton = new System.Windows.Forms.RadioButton();
+            this.RectystallizationTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.currentIterationExecutionRecrystallizationTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.iterationsExecutionRecrystallizationNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.stopExecutionRecrystallizationButton = new System.Windows.Forms.Button();
+            this.runIterationsExecutionRecrystallizationButton = new System.Windows.Forms.Button();
+            this.runExecutionRecrystallizationButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.randomPlacementPropertiesRecrystallizationButton = new System.Windows.Forms.Button();
+            this.statesAmountPropertiesRecrystallizationNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.applayModeRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
+            this.applayPlaceComboBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.gbSizePropertiesRecrystallizationumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -137,7 +156,7 @@
             this.grainBoundariesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.substructureGroupBox.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.monteCarloTabPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesMonteCarloNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.energyValuePropertiesMonteCarloNumericUpDown)).BeginInit();
@@ -145,6 +164,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).BeginInit();
             this.propertiesMonteCarloGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).BeginInit();
+            this.RectystallizationTabPage.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsExecutionRecrystallizationNumericUpDown)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesRecrystallizationumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -577,7 +602,8 @@
             this.menuTabControl.Controls.Add(this.propertiesTabPage);
             this.menuTabControl.Controls.Add(this.executionTabPage);
             this.menuTabControl.Controls.Add(this.substructureTabPage);
-            this.menuTabControl.Controls.Add(this.tabPage1);
+            this.menuTabControl.Controls.Add(this.monteCarloTabPage);
+            this.menuTabControl.Controls.Add(this.RectystallizationTabPage);
             this.menuTabControl.Location = new System.Drawing.Point(515, 12);
             this.menuTabControl.Name = "menuTabControl";
             this.menuTabControl.SelectedIndex = 0;
@@ -840,17 +866,17 @@
             this.clearSubstructureButton.UseVisualStyleBackColor = true;
             this.clearSubstructureButton.Click += new System.EventHandler(this.ClearSubstructureButton_Click);
             // 
-            // tabPage1
+            // monteCarloTabPage
             // 
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.executionMonteCarloGroupBox);
-            this.tabPage1.Controls.Add(this.propertiesMonteCarloGroupBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(184, 457);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Monte Carlo";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.monteCarloTabPage.Controls.Add(this.groupBox2);
+            this.monteCarloTabPage.Controls.Add(this.executionMonteCarloGroupBox);
+            this.monteCarloTabPage.Controls.Add(this.propertiesMonteCarloGroupBox);
+            this.monteCarloTabPage.Location = new System.Drawing.Point(4, 22);
+            this.monteCarloTabPage.Name = "monteCarloTabPage";
+            this.monteCarloTabPage.Size = new System.Drawing.Size(184, 457);
+            this.monteCarloTabPage.TabIndex = 3;
+            this.monteCarloTabPage.Text = "Monte Carlo";
+            this.monteCarloTabPage.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -1051,7 +1077,7 @@
             this.propertiesMonteCarloGroupBox.Controls.Add(this.stateAmountMonteCarloLlabel);
             this.propertiesMonteCarloGroupBox.Controls.Add(this.randomStatesMonteCarloButton);
             this.propertiesMonteCarloGroupBox.Controls.Add(this.stateMonteCarloNumericUpDown);
-            this.propertiesMonteCarloGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.propertiesMonteCarloGroupBox.Location = new System.Drawing.Point(6, 7);
             this.propertiesMonteCarloGroupBox.Name = "propertiesMonteCarloGroupBox";
             this.propertiesMonteCarloGroupBox.Size = new System.Drawing.Size(175, 91);
             this.propertiesMonteCarloGroupBox.TabIndex = 22;
@@ -1120,6 +1146,240 @@
             this.energyNeighborhoodRadioButton.UseVisualStyleBackColor = true;
             this.energyNeighborhoodRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
             // 
+            // RectystallizationTabPage
+            // 
+            this.RectystallizationTabPage.Controls.Add(this.groupBox3);
+            this.RectystallizationTabPage.Controls.Add(this.groupBox4);
+            this.RectystallizationTabPage.Location = new System.Drawing.Point(4, 22);
+            this.RectystallizationTabPage.Name = "RectystallizationTabPage";
+            this.RectystallizationTabPage.Size = new System.Drawing.Size(184, 457);
+            this.RectystallizationTabPage.TabIndex = 4;
+            this.RectystallizationTabPage.Text = "Recrystallization";
+            this.RectystallizationTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.currentIterationExecutionRecrystallizationTextBox);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.iterationsExecutionRecrystallizationNumericUpDown);
+            this.groupBox3.Controls.Add(this.stopExecutionRecrystallizationButton);
+            this.groupBox3.Controls.Add(this.runIterationsExecutionRecrystallizationButton);
+            this.groupBox3.Controls.Add(this.runExecutionRecrystallizationButton);
+            this.groupBox3.Location = new System.Drawing.Point(3, 217);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(177, 134);
+            this.groupBox3.TabIndex = 25;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Execution";
+            // 
+            // currentIterationExecutionRecrystallizationTextBox
+            // 
+            this.currentIterationExecutionRecrystallizationTextBox.Enabled = false;
+            this.currentIterationExecutionRecrystallizationTextBox.Location = new System.Drawing.Point(95, 106);
+            this.currentIterationExecutionRecrystallizationTextBox.Name = "currentIterationExecutionRecrystallizationTextBox";
+            this.currentIterationExecutionRecrystallizationTextBox.Size = new System.Drawing.Size(76, 20);
+            this.currentIterationExecutionRecrystallizationTextBox.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 109);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(88, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Current Iteration: ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Iterations:";
+            // 
+            // iterationsExecutionRecrystallizationNumericUpDown
+            // 
+            this.iterationsExecutionRecrystallizationNumericUpDown.Location = new System.Drawing.Point(71, 16);
+            this.iterationsExecutionRecrystallizationNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.iterationsExecutionRecrystallizationNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.iterationsExecutionRecrystallizationNumericUpDown.Name = "iterationsExecutionRecrystallizationNumericUpDown";
+            this.iterationsExecutionRecrystallizationNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.iterationsExecutionRecrystallizationNumericUpDown.TabIndex = 20;
+            this.iterationsExecutionRecrystallizationNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // stopExecutionRecrystallizationButton
+            // 
+            this.stopExecutionRecrystallizationButton.Location = new System.Drawing.Point(93, 71);
+            this.stopExecutionRecrystallizationButton.Name = "stopExecutionRecrystallizationButton";
+            this.stopExecutionRecrystallizationButton.Size = new System.Drawing.Size(78, 23);
+            this.stopExecutionRecrystallizationButton.TabIndex = 18;
+            this.stopExecutionRecrystallizationButton.Text = "Stop";
+            this.stopExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            // 
+            // runIterationsExecutionRecrystallizationButton
+            // 
+            this.runIterationsExecutionRecrystallizationButton.Location = new System.Drawing.Point(6, 42);
+            this.runIterationsExecutionRecrystallizationButton.Name = "runIterationsExecutionRecrystallizationButton";
+            this.runIterationsExecutionRecrystallizationButton.Size = new System.Drawing.Size(165, 23);
+            this.runIterationsExecutionRecrystallizationButton.TabIndex = 21;
+            this.runIterationsExecutionRecrystallizationButton.Text = "Run Iterations";
+            this.runIterationsExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            // 
+            // runExecutionRecrystallizationButton
+            // 
+            this.runExecutionRecrystallizationButton.Location = new System.Drawing.Point(6, 71);
+            this.runExecutionRecrystallizationButton.Name = "runExecutionRecrystallizationButton";
+            this.runExecutionRecrystallizationButton.Size = new System.Drawing.Size(81, 23);
+            this.runExecutionRecrystallizationButton.TabIndex = 17;
+            this.runExecutionRecrystallizationButton.Text = "Run";
+            this.runExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.gbSizePropertiesRecrystallizationumericUpDown);
+            this.groupBox4.Controls.Add(this.applayPlaceComboBox);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.applayModeRecrystallizationComboBox);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.randomPlacementPropertiesRecrystallizationButton);
+            this.groupBox4.Controls.Add(this.statesAmountPropertiesRecrystallizationNumericUpDown);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(175, 208);
+            this.groupBox4.TabIndex = 24;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Properties";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "States Amount:";
+            // 
+            // randomPlacementPropertiesRecrystallizationButton
+            // 
+            this.randomPlacementPropertiesRecrystallizationButton.Location = new System.Drawing.Point(7, 177);
+            this.randomPlacementPropertiesRecrystallizationButton.Name = "randomPlacementPropertiesRecrystallizationButton";
+            this.randomPlacementPropertiesRecrystallizationButton.Size = new System.Drawing.Size(162, 23);
+            this.randomPlacementPropertiesRecrystallizationButton.TabIndex = 10;
+            this.randomPlacementPropertiesRecrystallizationButton.Text = "Random states placement";
+            this.randomPlacementPropertiesRecrystallizationButton.UseVisualStyleBackColor = true;
+            // 
+            // statesAmountPropertiesRecrystallizationNumericUpDown
+            // 
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Location = new System.Drawing.Point(47, 32);
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Name = "statesAmountPropertiesRecrystallizationNumericUpDown";
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Size = new System.Drawing.Size(121, 20);
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.TabIndex = 11;
+            this.statesAmountPropertiesRecrystallizationNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Applay Mode:";
+            // 
+            // applayModeRecrystallizationComboBox
+            // 
+            this.applayModeRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.applayModeRecrystallizationComboBox.FormattingEnabled = true;
+            this.applayModeRecrystallizationComboBox.Items.AddRange(new object[] {
+            "Constant",
+            "Increasing",
+            "Manually"});
+            this.applayModeRecrystallizationComboBox.Location = new System.Drawing.Point(47, 71);
+            this.applayModeRecrystallizationComboBox.Name = "applayModeRecrystallizationComboBox";
+            this.applayModeRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.applayModeRecrystallizationComboBox.TabIndex = 13;
+            // 
+            // applayPlaceComboBox
+            // 
+            this.applayPlaceComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Anywhere",
+            "Grain Boundaries"});
+            this.applayPlaceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.applayPlaceComboBox.FormattingEnabled = true;
+            this.applayPlaceComboBox.Location = new System.Drawing.Point(47, 111);
+            this.applayPlaceComboBox.Name = "applayPlaceComboBox";
+            this.applayPlaceComboBox.Size = new System.Drawing.Size(121, 21);
+            this.applayPlaceComboBox.TabIndex = 15;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 95);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(72, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Applay Place:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 135);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(48, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "GB Size:";
+            // 
+            // gbSizePropertiesRecrystallizationumericUpDown
+            // 
+            this.gbSizePropertiesRecrystallizationumericUpDown.Location = new System.Drawing.Point(47, 151);
+            this.gbSizePropertiesRecrystallizationumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.gbSizePropertiesRecrystallizationumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gbSizePropertiesRecrystallizationumericUpDown.Name = "gbSizePropertiesRecrystallizationumericUpDown";
+            this.gbSizePropertiesRecrystallizationumericUpDown.Size = new System.Drawing.Size(121, 20);
+            this.gbSizePropertiesRecrystallizationumericUpDown.TabIndex = 17;
+            this.gbSizePropertiesRecrystallizationumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1162,7 +1422,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).EndInit();
             this.substructureGroupBox.ResumeLayout(false);
             this.substructureGroupBox.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
+            this.monteCarloTabPage.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesMonteCarloNumericUpDown)).EndInit();
@@ -1173,6 +1433,14 @@
             this.propertiesMonteCarloGroupBox.ResumeLayout(false);
             this.propertiesMonteCarloGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).EndInit();
+            this.RectystallizationTabPage.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsExecutionRecrystallizationNumericUpDown)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesRecrystallizationumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1242,7 +1510,7 @@
         private System.Windows.Forms.ComboBox selectionModePropertiesGrainBoundariesComboBox;
         private System.Windows.Forms.GroupBox substructureGroupBox;
         private System.Windows.Forms.Label mouseModeLabel;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage monteCarloTabPage;
         private System.Windows.Forms.NumericUpDown stateMonteCarloNumericUpDown;
         private System.Windows.Forms.Button randomStatesMonteCarloButton;
         private System.Windows.Forms.Label stateAmountMonteCarloLlabel;
@@ -1266,6 +1534,25 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown gbSizePropertiesMonteCarloNumericUpDown;
         private System.Windows.Forms.RadioButton energyNeighborhoodRadioButton;
+        private System.Windows.Forms.TabPage RectystallizationTabPage;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox currentIterationExecutionRecrystallizationTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown iterationsExecutionRecrystallizationNumericUpDown;
+        private System.Windows.Forms.Button stopExecutionRecrystallizationButton;
+        private System.Windows.Forms.Button runIterationsExecutionRecrystallizationButton;
+        private System.Windows.Forms.Button runExecutionRecrystallizationButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown gbSizePropertiesRecrystallizationumericUpDown;
+        private System.Windows.Forms.ComboBox applayPlaceComboBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox applayModeRecrystallizationComboBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button randomPlacementPropertiesRecrystallizationButton;
+        private System.Windows.Forms.NumericUpDown statesAmountPropertiesRecrystallizationNumericUpDown;
     }
 }
 
