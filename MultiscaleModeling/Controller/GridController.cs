@@ -27,6 +27,8 @@ namespace MultiscaleModeling.Controller
         int nucleonsPopulation;
         public int CurrentNucleonID { get; private set; }
         public int ProbabilityOfChange;
+        int maxEnergy = 1;
+        int minEnergy = 0;
         #endregion
 
         #region INCLUSIONS
@@ -113,6 +115,8 @@ namespace MultiscaleModeling.Controller
             currentGrid.Resize(width, height);
             nextStepGrid.Resize(width, height);
             emptyCount = Grid.SizeX * Grid.SizeY;
+            minEnergy = 0;
+            maxEnergy = 1;
         }
         public void ClearGrid()
         {
@@ -120,6 +124,8 @@ namespace MultiscaleModeling.Controller
             currentGrid.Clear();
             nextStepGrid.Clear();
             emptyCount = Grid.SizeX * Grid.SizeY;
+            minEnergy = 0;
+            maxEnergy = 1;
         }
 
         internal void selectGrainForDP(int cellPosX, int cellPosY, int selectionType)
@@ -129,6 +135,8 @@ namespace MultiscaleModeling.Controller
                 return;
             }
 
+            bool recalculateEnergy = currentGrid.Cells[cellPosX, cellPosY].Energy == minEnergy ||
+                currentGrid.Cells[cellPosX, cellPosY].Energy == maxEnergy;
             int idToChange = currentGrid.Cells[cellPosX, cellPosY].Id;
             int stateToChangeTo = 3;
             int idToChangeTo = -2;
@@ -148,6 +156,10 @@ namespace MultiscaleModeling.Controller
                     }
                 }
             }
+            if (recalculateEnergy)
+            {
+                CalculateMinMaxEnergy();
+            }
         }
 
         internal void GenerateCellBoundary(int x, int y, int size)
@@ -166,7 +178,7 @@ namespace MultiscaleModeling.Controller
         {
             currentGrid.ChangeCellValue(x, y);
             currentGrid.Cells[x, y].Id = CurrentNucleonID;
-
+            CalculateMinMaxEnergy();
             if (currentGrid.Cells[x, y].State == 0)
             {
                 emptyCount++;
@@ -182,7 +194,7 @@ namespace MultiscaleModeling.Controller
         public bool ChangeGridValue(int x, int y, int id)
         {
             currentGrid.ChangeCellValue(x, y, id);
-
+            CalculateMinMaxEnergy();
             if (currentGrid.Cells[x, y].State == 0)
             {
                 emptyCount++;
@@ -233,6 +245,7 @@ namespace MultiscaleModeling.Controller
                 }
             }
             Populate(start, nucleonsPopulation);
+            CalculateMinMaxEnergy();
         }
         void Populate(List<Model.Point> start, int nPopulation)
         {
@@ -434,6 +447,8 @@ namespace MultiscaleModeling.Controller
                 currentGrid.Copy(nextStepGrid);
                 progress.Report((gridSize - emptyCount) * 100 / gridSize);
             }
+
+            CalculateMinMaxEnergy();
             running = false;
         }
 
@@ -442,6 +457,7 @@ namespace MultiscaleModeling.Controller
             lock (synLock)
             {
                 running = false;
+                CalculateMinMaxEnergy();
             }
         }
 
@@ -487,6 +503,7 @@ namespace MultiscaleModeling.Controller
             {
                 this.nucleonsPopulation = grains.Keys.Count > 0 ? grains.Keys.Count : 1;
             }
+            CalculateMinMaxEnergy();
         }
 
         internal string GetBoundaryPercentSize()
@@ -526,17 +543,39 @@ namespace MultiscaleModeling.Controller
             }
             emptyCount = 0;
             nextStepGrid.Copy(nextStepGrid);
-        }
-
-        internal void GeneratePointBoundaries(int x, int y)
-        {
-            throw new NotImplementedException();
+            CalculateMinMaxEnergy();
         }
 
         internal void GenerateAllBoundaries(int size)
         {
-            //nextStepGrid.Copy(currentGrid);
-            currentGrid = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
+            List<Point> gbPoints = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
+            foreach(Point p in gbPoints)
+            {
+                currentGrid.Cells[p.X, p.Y].State = 2;
+                currentGrid.Cells[p.X, p.Y].Id = -1;
+            }
+        }
+
+        internal void SetEnergyOnBoundaries(int size, int energyValue)
+        {
+            List<Point> gbPoints = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, size);
+            foreach (Point p in gbPoints)
+            {
+                currentGrid.Cells[p.X, p.Y].Energy = energyValue;
+            }
+
+            maxEnergy = maxEnergy < energyValue ? energyValue : maxEnergy;
+            CalculateMinMaxEnergy();
+        }
+        internal void SetEnergyOnInside(int size, int energyValue)
+        {
+            List<Point> gbPoints = GrainBoundary.GenereteAllGrainWithoutBoundaries(currentGrid, size);
+
+            foreach(Point p in gbPoints)
+            {
+                currentGrid.Cells[p.X, p.Y].Energy = energyValue;
+            }
+            CalculateMinMaxEnergy();
         }
 
         internal void ClearUnselectedGrains()
@@ -565,14 +604,20 @@ namespace MultiscaleModeling.Controller
         {
             Thread t = new Thread(() => RunMonteCarlo());
             running = true;
-            while(running && mcEngine.currentIteration < maxIterations)
+            while (running && mcEngine.currentIteration < maxIterations)
             {
                 t = new Thread(() => RunMonteCarlo());
                 t.Start();
                 t.Join();
                 progress.Report(mcEngine.currentIteration.ToString());
             }
-            
+
+        }
+
+        internal int NumberOfDifferendNeighbors(int x, int y)
+        {
+            return Neighbourhood.GetNeighborhood(x, y, Grid.SizeX, Grid.SizeY, BoundaryCondition)
+                .Where(p => currentGrid.Cells[x, y].Id != currentGrid.Cells[p.X, p.Y].Id).Count();
         }
 
         internal void RunMonteCarlo()
@@ -600,6 +645,58 @@ namespace MultiscaleModeling.Controller
             }
             InclusionManager.GenerateInclusions(ref currentGrid, amount, value, Neighbourhood, BoundaryCondition);
         }
+
+        internal int GetCurrentGridCellEnergy(int x, int y, bool withNeighboors = false)
+        {
+            int grainEnergy = currentGrid.Cells[x, y].Energy; 
+            if(withNeighboors)
+            {
+                grainEnergy += NumberOfDifferendNeighbors(x, y);
+            }
+            grainEnergy *= 100;
+            return (grainEnergy) / (maxEnergy + 4);
+        }
+
+        private void CalculateMinMaxEnergy()
+        {
+            int tempMin = 0;
+            int tempMax = 0;
+
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    if (currentGrid.Cells[x, y].State == 1)
+                    {
+                        int energy = currentGrid.Cells[x, y].Energy;
+                        if (energy < tempMin)
+                        {
+                            tempMin = energy;
+                        }
+                        else if (energy > tempMax)
+                        {
+                            tempMax = energy;
+                        }
+                    }
+                }
+            }
+            maxEnergy = tempMax + 1;
+            minEnergy = tempMin;
+        }
+
+        internal void SetEnergyAll(int energyValue)
+        {
+            for (int x = 0; x < Grid.SizeX; x++)
+            {
+                for (int y = 0; y < Grid.SizeY; y++)
+                {
+                    currentGrid.Cells[x, y].Energy = energyValue;
+                }
+            }
+
+            CalculateMinMaxEnergy();
+        }
+
         #endregion
 
     }

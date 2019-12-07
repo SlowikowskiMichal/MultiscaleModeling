@@ -69,17 +69,11 @@ namespace MultiscaleModeling
 
             gridController.SetBoundaryCondition(celluralAutomataProperties.GetBoundaryCondition());
             gridController.SetNeighbourhood(celluralAutomataProperties.GetNeighbourhood());
-            
+
+            setEnergyModePropertiesMonteCarloComboBox.SelectedIndex = 0;
+
             //IMAGE
             brush = new SolidBrush(Color.White);
-            //GRID VIEW
-            zoom = 1;//viewZoomTrackBar.Value;
-            cellXSize = sizeX * zoom;
-            cellYSize = sizeY * zoom;
-            drawGrid = false;//viewGridCheckBox.Checked;
-            grainViewPropertiesRadioButton.Checked = true;
-
-
             selectionTypeSubstructureComboBox.SelectedIndex = 0;
 
             //GRID OPTIONS
@@ -90,6 +84,12 @@ namespace MultiscaleModeling
             SetImageSize();
 
             selectionModePropertiesGrainBoundariesComboBox.SelectedIndex = 0;
+            //GRID VIEW
+            zoom = 1;//viewZoomTrackBar.Value;
+            cellXSize = sizeX * zoom;
+            cellYSize = sizeY * zoom;
+            drawGrid = false;//viewGridCheckBox.Checked;
+            grainViewPropertiesRadioButton.Checked = true;
         }
 
 
@@ -540,15 +540,116 @@ namespace MultiscaleModeling
             {
                 DrawFunction = DrawGridOnImage;
             }
-            else
+            else if(energyViewPropertiesRadioButton.Checked)
             {
                 DrawFunction = DrawEnergyOnImage;
             }
+            else
+            {
+                DrawFunction = DrawEnergyWithNeighborhoodOnImage;
+            }
+            DrawFunction(ref nextImage);
+        }
+
+        private void DrawEnergyWithNeighborhoodOnImage(ref Bitmap imageToDrawOn)
+        {
+            if (imageToDrawOn == null)
+            {
+                imageToDrawOn = nextImage;
+            }
+            int endPositionX = Math.Min(currentPositionX + imageToDrawOn.Width, Grid.SizeX);
+            int endPositionY = Math.Min(currentPositionY + imageToDrawOn.Height, Grid.SizeY);
+
+            Graphics.FromImage(imageToDrawOn).Clear(Color.Black);
+
+            int colorsCount = ColorManager.energyColors.Count() - 1;
+
+            for (int x = currentPositionX; x < endPositionX; x++)
+            {
+                for (int y = currentPositionY; y < endPositionY; y++)
+                {
+                    if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
+                    {
+                        int color = gridController.GetCurrentGridCellEnergy(x, y, true);
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.energyColors[Math.Min(color,colorsCount)]));
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 2)
+                    {
+                        FillCell(x, y, imageToDrawOn, Color.Black);
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 3)
+                    {
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.dpColor));
+                    }
+                    else
+                    {
+                        FillCell(x, y, imageToDrawOn, Color.White);
+                    }
+                }
+            }
+            DeterminateClickOnPictureBoxMode();
+            viewPictureBox.Image = nextImage;
+            viewPictureBox.Refresh();
         }
 
         private void DrawEnergyOnImage(ref Bitmap imageToDrawOn)
         {
-            throw new NotImplementedException();
+            if (imageToDrawOn == null)
+            {
+                imageToDrawOn = nextImage;
+            }
+            int endPositionX = Math.Min(currentPositionX + imageToDrawOn.Width, Grid.SizeX);
+            int endPositionY = Math.Min(currentPositionY + imageToDrawOn.Height, Grid.SizeY);
+
+            Graphics.FromImage(imageToDrawOn).Clear(Color.Black);
+
+            int colorsCount = ColorManager.energyColors.Count();
+
+            for (int x = currentPositionX; x < endPositionX; x++)
+            {
+                for (int y = currentPositionY; y < endPositionY; y++)
+                {
+                    if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
+                    {
+                        int color = gridController.GetCurrentGridCellEnergy(x, y);
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.energyColors[color % colorsCount]));
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 2)
+                    {
+                        FillCell(x, y, imageToDrawOn, Color.Black);
+                    }
+                    else if (gridController.GetCurrentGridCellState(x, y) == 3)
+                    {
+                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.dpColor));
+                    }
+                    else
+                    {
+                        FillCell(x, y, imageToDrawOn, Color.White);
+                    }
+                }
+            }
+            DeterminateClickOnPictureBoxMode();
+            viewPictureBox.Image = nextImage;
+            viewPictureBox.Refresh();
+        }
+
+        private void setEnergyValueButton_Click(object sender, EventArgs e)
+        {
+            if (setEnergyModePropertiesMonteCarloComboBox.SelectedIndex == 2)
+            {
+                gridController.SetEnergyOnBoundaries(decimal.ToInt32(gbSizePropertiesMonteCarloNumericUpDown.Value),
+                    decimal.ToInt32(energyValuePropertiesMonteCarloNumericUpDown.Value));
+            }else if(setEnergyModePropertiesMonteCarloComboBox.SelectedIndex == 1)
+            {
+                gridController.SetEnergyOnInside(decimal.ToInt32(gbSizePropertiesMonteCarloNumericUpDown.Value),
+                                    decimal.ToInt32(energyValuePropertiesMonteCarloNumericUpDown.Value));
+            }
+            else if(setEnergyModePropertiesMonteCarloComboBox.SelectedIndex == 0)
+            {
+                gridController.SetEnergyAll(decimal.ToInt32(decimal.ToInt32(energyValuePropertiesMonteCarloNumericUpDown.Value)));
+            }
+
+            DrawFunction(ref nextImage);
         }
     }
 }

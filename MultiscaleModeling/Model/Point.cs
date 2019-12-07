@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiscaleModeling.Model
 {
-    class Point : IEquatable<Point>
+    public class Point : IEquatable<Point>
     {
         public int X;
         public int Y;

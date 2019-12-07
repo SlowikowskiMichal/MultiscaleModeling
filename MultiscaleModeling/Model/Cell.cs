@@ -12,10 +12,12 @@ namespace MultiscaleModeling.Model
         public int Id { get; set; }
         public bool Recrystallized { get; set; }
 
+        public int Energy { get; set; }
         public Cell()
         {
             State = 0;
             Recrystallized = false;
+            Energy = 0;
         }
 
         public void ChangeState()
@@ -32,6 +34,8 @@ namespace MultiscaleModeling.Model
         {
             State = 0;
             Recrystallized = false;
+            Id = 0;
+            Energy = 0;
         }
     }
 }

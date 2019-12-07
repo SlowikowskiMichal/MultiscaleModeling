@@ -31,9 +31,6 @@ namespace MultiscaleModeling.Model
             Neighbourhood.Neighbourhood n = new MooresNeighbourhood();
 
             Random r = new Random();
-            
-
-
 
             List<Point> listOfPoints = ShuffleCells(Grid.SizeX,Grid.SizeY, currentGrid);
 
@@ -44,15 +41,15 @@ namespace MultiscaleModeling.Model
 
                 List<Point> nCoord = new List<Point>();
 
-                foreach(Point p in buff)
+                foreach (Point p in buff)
                 {
-                    if(currentGrid.Cells[p.X,p.Y].State == 1)
+                    if (currentGrid.Cells[p.X, p.Y].State == 1)
                     {
                         nCoord.Add(new Point(p.X, p.Y));
                     }
                 }
 
-                if(nCoord.Count == 0)
+                if (nCoord.Count == 0)
                 {
                     break;
                 }
@@ -78,7 +75,14 @@ namespace MultiscaleModeling.Model
                         afterEnergy++;
                     }
                 }
-                currentGrid.Cells[c.X, c.Y].Id = afterEnergy <= currentEnergy ? currentGrid.Cells[c.X, c.Y].Id : currentId;
+                if (afterEnergy > currentEnergy)
+                {
+                    currentGrid.Cells[c.X, c.Y].Id = currentId;
+                }
+                else
+                {
+                    currentGrid.Cells[c.X, c.Y].Energy = currentGrid.Cells[nCoord[newCoordIndex].X, nCoord[newCoordIndex].Y].Energy;
+                }
             }
         }
 

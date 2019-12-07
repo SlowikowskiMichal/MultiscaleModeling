@@ -8,12 +8,11 @@ namespace MultiscaleModeling.Model
 {
     static public class GrainBoundary
     {
-        static public Grid GenerateAllGrainBoundaries(Grid grid, int size)
+        static public List<Point> GenerateAllGrainBoundaries(Grid grid, int size)
         {
-            Grid bufferGrid = new Grid(Grid.SizeX,Grid.SizeY);
-            bufferGrid.Copy(grid);
-
             int currentID = -1;
+
+            List<Point> GridPoints = new List<Point>();
 
             int minX;
             int maxX;
@@ -39,16 +38,64 @@ namespace MultiscaleModeling.Model
                         {
                             if(grid.Cells[i,j].Id != currentID && grid.Cells[i, j].State != 2)
                             {
-                                bufferGrid.Cells[i, j].State = 2;
-                                bufferGrid.Cells[i, j].Id = -1;
+                                GridPoints.Add(new Point(x, y));
+                                break;
                             }
                         }
                     }
                 }
             }
 
-            return bufferGrid;
+            return GridPoints;
         }
+
+        static public List<Point> GenereteAllGrainWithoutBoundaries(Grid grid, int size)
+        {
+            int currentID = -1;
+
+            List<Point> GridPoints = new List<Point>();
+
+            int minX;
+            int maxX;
+            int minY;
+            int maxY;
+            int maxGridXIndex = Grid.SizeX;
+            int maxGridYIndex = Grid.SizeY;
+            bool addFlag = false;
+            for (int y = 0; y < Grid.SizeY; y++)
+            {
+                for (int x = 0; x < Grid.SizeX; x++)
+                {
+                    currentID = grid.Cells[x, y].Id;
+
+                    minX = Math.Max(0, x - size);
+                    minY = Math.Max(0, y - size);
+                    maxX = Math.Min(maxGridXIndex, x + size);
+                    maxY = Math.Min(maxGridYIndex, y + size);
+
+                    addFlag = true;
+
+                    for (int i = minX; i < maxX; i++)
+                    {
+                        for (int j = minY; j < maxY; j++)
+                        {
+                            if (grid.Cells[i, j].Id != currentID && grid.Cells[i, j].State != 2)
+                            {
+                                addFlag = false;
+                                break;
+                            }
+                        }
+                    }
+                    if(addFlag)
+                    {
+                        GridPoints.Add(new Point(x, y));
+                    }
+                }
+            }
+
+            return GridPoints;
+        }
+
 
         internal static Grid GenerateSelectedGrainCellBoundary(Grid grid, int x, int y, int size)
         {

@@ -32,6 +32,8 @@
             this.viewPanel = new System.Windows.Forms.Panel();
             this.viewPictureBox = new System.Windows.Forms.PictureBox();
             this.viewGroupBox = new System.Windows.Forms.GroupBox();
+            this.energyViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
+            this.grainViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
             this.viewGridCheckBox = new System.Windows.Forms.CheckBox();
             this.viewZoomTrackBarLabel = new System.Windows.Forms.Label();
             this.viewZoomTrackBar = new System.Windows.Forms.TrackBar();
@@ -92,6 +94,14 @@
             this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gbSizePropertiesMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.setEnergyModePropertiesMonteCarloComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.setEnergyValueButton = new System.Windows.Forms.Button();
+            this.energyValuePropertiesMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.executionMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
             this.currentIterationNumberMonteCarloTextBox = new System.Windows.Forms.TextBox();
             this.currentIterationMonteCarloLabel = new System.Windows.Forms.Label();
@@ -105,8 +115,7 @@
             this.randomStatesMonteCarloButton = new System.Windows.Forms.Button();
             this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.mouseModeLabel = new System.Windows.Forms.Label();
-            this.grainViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
-            this.energyViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
+            this.energyNeighborhoodRadioButton = new System.Windows.Forms.RadioButton();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -129,6 +138,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.substructureGroupBox.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesMonteCarloNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.energyValuePropertiesMonteCarloNumericUpDown)).BeginInit();
             this.executionMonteCarloGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).BeginInit();
             this.propertiesMonteCarloGroupBox.SuspendLayout();
@@ -159,6 +171,7 @@
             // viewGroupBox
             // 
             this.viewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewGroupBox.Controls.Add(this.energyNeighborhoodRadioButton);
             this.viewGroupBox.Controls.Add(this.energyViewPropertiesRadioButton);
             this.viewGroupBox.Controls.Add(this.grainViewPropertiesRadioButton);
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
@@ -166,10 +179,34 @@
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
             this.viewGroupBox.Location = new System.Drawing.Point(3, 349);
             this.viewGroupBox.Name = "viewGroupBox";
-            this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
+            this.viewGroupBox.Size = new System.Drawing.Size(174, 102);
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
+            // 
+            // energyViewPropertiesRadioButton
+            // 
+            this.energyViewPropertiesRadioButton.AutoSize = true;
+            this.energyViewPropertiesRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.energyViewPropertiesRadioButton.Name = "energyViewPropertiesRadioButton";
+            this.energyViewPropertiesRadioButton.Size = new System.Drawing.Size(88, 17);
+            this.energyViewPropertiesRadioButton.TabIndex = 4;
+            this.energyViewPropertiesRadioButton.TabStop = true;
+            this.energyViewPropertiesRadioButton.Text = "Show Energy";
+            this.energyViewPropertiesRadioButton.UseVisualStyleBackColor = true;
+            this.energyViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
+            // 
+            // grainViewPropertiesRadioButton
+            // 
+            this.grainViewPropertiesRadioButton.AutoSize = true;
+            this.grainViewPropertiesRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.grainViewPropertiesRadioButton.Name = "grainViewPropertiesRadioButton";
+            this.grainViewPropertiesRadioButton.Size = new System.Drawing.Size(85, 17);
+            this.grainViewPropertiesRadioButton.TabIndex = 3;
+            this.grainViewPropertiesRadioButton.TabStop = true;
+            this.grainViewPropertiesRadioButton.Text = "Show Grains";
+            this.grainViewPropertiesRadioButton.UseVisualStyleBackColor = true;
+            this.grainViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
             // 
             // viewGridCheckBox
             // 
@@ -805,6 +842,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.executionMonteCarloGroupBox);
             this.tabPage1.Controls.Add(this.propertiesMonteCarloGroupBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -813,6 +851,106 @@
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "Monte Carlo";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.gbSizePropertiesMonteCarloNumericUpDown);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.setEnergyModePropertiesMonteCarloComboBox);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.setEnergyValueButton);
+            this.groupBox2.Controls.Add(this.energyValuePropertiesMonteCarloNumericUpDown);
+            this.groupBox2.Location = new System.Drawing.Point(4, 244);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(175, 148);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Properties";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "GB Size:";
+            // 
+            // gbSizePropertiesMonteCarloNumericUpDown
+            // 
+            this.gbSizePropertiesMonteCarloNumericUpDown.Location = new System.Drawing.Point(69, 91);
+            this.gbSizePropertiesMonteCarloNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gbSizePropertiesMonteCarloNumericUpDown.Name = "gbSizePropertiesMonteCarloNumericUpDown";
+            this.gbSizePropertiesMonteCarloNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.gbSizePropertiesMonteCarloNumericUpDown.TabIndex = 14;
+            this.gbSizePropertiesMonteCarloNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Set energy mode:";
+            // 
+            // setEnergyModePropertiesMonteCarloComboBox
+            // 
+            this.setEnergyModePropertiesMonteCarloComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.setEnergyModePropertiesMonteCarloComboBox.FormattingEnabled = true;
+            this.setEnergyModePropertiesMonteCarloComboBox.Items.AddRange(new object[] {
+            "Homogenius",
+            "Grains",
+            "Boundries"});
+            this.setEnergyModePropertiesMonteCarloComboBox.Location = new System.Drawing.Point(46, 33);
+            this.setEnergyModePropertiesMonteCarloComboBox.Name = "setEnergyModePropertiesMonteCarloComboBox";
+            this.setEnergyModePropertiesMonteCarloComboBox.Size = new System.Drawing.Size(121, 21);
+            this.setEnergyModePropertiesMonteCarloComboBox.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Energy value:";
+            // 
+            // setEnergyValueButton
+            // 
+            this.setEnergyValueButton.Location = new System.Drawing.Point(6, 117);
+            this.setEnergyValueButton.Name = "setEnergyValueButton";
+            this.setEnergyValueButton.Size = new System.Drawing.Size(162, 23);
+            this.setEnergyValueButton.TabIndex = 10;
+            this.setEnergyValueButton.Text = "Set Energy Values";
+            this.setEnergyValueButton.UseVisualStyleBackColor = true;
+            this.setEnergyValueButton.Click += new System.EventHandler(this.setEnergyValueButton_Click);
+            // 
+            // energyValuePropertiesMonteCarloNumericUpDown
+            // 
+            this.energyValuePropertiesMonteCarloNumericUpDown.Location = new System.Drawing.Point(92, 65);
+            this.energyValuePropertiesMonteCarloNumericUpDown.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.energyValuePropertiesMonteCarloNumericUpDown.Name = "energyValuePropertiesMonteCarloNumericUpDown";
+            this.energyValuePropertiesMonteCarloNumericUpDown.Size = new System.Drawing.Size(77, 20);
+            this.energyValuePropertiesMonteCarloNumericUpDown.TabIndex = 11;
+            this.energyValuePropertiesMonteCarloNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // executionMonteCarloGroupBox
             // 
@@ -970,29 +1108,17 @@
             this.mouseModeLabel.TabIndex = 16;
             this.mouseModeLabel.Text = "Mouse mode:";
             // 
-            // grainViewPropertiesRadioButton
+            // energyNeighborhoodRadioButton
             // 
-            this.grainViewPropertiesRadioButton.AutoSize = true;
-            this.grainViewPropertiesRadioButton.Location = new System.Drawing.Point(42, 19);
-            this.grainViewPropertiesRadioButton.Name = "grainViewPropertiesRadioButton";
-            this.grainViewPropertiesRadioButton.Size = new System.Drawing.Size(85, 17);
-            this.grainViewPropertiesRadioButton.TabIndex = 3;
-            this.grainViewPropertiesRadioButton.TabStop = true;
-            this.grainViewPropertiesRadioButton.Text = "Show Grains";
-            this.grainViewPropertiesRadioButton.UseVisualStyleBackColor = true;
-            this.grainViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
-            // 
-            // energyViewPropertiesRadioButton
-            // 
-            this.energyViewPropertiesRadioButton.AutoSize = true;
-            this.energyViewPropertiesRadioButton.Location = new System.Drawing.Point(42, 42);
-            this.energyViewPropertiesRadioButton.Name = "energyViewPropertiesRadioButton";
-            this.energyViewPropertiesRadioButton.Size = new System.Drawing.Size(88, 17);
-            this.energyViewPropertiesRadioButton.TabIndex = 4;
-            this.energyViewPropertiesRadioButton.TabStop = true;
-            this.energyViewPropertiesRadioButton.Text = "Show Energy";
-            this.energyViewPropertiesRadioButton.UseVisualStyleBackColor = true;
-            this.energyViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
+            this.energyNeighborhoodRadioButton.AutoSize = true;
+            this.energyNeighborhoodRadioButton.Location = new System.Drawing.Point(6, 65);
+            this.energyNeighborhoodRadioButton.Name = "energyNeighborhoodRadioButton";
+            this.energyNeighborhoodRadioButton.Size = new System.Drawing.Size(117, 30);
+            this.energyNeighborhoodRadioButton.TabIndex = 5;
+            this.energyNeighborhoodRadioButton.TabStop = true;
+            this.energyNeighborhoodRadioButton.Text = "Show Energy \r\nWith Neighborhood";
+            this.energyNeighborhoodRadioButton.UseVisualStyleBackColor = true;
+            this.energyNeighborhoodRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -1037,6 +1163,10 @@
             this.substructureGroupBox.ResumeLayout(false);
             this.substructureGroupBox.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesMonteCarloNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.energyValuePropertiesMonteCarloNumericUpDown)).EndInit();
             this.executionMonteCarloGroupBox.ResumeLayout(false);
             this.executionMonteCarloGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).EndInit();
@@ -1127,6 +1257,15 @@
         private System.Windows.Forms.GroupBox propertiesMonteCarloGroupBox;
         private System.Windows.Forms.RadioButton energyViewPropertiesRadioButton;
         private System.Windows.Forms.RadioButton grainViewPropertiesRadioButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox setEnergyModePropertiesMonteCarloComboBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button setEnergyValueButton;
+        private System.Windows.Forms.NumericUpDown energyValuePropertiesMonteCarloNumericUpDown;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown gbSizePropertiesMonteCarloNumericUpDown;
+        private System.Windows.Forms.RadioButton energyNeighborhoodRadioButton;
     }
 }
 
