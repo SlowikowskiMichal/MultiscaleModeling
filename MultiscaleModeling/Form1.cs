@@ -15,6 +15,8 @@ namespace MultiscaleModeling
     public partial class Form1 : Form
     {
         readonly static object synLock = new object();
+        delegate void DrawDelegate(ref Bitmap imageToDrawOn);
+        DrawDelegate DrawFunction;
 
         #region ATTRIBUTES
         #region GRID
@@ -63,16 +65,20 @@ namespace MultiscaleModeling
 
             celluralAutomataProperties = new CelluralAutomataProperties();
 
+            DrawFunction = DrawGridOnImage;
+
             gridController.SetBoundaryCondition(celluralAutomataProperties.GetBoundaryCondition());
             gridController.SetNeighbourhood(celluralAutomataProperties.GetNeighbourhood());
             
             //IMAGE
             brush = new SolidBrush(Color.White);
             //GRID VIEW
-            zoom = viewZoomTrackBar.Value;
+            zoom = 1;//viewZoomTrackBar.Value;
             cellXSize = sizeX * zoom;
             cellYSize = sizeY * zoom;
-            drawGrid = viewGridCheckBox.Checked;
+            drawGrid = false;//viewGridCheckBox.Checked;
+            grainViewPropertiesRadioButton.Checked = true;
+
 
             selectionTypeSubstructureComboBox.SelectedIndex = 0;
 
@@ -149,7 +155,7 @@ namespace MultiscaleModeling
                 gridController.GenerateCellBoundary(x, y, decimal.ToInt32(sizePropertiesGrainBoundariesNumericUpDown.Value));
                 gbPercentTextBox.Text = gridController.GetBoundaryPercentSize();
 
-                DrawGridOnImage(ref nextImage);
+                DrawFunction(ref nextImage);
                 viewPictureBox.Refresh();
 
             }
@@ -161,7 +167,7 @@ namespace MultiscaleModeling
                     if (gridController.emptyCount == 0)
                     {
                         gridController.selectGrainForDP(x, y, selectionTypeSubstructureComboBox.SelectedIndex);
-                        DrawGridOnImage(ref nextImage);
+                        DrawFunction(ref nextImage);
                     }
                     else
                     {
@@ -202,7 +208,7 @@ namespace MultiscaleModeling
         private void ClearSizeGridPropertiesButton_Click(object sender, EventArgs e)
         {
             gridController.ClearGrid();
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             currentIterationNumberMonteCarloTextBox.Text = "0";
 
             viewPictureBox.Image = nextImage;
@@ -212,7 +218,7 @@ namespace MultiscaleModeling
         private void RandomPlacementButton_Click(object sender, EventArgs e)
         {
             gridController.RandomPopulate((int)nucleonAmoutCAPropertiesNumericUpDown.Value);
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
         private async void RunCAExecutionButton_Click(object sender, EventArgs e)
@@ -230,7 +236,7 @@ namespace MultiscaleModeling
             SetGuiAsEnabled(false);
             await Task.Factory.StartNew(() => gridController.Continue(progress,rule),
                             TaskCreationOptions.LongRunning);
-            this.DrawGridOnImage(ref nextImage);
+            this.DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
             running = false;
             SetGuiAsEnabled(true);
@@ -337,7 +343,7 @@ namespace MultiscaleModeling
 
 
             viewPictureBox.Image = nextImage;
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
         #endregion
@@ -368,7 +374,7 @@ namespace MultiscaleModeling
                 nextImage = new Bitmap(Grid.SizeX, Grid.SizeY);
                 nucleonAmoutCAPropertiesNumericUpDown.Text = gridController.GetNucleonsPopulation().ToString();
             }
-            this.DrawGridOnImage(ref nextImage);
+            this.DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
         public void StopCalculations()
@@ -395,7 +401,7 @@ namespace MultiscaleModeling
                 nextImage = new Bitmap(Grid.SizeX, Grid.SizeY);
                 nucleonAmoutCAPropertiesNumericUpDown.Text = gridController.GetNucleonsPopulation().ToString();
             }
-            this.DrawGridOnImage(ref nextImage);
+            this.DrawFunction(ref nextImage);
         }
 
         private void TypeInclusionsComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -420,7 +426,7 @@ namespace MultiscaleModeling
                 Decimal.ToInt32(amountInsclusionsNumericUpDown.Value)
             );
 
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
 
@@ -432,7 +438,7 @@ namespace MultiscaleModeling
         private void ClearSubstructureButton_Click(object sender, EventArgs e)
         {
             gridController.ClearUnselectedGrains();
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
 
@@ -445,7 +451,7 @@ namespace MultiscaleModeling
 
             gbPercentTextBox.Text = gridController.GetBoundaryPercentSize();
 
-            DrawGridOnImage(ref nextImage);
+            DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
         }
 
@@ -472,7 +478,7 @@ namespace MultiscaleModeling
         {
             {
                 gridController.RandomAllPopulate((int)stateMonteCarloNumericUpDown.Value);
-                DrawGridOnImage(ref nextImage);
+                DrawFunction(ref nextImage);
                 viewPictureBox.Refresh();
             }
         }
@@ -493,7 +499,7 @@ namespace MultiscaleModeling
             await Task.Factory.StartNew(() => gridController.RunIterationsMonteCarlo(progress, decimal.ToInt32(iterationsNumberNumericUpDown.Value)),
                             TaskCreationOptions.LongRunning);
 
-            this.DrawGridOnImage(ref nextImage);
+            this.DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
             running = false;
             SetGuiAsEnabled(true);
@@ -514,7 +520,7 @@ namespace MultiscaleModeling
                             TaskCreationOptions.LongRunning);
             
             currentIterationNumberMonteCarloTextBox.Text = gridController.GetMonteCarloIteration().ToString();
-            this.DrawGridOnImage(ref nextImage);
+            this.DrawFunction(ref nextImage);
             viewPictureBox.Refresh();
 
             running = false;
@@ -526,6 +532,23 @@ namespace MultiscaleModeling
         {
             gridController.StopExecution();
             SetGuiAsEnabled(!running);
+        }
+
+        private void energyViewPropertiesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(grainViewPropertiesRadioButton.Checked)
+            {
+                DrawFunction = DrawGridOnImage;
+            }
+            else
+            {
+                DrawFunction = DrawEnergyOnImage;
+            }
+        }
+
+        private void DrawEnergyOnImage(ref Bitmap imageToDrawOn)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -92,19 +92,21 @@
             this.selectionTypeSubstructureComboBox = new System.Windows.Forms.ComboBox();
             this.clearSubstructureButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.randomStatesMonteCarloButton = new System.Windows.Forms.Button();
-            this.stateAmountMonteCarloLlabel = new System.Windows.Forms.Label();
-            this.mouseModeLabel = new System.Windows.Forms.Label();
-            this.runMonteCarloButton = new System.Windows.Forms.Button();
-            this.stopMonteCarloButton = new System.Windows.Forms.Button();
-            this.iterationsNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.iterationsMonteCarloLabel = new System.Windows.Forms.Label();
-            this.runIterationsMonteCarloButton = new System.Windows.Forms.Button();
-            this.propertiesMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
             this.executionMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
-            this.currentIterationMonteCarloLabel = new System.Windows.Forms.Label();
             this.currentIterationNumberMonteCarloTextBox = new System.Windows.Forms.TextBox();
+            this.currentIterationMonteCarloLabel = new System.Windows.Forms.Label();
+            this.iterationsMonteCarloLabel = new System.Windows.Forms.Label();
+            this.iterationsNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.stopMonteCarloButton = new System.Windows.Forms.Button();
+            this.runIterationsMonteCarloButton = new System.Windows.Forms.Button();
+            this.runMonteCarloButton = new System.Windows.Forms.Button();
+            this.propertiesMonteCarloGroupBox = new System.Windows.Forms.GroupBox();
+            this.stateAmountMonteCarloLlabel = new System.Windows.Forms.Label();
+            this.randomStatesMonteCarloButton = new System.Windows.Forms.Button();
+            this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.mouseModeLabel = new System.Windows.Forms.Label();
+            this.grainViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
+            this.energyViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -127,10 +129,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.sizePropertiesGrainBoundariesNumericUpDown)).BeginInit();
             this.substructureGroupBox.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).BeginInit();
+            this.executionMonteCarloGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).BeginInit();
             this.propertiesMonteCarloGroupBox.SuspendLayout();
-            this.executionMonteCarloGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -157,46 +159,50 @@
             // viewGroupBox
             // 
             this.viewGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewGroupBox.Controls.Add(this.energyViewPropertiesRadioButton);
+            this.viewGroupBox.Controls.Add(this.grainViewPropertiesRadioButton);
             this.viewGroupBox.Controls.Add(this.viewGridCheckBox);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBarLabel);
             this.viewGroupBox.Controls.Add(this.viewZoomTrackBar);
-            this.viewGroupBox.Location = new System.Drawing.Point(4, 377);
+            this.viewGroupBox.Location = new System.Drawing.Point(3, 349);
             this.viewGroupBox.Name = "viewGroupBox";
             this.viewGroupBox.Size = new System.Drawing.Size(174, 91);
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
-            this.viewGroupBox.Visible = false;
             // 
             // viewGridCheckBox
             // 
             this.viewGridCheckBox.AllowDrop = true;
             this.viewGridCheckBox.AutoSize = true;
             this.viewGridCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.viewGridCheckBox.Location = new System.Drawing.Point(12, 70);
+            this.viewGridCheckBox.Location = new System.Drawing.Point(19, 128);
             this.viewGridCheckBox.Name = "viewGridCheckBox";
             this.viewGridCheckBox.Size = new System.Drawing.Size(145, 17);
             this.viewGridCheckBox.TabIndex = 2;
             this.viewGridCheckBox.Text = "Show Grid Between Cells";
             this.viewGridCheckBox.UseVisualStyleBackColor = true;
+            this.viewGridCheckBox.Visible = false;
             // 
             // viewZoomTrackBarLabel
             // 
             this.viewZoomTrackBarLabel.AutoSize = true;
-            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(12, 20);
+            this.viewZoomTrackBarLabel.Location = new System.Drawing.Point(19, 78);
             this.viewZoomTrackBarLabel.Name = "viewZoomTrackBarLabel";
             this.viewZoomTrackBarLabel.Size = new System.Drawing.Size(34, 13);
             this.viewZoomTrackBarLabel.TabIndex = 1;
             this.viewZoomTrackBarLabel.Text = "Zoom";
+            this.viewZoomTrackBarLabel.Visible = false;
             // 
             // viewZoomTrackBar
             // 
-            this.viewZoomTrackBar.Location = new System.Drawing.Point(53, 19);
+            this.viewZoomTrackBar.Location = new System.Drawing.Point(60, 77);
             this.viewZoomTrackBar.Minimum = 1;
             this.viewZoomTrackBar.Name = "viewZoomTrackBar";
             this.viewZoomTrackBar.Size = new System.Drawing.Size(104, 45);
             this.viewZoomTrackBar.TabIndex = 0;
             this.viewZoomTrackBar.Value = 1;
+            this.viewZoomTrackBar.Visible = false;
             // 
             // gridPropertiesGroupBox
             // 
@@ -808,75 +814,47 @@
             this.tabPage1.Text = "Monte Carlo";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // stateMonteCarloNumericUpDown
+            // executionMonteCarloGroupBox
             // 
-            this.stateMonteCarloNumericUpDown.Location = new System.Drawing.Point(68, 32);
-            this.stateMonteCarloNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.stateMonteCarloNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.stateMonteCarloNumericUpDown.Name = "stateMonteCarloNumericUpDown";
-            this.stateMonteCarloNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.stateMonteCarloNumericUpDown.TabIndex = 11;
-            this.stateMonteCarloNumericUpDown.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationNumberMonteCarloTextBox);
+            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationMonteCarloLabel);
+            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsMonteCarloLabel);
+            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsNumberNumericUpDown);
+            this.executionMonteCarloGroupBox.Controls.Add(this.stopMonteCarloButton);
+            this.executionMonteCarloGroupBox.Controls.Add(this.runIterationsMonteCarloButton);
+            this.executionMonteCarloGroupBox.Controls.Add(this.runMonteCarloButton);
+            this.executionMonteCarloGroupBox.Location = new System.Drawing.Point(4, 104);
+            this.executionMonteCarloGroupBox.Name = "executionMonteCarloGroupBox";
+            this.executionMonteCarloGroupBox.Size = new System.Drawing.Size(177, 134);
+            this.executionMonteCarloGroupBox.TabIndex = 23;
+            this.executionMonteCarloGroupBox.TabStop = false;
+            this.executionMonteCarloGroupBox.Text = "Execution";
             // 
-            // randomStatesMonteCarloButton
+            // currentIterationNumberMonteCarloTextBox
             // 
-            this.randomStatesMonteCarloButton.Location = new System.Drawing.Point(6, 58);
-            this.randomStatesMonteCarloButton.Name = "randomStatesMonteCarloButton";
-            this.randomStatesMonteCarloButton.Size = new System.Drawing.Size(162, 23);
-            this.randomStatesMonteCarloButton.TabIndex = 10;
-            this.randomStatesMonteCarloButton.Text = "Random states placement";
-            this.randomStatesMonteCarloButton.UseVisualStyleBackColor = true;
-            this.randomStatesMonteCarloButton.Click += new System.EventHandler(this.RandomStatesMonteCarloButton_Click);
+            this.currentIterationNumberMonteCarloTextBox.Enabled = false;
+            this.currentIterationNumberMonteCarloTextBox.Location = new System.Drawing.Point(95, 106);
+            this.currentIterationNumberMonteCarloTextBox.Name = "currentIterationNumberMonteCarloTextBox";
+            this.currentIterationNumberMonteCarloTextBox.Size = new System.Drawing.Size(76, 20);
+            this.currentIterationNumberMonteCarloTextBox.TabIndex = 23;
             // 
-            // stateAmountMonteCarloLlabel
+            // currentIterationMonteCarloLabel
             // 
-            this.stateAmountMonteCarloLlabel.AutoSize = true;
-            this.stateAmountMonteCarloLlabel.Location = new System.Drawing.Point(6, 16);
-            this.stateAmountMonteCarloLlabel.Name = "stateAmountMonteCarloLlabel";
-            this.stateAmountMonteCarloLlabel.Size = new System.Drawing.Size(79, 13);
-            this.stateAmountMonteCarloLlabel.TabIndex = 9;
-            this.stateAmountMonteCarloLlabel.Text = "States Amount:";
+            this.currentIterationMonteCarloLabel.AutoSize = true;
+            this.currentIterationMonteCarloLabel.Location = new System.Drawing.Point(3, 109);
+            this.currentIterationMonteCarloLabel.Name = "currentIterationMonteCarloLabel";
+            this.currentIterationMonteCarloLabel.Size = new System.Drawing.Size(88, 13);
+            this.currentIterationMonteCarloLabel.TabIndex = 22;
+            this.currentIterationMonteCarloLabel.Text = "Current Iteration: ";
             // 
-            // mouseModeLabel
+            // iterationsMonteCarloLabel
             // 
-            this.mouseModeLabel.Location = new System.Drawing.Point(516, 498);
-            this.mouseModeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.mouseModeLabel.Name = "mouseModeLabel";
-            this.mouseModeLabel.Size = new System.Drawing.Size(191, 16);
-            this.mouseModeLabel.TabIndex = 16;
-            this.mouseModeLabel.Text = "Mouse mode:";
-            // 
-            // runMonteCarloButton
-            // 
-            this.runMonteCarloButton.Location = new System.Drawing.Point(6, 71);
-            this.runMonteCarloButton.Name = "runMonteCarloButton";
-            this.runMonteCarloButton.Size = new System.Drawing.Size(81, 23);
-            this.runMonteCarloButton.TabIndex = 17;
-            this.runMonteCarloButton.Text = "Run";
-            this.runMonteCarloButton.UseVisualStyleBackColor = true;
-            this.runMonteCarloButton.Click += new System.EventHandler(this.RunMonteCarloButton_Click);
-            // 
-            // stopMonteCarloButton
-            // 
-            this.stopMonteCarloButton.Location = new System.Drawing.Point(93, 71);
-            this.stopMonteCarloButton.Name = "stopMonteCarloButton";
-            this.stopMonteCarloButton.Size = new System.Drawing.Size(78, 23);
-            this.stopMonteCarloButton.TabIndex = 18;
-            this.stopMonteCarloButton.Text = "Stop";
-            this.stopMonteCarloButton.UseVisualStyleBackColor = true;
-            this.stopMonteCarloButton.Click += new System.EventHandler(this.StopMonteCarloButton_Click);
+            this.iterationsMonteCarloLabel.AutoSize = true;
+            this.iterationsMonteCarloLabel.Location = new System.Drawing.Point(8, 18);
+            this.iterationsMonteCarloLabel.Name = "iterationsMonteCarloLabel";
+            this.iterationsMonteCarloLabel.Size = new System.Drawing.Size(53, 13);
+            this.iterationsMonteCarloLabel.TabIndex = 19;
+            this.iterationsMonteCarloLabel.Text = "Iterations:";
             // 
             // iterationsNumberNumericUpDown
             // 
@@ -900,14 +878,15 @@
             0,
             0});
             // 
-            // iterationsMonteCarloLabel
+            // stopMonteCarloButton
             // 
-            this.iterationsMonteCarloLabel.AutoSize = true;
-            this.iterationsMonteCarloLabel.Location = new System.Drawing.Point(8, 18);
-            this.iterationsMonteCarloLabel.Name = "iterationsMonteCarloLabel";
-            this.iterationsMonteCarloLabel.Size = new System.Drawing.Size(53, 13);
-            this.iterationsMonteCarloLabel.TabIndex = 19;
-            this.iterationsMonteCarloLabel.Text = "Iterations:";
+            this.stopMonteCarloButton.Location = new System.Drawing.Point(93, 71);
+            this.stopMonteCarloButton.Name = "stopMonteCarloButton";
+            this.stopMonteCarloButton.Size = new System.Drawing.Size(78, 23);
+            this.stopMonteCarloButton.TabIndex = 18;
+            this.stopMonteCarloButton.Text = "Stop";
+            this.stopMonteCarloButton.UseVisualStyleBackColor = true;
+            this.stopMonteCarloButton.Click += new System.EventHandler(this.StopMonteCarloButton_Click);
             // 
             // runIterationsMonteCarloButton
             // 
@@ -918,6 +897,16 @@
             this.runIterationsMonteCarloButton.Text = "Run Iterations";
             this.runIterationsMonteCarloButton.UseVisualStyleBackColor = true;
             this.runIterationsMonteCarloButton.Click += new System.EventHandler(this.RunIterationsMonteCarloButton_Click);
+            // 
+            // runMonteCarloButton
+            // 
+            this.runMonteCarloButton.Location = new System.Drawing.Point(6, 71);
+            this.runMonteCarloButton.Name = "runMonteCarloButton";
+            this.runMonteCarloButton.Size = new System.Drawing.Size(81, 23);
+            this.runMonteCarloButton.TabIndex = 17;
+            this.runMonteCarloButton.Text = "Run";
+            this.runMonteCarloButton.UseVisualStyleBackColor = true;
+            this.runMonteCarloButton.Click += new System.EventHandler(this.RunMonteCarloButton_Click);
             // 
             // propertiesMonteCarloGroupBox
             // 
@@ -931,38 +920,79 @@
             this.propertiesMonteCarloGroupBox.TabStop = false;
             this.propertiesMonteCarloGroupBox.Text = "Properties";
             // 
-            // executionMonteCarloGroupBox
+            // stateAmountMonteCarloLlabel
             // 
-            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationNumberMonteCarloTextBox);
-            this.executionMonteCarloGroupBox.Controls.Add(this.currentIterationMonteCarloLabel);
-            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsMonteCarloLabel);
-            this.executionMonteCarloGroupBox.Controls.Add(this.iterationsNumberNumericUpDown);
-            this.executionMonteCarloGroupBox.Controls.Add(this.stopMonteCarloButton);
-            this.executionMonteCarloGroupBox.Controls.Add(this.runIterationsMonteCarloButton);
-            this.executionMonteCarloGroupBox.Controls.Add(this.runMonteCarloButton);
-            this.executionMonteCarloGroupBox.Location = new System.Drawing.Point(4, 104);
-            this.executionMonteCarloGroupBox.Name = "executionMonteCarloGroupBox";
-            this.executionMonteCarloGroupBox.Size = new System.Drawing.Size(177, 134);
-            this.executionMonteCarloGroupBox.TabIndex = 23;
-            this.executionMonteCarloGroupBox.TabStop = false;
-            this.executionMonteCarloGroupBox.Text = "Execution";
+            this.stateAmountMonteCarloLlabel.AutoSize = true;
+            this.stateAmountMonteCarloLlabel.Location = new System.Drawing.Point(6, 16);
+            this.stateAmountMonteCarloLlabel.Name = "stateAmountMonteCarloLlabel";
+            this.stateAmountMonteCarloLlabel.Size = new System.Drawing.Size(79, 13);
+            this.stateAmountMonteCarloLlabel.TabIndex = 9;
+            this.stateAmountMonteCarloLlabel.Text = "States Amount:";
             // 
-            // currentIterationMonteCarloLabel
+            // randomStatesMonteCarloButton
             // 
-            this.currentIterationMonteCarloLabel.AutoSize = true;
-            this.currentIterationMonteCarloLabel.Location = new System.Drawing.Point(3, 109);
-            this.currentIterationMonteCarloLabel.Name = "currentIterationMonteCarloLabel";
-            this.currentIterationMonteCarloLabel.Size = new System.Drawing.Size(88, 13);
-            this.currentIterationMonteCarloLabel.TabIndex = 22;
-            this.currentIterationMonteCarloLabel.Text = "Current Iteration: ";
+            this.randomStatesMonteCarloButton.Location = new System.Drawing.Point(6, 58);
+            this.randomStatesMonteCarloButton.Name = "randomStatesMonteCarloButton";
+            this.randomStatesMonteCarloButton.Size = new System.Drawing.Size(162, 23);
+            this.randomStatesMonteCarloButton.TabIndex = 10;
+            this.randomStatesMonteCarloButton.Text = "Random states placement";
+            this.randomStatesMonteCarloButton.UseVisualStyleBackColor = true;
+            this.randomStatesMonteCarloButton.Click += new System.EventHandler(this.RandomStatesMonteCarloButton_Click);
             // 
-            // currentIterationNumberMonteCarloTextBox
+            // stateMonteCarloNumericUpDown
             // 
-            this.currentIterationNumberMonteCarloTextBox.Enabled = false;
-            this.currentIterationNumberMonteCarloTextBox.Location = new System.Drawing.Point(95, 106);
-            this.currentIterationNumberMonteCarloTextBox.Name = "currentIterationNumberMonteCarloTextBox";
-            this.currentIterationNumberMonteCarloTextBox.Size = new System.Drawing.Size(76, 20);
-            this.currentIterationNumberMonteCarloTextBox.TabIndex = 23;
+            this.stateMonteCarloNumericUpDown.Location = new System.Drawing.Point(68, 32);
+            this.stateMonteCarloNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.stateMonteCarloNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.stateMonteCarloNumericUpDown.Name = "stateMonteCarloNumericUpDown";
+            this.stateMonteCarloNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.stateMonteCarloNumericUpDown.TabIndex = 11;
+            this.stateMonteCarloNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // mouseModeLabel
+            // 
+            this.mouseModeLabel.Location = new System.Drawing.Point(516, 498);
+            this.mouseModeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mouseModeLabel.Name = "mouseModeLabel";
+            this.mouseModeLabel.Size = new System.Drawing.Size(191, 16);
+            this.mouseModeLabel.TabIndex = 16;
+            this.mouseModeLabel.Text = "Mouse mode:";
+            // 
+            // grainViewPropertiesRadioButton
+            // 
+            this.grainViewPropertiesRadioButton.AutoSize = true;
+            this.grainViewPropertiesRadioButton.Location = new System.Drawing.Point(42, 19);
+            this.grainViewPropertiesRadioButton.Name = "grainViewPropertiesRadioButton";
+            this.grainViewPropertiesRadioButton.Size = new System.Drawing.Size(85, 17);
+            this.grainViewPropertiesRadioButton.TabIndex = 3;
+            this.grainViewPropertiesRadioButton.TabStop = true;
+            this.grainViewPropertiesRadioButton.Text = "Show Grains";
+            this.grainViewPropertiesRadioButton.UseVisualStyleBackColor = true;
+            this.grainViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
+            // 
+            // energyViewPropertiesRadioButton
+            // 
+            this.energyViewPropertiesRadioButton.AutoSize = true;
+            this.energyViewPropertiesRadioButton.Location = new System.Drawing.Point(42, 42);
+            this.energyViewPropertiesRadioButton.Name = "energyViewPropertiesRadioButton";
+            this.energyViewPropertiesRadioButton.Size = new System.Drawing.Size(88, 17);
+            this.energyViewPropertiesRadioButton.TabIndex = 4;
+            this.energyViewPropertiesRadioButton.TabStop = true;
+            this.energyViewPropertiesRadioButton.Text = "Show Energy";
+            this.energyViewPropertiesRadioButton.UseVisualStyleBackColor = true;
+            this.energyViewPropertiesRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -1007,12 +1037,12 @@
             this.substructureGroupBox.ResumeLayout(false);
             this.substructureGroupBox.PerformLayout();
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).EndInit();
+            this.executionMonteCarloGroupBox.ResumeLayout(false);
+            this.executionMonteCarloGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iterationsNumberNumericUpDown)).EndInit();
             this.propertiesMonteCarloGroupBox.ResumeLayout(false);
             this.propertiesMonteCarloGroupBox.PerformLayout();
-            this.executionMonteCarloGroupBox.ResumeLayout(false);
-            this.executionMonteCarloGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stateMonteCarloNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1095,6 +1125,8 @@
         private System.Windows.Forms.Button runIterationsMonteCarloButton;
         private System.Windows.Forms.Button runMonteCarloButton;
         private System.Windows.Forms.GroupBox propertiesMonteCarloGroupBox;
+        private System.Windows.Forms.RadioButton energyViewPropertiesRadioButton;
+        private System.Windows.Forms.RadioButton grainViewPropertiesRadioButton;
     }
 }
 
