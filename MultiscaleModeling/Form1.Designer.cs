@@ -131,7 +131,7 @@
             this.statesAmountPropertiesRecrystallizationNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.applayModeRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
-            this.applayPlaceComboBox = new System.Windows.Forms.ComboBox();
+            this.applayPlacePropertiesRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.gbSizePropertiesRecrystallizationumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -1252,7 +1252,7 @@
             // 
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.gbSizePropertiesRecrystallizationumericUpDown);
-            this.groupBox4.Controls.Add(this.applayPlaceComboBox);
+            this.groupBox4.Controls.Add(this.applayPlacePropertiesRecrystallizationComboBox);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.applayModeRecrystallizationComboBox);
             this.groupBox4.Controls.Add(this.label8);
@@ -1281,7 +1281,7 @@
             this.randomPlacementPropertiesRecrystallizationButton.Name = "randomPlacementPropertiesRecrystallizationButton";
             this.randomPlacementPropertiesRecrystallizationButton.Size = new System.Drawing.Size(162, 23);
             this.randomPlacementPropertiesRecrystallizationButton.TabIndex = 10;
-            this.randomPlacementPropertiesRecrystallizationButton.Text = "Random states placement";
+            this.randomPlacementPropertiesRecrystallizationButton.Text = "Place Nucleons";
             this.randomPlacementPropertiesRecrystallizationButton.UseVisualStyleBackColor = true;
             // 
             // statesAmountPropertiesRecrystallizationNumericUpDown
@@ -1327,18 +1327,22 @@
             this.applayModeRecrystallizationComboBox.Name = "applayModeRecrystallizationComboBox";
             this.applayModeRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
             this.applayModeRecrystallizationComboBox.TabIndex = 13;
+            this.applayModeRecrystallizationComboBox.SelectedIndexChanged += new System.EventHandler(this.applayModeRecrystallizationComboBox_SelectedIndexChanged);
             // 
-            // applayPlaceComboBox
+            // applayPlacePropertiesRecrystallizationComboBox
             // 
-            this.applayPlaceComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            this.applayPlacePropertiesRecrystallizationComboBox.AutoCompleteCustomSource.AddRange(new string[] {
             "Anywhere",
             "Grain Boundaries"});
-            this.applayPlaceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.applayPlaceComboBox.FormattingEnabled = true;
-            this.applayPlaceComboBox.Location = new System.Drawing.Point(47, 111);
-            this.applayPlaceComboBox.Name = "applayPlaceComboBox";
-            this.applayPlaceComboBox.Size = new System.Drawing.Size(121, 21);
-            this.applayPlaceComboBox.TabIndex = 15;
+            this.applayPlacePropertiesRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.applayPlacePropertiesRecrystallizationComboBox.FormattingEnabled = true;
+            this.applayPlacePropertiesRecrystallizationComboBox.Items.AddRange(new object[] {
+            "Anywhere",
+            "Grain Boundaries"});
+            this.applayPlacePropertiesRecrystallizationComboBox.Location = new System.Drawing.Point(47, 111);
+            this.applayPlacePropertiesRecrystallizationComboBox.Name = "applayPlacePropertiesRecrystallizationComboBox";
+            this.applayPlacePropertiesRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.applayPlacePropertiesRecrystallizationComboBox.TabIndex = 15;
             // 
             // label9
             // 
@@ -1375,7 +1379,7 @@
             this.gbSizePropertiesRecrystallizationumericUpDown.Size = new System.Drawing.Size(121, 20);
             this.gbSizePropertiesRecrystallizationumericUpDown.TabIndex = 17;
             this.gbSizePropertiesRecrystallizationumericUpDown.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
@@ -1546,7 +1550,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown gbSizePropertiesRecrystallizationumericUpDown;
-        private System.Windows.Forms.ComboBox applayPlaceComboBox;
+        private System.Windows.Forms.ComboBox applayPlacePropertiesRecrystallizationComboBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox applayModeRecrystallizationComboBox;
         private System.Windows.Forms.Label label8;

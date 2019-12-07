@@ -56,6 +56,10 @@ namespace MultiscaleModeling
         {
             InitializeComponent();
 
+            applayModeRecrystallizationComboBox.SelectedIndex = 0;
+            applayPlacePropertiesRecrystallizationComboBox.SelectedIndex = 0;
+            randomPlacementPropertiesRecrystallizationButton.Enabled = false;
+
             //GRID
             gridController = new GridController(
                 int.Parse(widthSizeGridPropertiesNumericUpDown.Text),
@@ -650,6 +654,18 @@ namespace MultiscaleModeling
             }
 
             DrawFunction(ref nextImage);
+        }
+
+        private void applayModeRecrystallizationComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(applayModeRecrystallizationComboBox.SelectedIndex == 2)
+            {
+                randomPlacementPropertiesRecrystallizationButton.Enabled = true;
+            }
+            else
+            {
+                randomPlacementPropertiesRecrystallizationButton.Enabled = false;
+            }
         }
     }
 }
