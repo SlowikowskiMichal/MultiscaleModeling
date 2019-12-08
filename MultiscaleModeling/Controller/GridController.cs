@@ -4,8 +4,8 @@ using System.Linq;
 using MultiscaleModeling.Model;
 using System.Threading;
 using MultiscaleModeling.Model.Neighbourhood;
-using System.Windows.Forms;
 using MultiscaleModeling.Model.Inclusions;
+
 namespace MultiscaleModeling.Controller
 {
     class GridController
@@ -44,6 +44,11 @@ namespace MultiscaleModeling.Controller
         MonteCarloEngine mcEngine;
         #endregion
 
+        #region RECRYSTALLIZATION
+        RecrystallizationEngine rcEngine;
+        #endregion
+
+
         #endregion
 
         #region GETTERS SETTERS
@@ -73,6 +78,7 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
             mcEngine = new MonteCarloEngine();
+            rcEngine = new RecrystallizationEngine();
         }
         public GridController(int gridWidth, int gridHeight)
         {
@@ -83,6 +89,7 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
             mcEngine = new MonteCarloEngine();
+            rcEngine = new RecrystallizationEngine();
         }
         public GridController(int gridWidth, int gridHeight, int nucleonsPopulation)
         {
@@ -93,6 +100,7 @@ namespace MultiscaleModeling.Controller
             emptyCount = Grid.SizeX * Grid.SizeY;
             ProbabilityOfChange = 100;
             mcEngine = new MonteCarloEngine();
+            rcEngine = new RecrystallizationEngine();
         }
         #endregion
         /// <summary>
@@ -112,6 +120,8 @@ namespace MultiscaleModeling.Controller
         }
         public void ResizeGrid(int width, int height)
         {
+            mcEngine.ResetCurrentIteration();
+            rcEngine.ResetCurrentIteration();
             currentGrid.Resize(width, height);
             nextStepGrid.Resize(width, height);
             emptyCount = Grid.SizeX * Grid.SizeY;
@@ -121,6 +131,7 @@ namespace MultiscaleModeling.Controller
         public void ClearGrid()
         {
             mcEngine.ResetCurrentIteration();
+            rcEngine.ResetCurrentIteration();
             currentGrid.Clear();
             nextStepGrid.Clear();
             emptyCount = Grid.SizeX * Grid.SizeY;
@@ -753,6 +764,67 @@ namespace MultiscaleModeling.Controller
                     currentGrid.Cells[gbPoints[i].X, gbPoints[i].Y].Recrystallized = true;
                 }
             }
+        }
+
+        internal void RemoveRecrystallizationStatus()
+        {
+            for(int x = 0; x < Grid.SizeX; x++)
+            {
+                for(int y = 0; y < Grid.SizeY; y++)
+                {
+                    currentGrid.Cells[x, y].Recrystallized = false;
+                }
+            }
+        }
+
+        public void RunIterationsRecrystallization(IProgress<string> progress, int maxIterations, 
+            int nucleonsCount = 0, int gbSize = 0,int applayMode = 2,int applayPlace = 0)
+        {
+
+            Thread t = new Thread(() => RunRecrystallization(nucleonsCount,gbSize,applayMode,applayPlace));
+            running = true;
+            while (running && rcEngine.currentIteration < maxIterations)
+            {
+                t = new Thread(() => RunRecrystallization(nucleonsCount, gbSize, applayMode, applayPlace));
+                t.Start();
+                t.Join();
+                progress.Report(rcEngine.currentIteration.ToString());
+            }
+        }
+
+        public void RunRecrystallization(int nucleonsCount = 0, int gbSize = 0, int applayMode = 2, int applayPlace = 0)
+        {
+            if(applayMode == 0)
+            {
+                
+                if(applayPlace == 0)
+                {
+                    RandomPlacementRecrystallizationAnywhere(nucleonsCount);
+                }
+                else if(applayPlace == 1)
+                {
+                    RandomPlacementRecrystallizationGrainBoundries(nucleonsCount,gbSize);
+                }
+            }
+            else if(applayMode==1)
+            {
+                nucleonsCount *= (rcEngine.currentIteration + 1);
+                if (applayPlace == 0)
+                {
+                    RandomPlacementRecrystallizationAnywhere(nucleonsCount);
+                }
+                else if (applayPlace == 1)
+                {
+                    RandomPlacementRecrystallizationGrainBoundries(nucleonsCount, gbSize);
+                }
+            }
+            rcEngine.Run(ref currentGrid);
+            rcEngine.NextIteration();
+        }
+
+        internal int GetRecrystallizationIteration()
+        {
+            return rcEngine.currentIteration; 
         }
 
         #endregion

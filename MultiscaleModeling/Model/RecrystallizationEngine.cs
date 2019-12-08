@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +7,12 @@ using MultiscaleModeling.Model.Neighbourhood;
 
 namespace MultiscaleModeling.Model
 {
-    public class MonteCarloEngine
+    public class RecrystallizationEngine
     {
+
         public int currentIteration { get; private set; }
 
-        public MonteCarloEngine()
+        public RecrystallizationEngine()
         {
             currentIteration = 0;
         }
@@ -30,7 +31,7 @@ namespace MultiscaleModeling.Model
         {
             Neighbourhood.Neighbourhood n = new MooresNeighbourhood();
             Random r = new Random();
-            List<Point> listOfPoints = ShuffleCells(Grid.SizeX,Grid.SizeY, currentGrid);
+            List<Point> listOfPoints = ShuffleCells(Grid.SizeX, Grid.SizeY, currentGrid);
 
 
             foreach (Point c in listOfPoints)
@@ -41,7 +42,7 @@ namespace MultiscaleModeling.Model
 
                 foreach (Point p in buff)
                 {
-                    if (currentGrid.Cells[p.X, p.Y].State == 1)
+                    if (currentGrid.Cells[p.X, p.Y].Recrystallized && currentGrid.Cells[p.X, p.Y].State == 1)
                     {
                         nCoord.Add(new Point(p.X, p.Y));
                     }
@@ -63,6 +64,7 @@ namespace MultiscaleModeling.Model
                         currentEnergy++;
                     }
                 }
+                currentEnergy += currentGrid.Cells[c.X, c.Y].Energy;
                 int newCoordIndex = r.Next(0, nCoord.Count);
                 currentGrid.Cells[c.X, c.Y].Id = currentGrid.Cells[nCoord[newCoordIndex].X, nCoord[newCoordIndex].Y].Id;
 
@@ -79,7 +81,8 @@ namespace MultiscaleModeling.Model
                 }
                 else
                 {
-                    currentGrid.Cells[c.X, c.Y].Energy = currentGrid.Cells[nCoord[newCoordIndex].X, nCoord[newCoordIndex].Y].Energy;
+                    currentGrid.Cells[c.X, c.Y].Recrystallized = true;
+                    //currentGrid.Cells[c.X, c.Y].Energy = currentGrid.Cells[nCoord[newCoordIndex].X, nCoord[newCoordIndex].Y].Energy;
                 }
             }
         }
@@ -88,11 +91,11 @@ namespace MultiscaleModeling.Model
         {
             List<Point> pointsToReturn = new List<Point>();
 
-            for(int x = 0; x < sizeX; x++)
+            for (int x = 0; x < sizeX; x++)
             {
-                for(int y = 0; y < sizeY; y++)
+                for (int y = 0; y < sizeY; y++)
                 {
-                    if (grid.Cells[x, y].State == 1)
+                    if (grid.Cells[x, y].State == 1 && !grid.Cells[x, y].Recrystallized)
                     {
                         pointsToReturn.Add(new Point(x, y));
                     }

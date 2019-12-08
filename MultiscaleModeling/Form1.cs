@@ -690,5 +690,78 @@ namespace MultiscaleModeling
 
             DrawFunction(ref nextImage);
         }
+
+        private void removeRecrystallizationStatusButton_Click(object sender, EventArgs e)
+        {
+            gridController.RemoveRecrystallizationStatus();
+            DrawFunction(ref nextImage);
+        }
+
+        private async void runIterationsExecutionRecrystallizationButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+            {
+                return;
+            }
+            running = true;
+            var progress = new Progress<string>(v =>
+            {
+                currentIterationExecutionRecrystallizationTextBox.Text = v;
+            });
+
+            int nc = decimal.ToInt32(statesAmountPropertiesRecrystallizationNumericUpDown.Value);
+            int gb = decimal.ToInt32(gbSizePropertiesRecrystallizationumericUpDown.Value);
+            int am = applayModeRecrystallizationComboBox.SelectedIndex;
+            int ap = applayPlacePropertiesRecrystallizationComboBox.SelectedIndex;
+
+            SetGuiAsEnabled(false);
+            await Task.Factory.StartNew(() => gridController.RunIterationsRecrystallization(progress,
+                nc,
+                gb,
+                am,
+                ap),
+                TaskCreationOptions.LongRunning);
+
+            this.DrawFunction(ref nextImage);
+            viewPictureBox.Refresh();
+            running = false;
+            SetGuiAsEnabled(true);
+            DeterminateClickOnPictureBoxMode();
+        }
+
+        private void stopExecutionRecrystallizationButton_Click(object sender, EventArgs e)
+        {
+            gridController.StopExecution();
+            SetGuiAsEnabled(!running);
+        }
+
+        private async void runExecutionRecrystallizationButton_Click(object sender, EventArgs e)
+        {
+            if (running)
+            {
+                return;
+            }
+            running = true;
+
+            int nc = decimal.ToInt32(statesAmountPropertiesRecrystallizationNumericUpDown.Value);
+            int gb = decimal.ToInt32(gbSizePropertiesRecrystallizationumericUpDown.Value);
+            int am = applayModeRecrystallizationComboBox.SelectedIndex;
+            int ap = applayPlacePropertiesRecrystallizationComboBox.SelectedIndex;
+            SetGuiAsEnabled(false);
+            await Task.Factory.StartNew(() => gridController.RunRecrystallization(
+                nc,
+                gb,
+                am,
+                ap),
+                            TaskCreationOptions.LongRunning);
+
+            currentIterationExecutionRecrystallizationTextBox.Text = gridController.GetRecrystallizationIteration().ToString();
+            this.DrawFunction(ref nextImage);
+            viewPictureBox.Refresh();
+
+            running = false;
+            SetGuiAsEnabled(true);
+            DeterminateClickOnPictureBoxMode();
+        }
     }
 }

@@ -32,6 +32,7 @@
             this.viewPanel = new System.Windows.Forms.Panel();
             this.viewPictureBox = new System.Windows.Forms.PictureBox();
             this.viewGroupBox = new System.Windows.Forms.GroupBox();
+            this.energyNeighborhoodRadioButton = new System.Windows.Forms.RadioButton();
             this.energyViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
             this.grainViewPropertiesRadioButton = new System.Windows.Forms.RadioButton();
             this.viewGridCheckBox = new System.Windows.Forms.CheckBox();
@@ -114,8 +115,6 @@
             this.stateAmountMonteCarloLlabel = new System.Windows.Forms.Label();
             this.randomStatesMonteCarloButton = new System.Windows.Forms.Button();
             this.stateMonteCarloNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.mouseModeLabel = new System.Windows.Forms.Label();
-            this.energyNeighborhoodRadioButton = new System.Windows.Forms.RadioButton();
             this.RectystallizationTabPage = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.currentIterationExecutionRecrystallizationTextBox = new System.Windows.Forms.TextBox();
@@ -126,15 +125,17 @@
             this.runIterationsExecutionRecrystallizationButton = new System.Windows.Forms.Button();
             this.runExecutionRecrystallizationButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.gbSizePropertiesRecrystallizationumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.applayPlacePropertiesRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.applayModeRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.randomPlacementPropertiesRecrystallizationButton = new System.Windows.Forms.Button();
             this.statesAmountPropertiesRecrystallizationNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.applayModeRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
-            this.applayPlacePropertiesRecrystallizationComboBox = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.gbSizePropertiesRecrystallizationumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.mouseModeLabel = new System.Windows.Forms.Label();
+            this.removeRecrystallizationStatusButton = new System.Windows.Forms.Button();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewPictureBox)).BeginInit();
             this.viewGroupBox.SuspendLayout();
@@ -168,8 +169,8 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iterationsExecutionRecrystallizationNumericUpDown)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesRecrystallizationumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // viewPanel
@@ -208,6 +209,18 @@
             this.viewGroupBox.TabIndex = 1;
             this.viewGroupBox.TabStop = false;
             this.viewGroupBox.Text = "View";
+            // 
+            // energyNeighborhoodRadioButton
+            // 
+            this.energyNeighborhoodRadioButton.AutoSize = true;
+            this.energyNeighborhoodRadioButton.Location = new System.Drawing.Point(6, 65);
+            this.energyNeighborhoodRadioButton.Name = "energyNeighborhoodRadioButton";
+            this.energyNeighborhoodRadioButton.Size = new System.Drawing.Size(117, 30);
+            this.energyNeighborhoodRadioButton.TabIndex = 5;
+            this.energyNeighborhoodRadioButton.TabStop = true;
+            this.energyNeighborhoodRadioButton.Text = "Show Energy \r\nWith Neighborhood";
+            this.energyNeighborhoodRadioButton.UseVisualStyleBackColor = true;
+            this.energyNeighborhoodRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
             // 
             // energyViewPropertiesRadioButton
             // 
@@ -1125,29 +1138,9 @@
             0,
             0});
             // 
-            // mouseModeLabel
-            // 
-            this.mouseModeLabel.Location = new System.Drawing.Point(516, 498);
-            this.mouseModeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.mouseModeLabel.Name = "mouseModeLabel";
-            this.mouseModeLabel.Size = new System.Drawing.Size(191, 16);
-            this.mouseModeLabel.TabIndex = 16;
-            this.mouseModeLabel.Text = "Mouse mode:";
-            // 
-            // energyNeighborhoodRadioButton
-            // 
-            this.energyNeighborhoodRadioButton.AutoSize = true;
-            this.energyNeighborhoodRadioButton.Location = new System.Drawing.Point(6, 65);
-            this.energyNeighborhoodRadioButton.Name = "energyNeighborhoodRadioButton";
-            this.energyNeighborhoodRadioButton.Size = new System.Drawing.Size(117, 30);
-            this.energyNeighborhoodRadioButton.TabIndex = 5;
-            this.energyNeighborhoodRadioButton.TabStop = true;
-            this.energyNeighborhoodRadioButton.Text = "Show Energy \r\nWith Neighborhood";
-            this.energyNeighborhoodRadioButton.UseVisualStyleBackColor = true;
-            this.energyNeighborhoodRadioButton.CheckedChanged += new System.EventHandler(this.energyViewPropertiesRadioButton_CheckedChanged);
-            // 
             // RectystallizationTabPage
             // 
+            this.RectystallizationTabPage.Controls.Add(this.removeRecrystallizationStatusButton);
             this.RectystallizationTabPage.Controls.Add(this.groupBox3);
             this.RectystallizationTabPage.Controls.Add(this.groupBox4);
             this.RectystallizationTabPage.Location = new System.Drawing.Point(4, 22);
@@ -1229,6 +1222,7 @@
             this.stopExecutionRecrystallizationButton.TabIndex = 18;
             this.stopExecutionRecrystallizationButton.Text = "Stop";
             this.stopExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            this.stopExecutionRecrystallizationButton.Click += new System.EventHandler(this.stopExecutionRecrystallizationButton_Click);
             // 
             // runIterationsExecutionRecrystallizationButton
             // 
@@ -1238,6 +1232,7 @@
             this.runIterationsExecutionRecrystallizationButton.TabIndex = 21;
             this.runIterationsExecutionRecrystallizationButton.Text = "Run Iterations";
             this.runIterationsExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            this.runIterationsExecutionRecrystallizationButton.Click += new System.EventHandler(this.runIterationsExecutionRecrystallizationButton_Click);
             // 
             // runExecutionRecrystallizationButton
             // 
@@ -1247,6 +1242,7 @@
             this.runExecutionRecrystallizationButton.TabIndex = 17;
             this.runExecutionRecrystallizationButton.Text = "Run";
             this.runExecutionRecrystallizationButton.UseVisualStyleBackColor = true;
+            this.runExecutionRecrystallizationButton.Click += new System.EventHandler(this.runExecutionRecrystallizationButton_Click);
             // 
             // groupBox4
             // 
@@ -1265,6 +1261,84 @@
             this.groupBox4.TabIndex = 24;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Properties";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 135);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(48, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "GB Size:";
+            // 
+            // gbSizePropertiesRecrystallizationumericUpDown
+            // 
+            this.gbSizePropertiesRecrystallizationumericUpDown.Location = new System.Drawing.Point(47, 151);
+            this.gbSizePropertiesRecrystallizationumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.gbSizePropertiesRecrystallizationumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gbSizePropertiesRecrystallizationumericUpDown.Name = "gbSizePropertiesRecrystallizationumericUpDown";
+            this.gbSizePropertiesRecrystallizationumericUpDown.Size = new System.Drawing.Size(121, 20);
+            this.gbSizePropertiesRecrystallizationumericUpDown.TabIndex = 17;
+            this.gbSizePropertiesRecrystallizationumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // applayPlacePropertiesRecrystallizationComboBox
+            // 
+            this.applayPlacePropertiesRecrystallizationComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Anywhere",
+            "Grain Boundaries"});
+            this.applayPlacePropertiesRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.applayPlacePropertiesRecrystallizationComboBox.FormattingEnabled = true;
+            this.applayPlacePropertiesRecrystallizationComboBox.Items.AddRange(new object[] {
+            "Anywhere",
+            "Grain Boundaries"});
+            this.applayPlacePropertiesRecrystallizationComboBox.Location = new System.Drawing.Point(47, 111);
+            this.applayPlacePropertiesRecrystallizationComboBox.Name = "applayPlacePropertiesRecrystallizationComboBox";
+            this.applayPlacePropertiesRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.applayPlacePropertiesRecrystallizationComboBox.TabIndex = 15;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 95);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(72, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Applay Place:";
+            // 
+            // applayModeRecrystallizationComboBox
+            // 
+            this.applayModeRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.applayModeRecrystallizationComboBox.FormattingEnabled = true;
+            this.applayModeRecrystallizationComboBox.Items.AddRange(new object[] {
+            "Constant",
+            "Increasing",
+            "Manually"});
+            this.applayModeRecrystallizationComboBox.Location = new System.Drawing.Point(47, 71);
+            this.applayModeRecrystallizationComboBox.Name = "applayModeRecrystallizationComboBox";
+            this.applayModeRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.applayModeRecrystallizationComboBox.TabIndex = 13;
+            this.applayModeRecrystallizationComboBox.SelectedIndexChanged += new System.EventHandler(this.applayModeRecrystallizationComboBox_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Applay Mode:";
             // 
             // label7
             // 
@@ -1307,83 +1381,24 @@
             0,
             0});
             // 
-            // label8
+            // mouseModeLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Applay Mode:";
+            this.mouseModeLabel.Location = new System.Drawing.Point(516, 498);
+            this.mouseModeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mouseModeLabel.Name = "mouseModeLabel";
+            this.mouseModeLabel.Size = new System.Drawing.Size(191, 16);
+            this.mouseModeLabel.TabIndex = 16;
+            this.mouseModeLabel.Text = "Mouse mode:";
             // 
-            // applayModeRecrystallizationComboBox
+            // removeRecrystallizationStatusButton
             // 
-            this.applayModeRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.applayModeRecrystallizationComboBox.FormattingEnabled = true;
-            this.applayModeRecrystallizationComboBox.Items.AddRange(new object[] {
-            "Constant",
-            "Increasing",
-            "Manually"});
-            this.applayModeRecrystallizationComboBox.Location = new System.Drawing.Point(47, 71);
-            this.applayModeRecrystallizationComboBox.Name = "applayModeRecrystallizationComboBox";
-            this.applayModeRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
-            this.applayModeRecrystallizationComboBox.TabIndex = 13;
-            this.applayModeRecrystallizationComboBox.SelectedIndexChanged += new System.EventHandler(this.applayModeRecrystallizationComboBox_SelectedIndexChanged);
-            // 
-            // applayPlacePropertiesRecrystallizationComboBox
-            // 
-            this.applayPlacePropertiesRecrystallizationComboBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "Anywhere",
-            "Grain Boundaries"});
-            this.applayPlacePropertiesRecrystallizationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.applayPlacePropertiesRecrystallizationComboBox.FormattingEnabled = true;
-            this.applayPlacePropertiesRecrystallizationComboBox.Items.AddRange(new object[] {
-            "Anywhere",
-            "Grain Boundaries"});
-            this.applayPlacePropertiesRecrystallizationComboBox.Location = new System.Drawing.Point(47, 111);
-            this.applayPlacePropertiesRecrystallizationComboBox.Name = "applayPlacePropertiesRecrystallizationComboBox";
-            this.applayPlacePropertiesRecrystallizationComboBox.Size = new System.Drawing.Size(121, 21);
-            this.applayPlacePropertiesRecrystallizationComboBox.TabIndex = 15;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 95);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 13);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "Applay Place:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 135);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "GB Size:";
-            // 
-            // gbSizePropertiesRecrystallizationumericUpDown
-            // 
-            this.gbSizePropertiesRecrystallizationumericUpDown.Location = new System.Drawing.Point(47, 151);
-            this.gbSizePropertiesRecrystallizationumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.gbSizePropertiesRecrystallizationumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.gbSizePropertiesRecrystallizationumericUpDown.Name = "gbSizePropertiesRecrystallizationumericUpDown";
-            this.gbSizePropertiesRecrystallizationumericUpDown.Size = new System.Drawing.Size(121, 20);
-            this.gbSizePropertiesRecrystallizationumericUpDown.TabIndex = 17;
-            this.gbSizePropertiesRecrystallizationumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.removeRecrystallizationStatusButton.Location = new System.Drawing.Point(3, 357);
+            this.removeRecrystallizationStatusButton.Name = "removeRecrystallizationStatusButton";
+            this.removeRecrystallizationStatusButton.Size = new System.Drawing.Size(178, 23);
+            this.removeRecrystallizationStatusButton.TabIndex = 26;
+            this.removeRecrystallizationStatusButton.Text = "Remove Recrystallization Status";
+            this.removeRecrystallizationStatusButton.UseVisualStyleBackColor = true;
+            this.removeRecrystallizationStatusButton.Click += new System.EventHandler(this.removeRecrystallizationStatusButton_Click);
             // 
             // Form1
             // 
@@ -1444,8 +1459,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.iterationsExecutionRecrystallizationNumericUpDown)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbSizePropertiesRecrystallizationumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statesAmountPropertiesRecrystallizationNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1558,6 +1573,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button randomPlacementPropertiesRecrystallizationButton;
         private System.Windows.Forms.NumericUpDown statesAmountPropertiesRecrystallizationNumericUpDown;
+        private System.Windows.Forms.Button removeRecrystallizationStatusButton;
     }
 }
 
