@@ -283,8 +283,16 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
                     {
+
                         int color = gridController.GetCurrentGridCellId(x, y);
-                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[color % ColorManager.indexcolors.Count()]));
+                        if (gridController.GetCurrentGridCellRecrystallized(x, y))
+                        {
+                            FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.recrystallizedColors[color % ColorManager.recrystallizedColors.Count()]));
+                        }
+                        else
+                        {
+                            FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.indexcolors[color % ColorManager.indexcolors.Count()]));
+                        }
                     }
                     else if (gridController.GetCurrentGridCellState(x, y) == 2)
                     {
@@ -650,7 +658,7 @@ namespace MultiscaleModeling
             }
             else if(setEnergyModePropertiesMonteCarloComboBox.SelectedIndex == 0)
             {
-                gridController.SetEnergyAll(decimal.ToInt32(decimal.ToInt32(energyValuePropertiesMonteCarloNumericUpDown.Value)));
+                gridController.SetEnergyAll(decimal.ToInt32(energyValuePropertiesMonteCarloNumericUpDown.Value));
             }
 
             DrawFunction(ref nextImage);
@@ -666,6 +674,21 @@ namespace MultiscaleModeling
             {
                 randomPlacementPropertiesRecrystallizationButton.Enabled = false;
             }
+        }
+
+        private void randomPlacementPropertiesRecrystallizationButton_Click(object sender, EventArgs e)
+        {
+            if (applayPlacePropertiesRecrystallizationComboBox.SelectedIndex == 0)
+            {
+                gridController.RandomPlacementRecrystallizationAnywhere(decimal.ToInt32(statesAmountPropertiesRecrystallizationNumericUpDown.Value));
+            }
+            else
+            {
+                gridController.RandomPlacementRecrystallizationGrainBoundries(decimal.ToInt32(statesAmountPropertiesRecrystallizationNumericUpDown.Value),
+                    decimal.ToInt32(gbSizePropertiesRecrystallizationumericUpDown.Value));
+            }
+
+            DrawFunction(ref nextImage);
         }
     }
 }

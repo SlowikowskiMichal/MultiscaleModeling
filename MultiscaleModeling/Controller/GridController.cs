@@ -342,6 +342,12 @@ namespace MultiscaleModeling.Controller
                 }
             }
         }
+
+        internal bool GetCurrentGridCellRecrystallized(int x, int y)
+        {
+            return currentGrid.Cells[x, y].Recrystallized;
+        }
+
         void CalculateNextStepStandard(int startX, int startY, int endX, int endY)
         {
             Random r = new Random();
@@ -697,7 +703,58 @@ namespace MultiscaleModeling.Controller
             CalculateMinMaxEnergy();
         }
 
-        #endregion
+        internal void RandomPlacementRecrystallizationAnywhere(int nucleonsCount)
+        {
+            int maxIterationsCount = 50;
+            int currentIterationCount = 0;
 
+            Random r = new Random();
+
+            for(int i = 0; i < nucleonsCount; )
+            {
+                int x = r.Next(0, Grid.SizeX);
+                int y = r.Next(0, Grid.SizeY);
+
+                if (!currentGrid.Cells[x, y].Recrystallized &&
+                    currentGrid.Cells[x,y].State == 1 )
+                {
+                    currentGrid.Cells[x, y].Recrystallized = true;
+                    currentIterationCount = 0;
+                }
+                else
+                {
+                    currentIterationCount++;
+                    
+                    if(currentIterationCount < maxIterationsCount)
+                    {
+                        continue;
+                    }
+
+                    break;
+                }
+
+                i++;
+            }
+
+        }
+
+        internal void RandomPlacementRecrystallizationGrainBoundries(int nucleonsCount, int gbSize)
+        {
+            List<Point> gbPoints = GrainBoundary.GenerateAllGrainBoundaries(currentGrid, gbSize);
+
+            gbPoints = gbPoints.Where(p => !currentGrid.Cells[p.X, p.Y].Recrystallized).ToList();
+
+            if(gbPoints.Count > 0)
+            {
+                int gbCount = Math.Min(gbPoints.Count, nucleonsCount);
+                gbPoints.Shuffle();
+                for(int i = 0; i < gbCount; i++)
+                {
+                    currentGrid.Cells[gbPoints[i].X, gbPoints[i].Y].Recrystallized = true;
+                }
+            }
+        }
+
+        #endregion
     }
 }

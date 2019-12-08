@@ -1283,6 +1283,7 @@
             this.randomPlacementPropertiesRecrystallizationButton.TabIndex = 10;
             this.randomPlacementPropertiesRecrystallizationButton.Text = "Place Nucleons";
             this.randomPlacementPropertiesRecrystallizationButton.UseVisualStyleBackColor = true;
+            this.randomPlacementPropertiesRecrystallizationButton.Click += new System.EventHandler(this.randomPlacementPropertiesRecrystallizationButton_Click);
             // 
             // statesAmountPropertiesRecrystallizationNumericUpDown
             // 

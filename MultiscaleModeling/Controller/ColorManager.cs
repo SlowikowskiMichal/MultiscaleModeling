@@ -245,7 +245,7 @@ namespace MultiscaleModeling.Controller
 "#ff0000"
         };
 
-        public static readonly String[] recrystalisedColors = new string[]
+        public static readonly String[] recrystallizedColors = new string[]
         {
              "#d60000",
  "#d20000",
