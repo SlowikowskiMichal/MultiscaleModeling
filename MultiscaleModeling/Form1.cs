@@ -623,8 +623,14 @@ namespace MultiscaleModeling
                 {
                     if (gridController.GetCurrentGridCellState(x, y) == 1 || gridController.GetCurrentGridCellState(x, y) == 4)
                     {
-                        int color = gridController.GetCurrentGridCellEnergy(x, y);
-                        FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.energyColors[color % colorsCount]));
+                        if(gridController.GetCurrentGridCellRecrystallized(x,y))
+                        {
+                            FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml("#ff0000"));
+                        }else
+                        {
+                            int color = gridController.GetCurrentGridCellEnergy(x, y);
+                            FillCell(x, y, imageToDrawOn, ColorTranslator.FromHtml(ColorManager.energyColors[color % colorsCount]));
+                        }
                     }
                     else if (gridController.GetCurrentGridCellState(x, y) == 2)
                     {
@@ -716,6 +722,7 @@ namespace MultiscaleModeling
 
             SetGuiAsEnabled(false);
             await Task.Factory.StartNew(() => gridController.RunIterationsRecrystallization(progress,
+                decimal.ToInt32(iterationsExecutionRecrystallizationNumericUpDown.Value),
                 nc,
                 gb,
                 am,

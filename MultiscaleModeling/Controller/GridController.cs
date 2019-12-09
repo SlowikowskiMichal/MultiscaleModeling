@@ -775,6 +775,7 @@ namespace MultiscaleModeling.Controller
                     currentGrid.Cells[x, y].Recrystallized = false;
                 }
             }
+            rcEngine.ResetCurrentIteration();
         }
 
         public void RunIterationsRecrystallization(IProgress<string> progress, int maxIterations, 

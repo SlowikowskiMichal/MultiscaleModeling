@@ -82,7 +82,7 @@ namespace MultiscaleModeling.Model
                 else
                 {
                     currentGrid.Cells[c.X, c.Y].Recrystallized = true;
-                    //currentGrid.Cells[c.X, c.Y].Energy = currentGrid.Cells[nCoord[newCoordIndex].X, nCoord[newCoordIndex].Y].Energy;
+                    currentGrid.Cells[c.X, c.Y].Energy = 0;
                 }
             }
         }
