@@ -730,6 +730,7 @@ namespace MultiscaleModeling.Controller
                     currentGrid.Cells[x,y].State == 1 )
                 {
                     currentGrid.Cells[x, y].Recrystallized = true;
+                    currentGrid.Cells[x, y].Id = i;
                     currentIterationCount = 0;
                 }
                 else
@@ -762,6 +763,7 @@ namespace MultiscaleModeling.Controller
                 for(int i = 0; i < gbCount; i++)
                 {
                     currentGrid.Cells[gbPoints[i].X, gbPoints[i].Y].Recrystallized = true;
+                    currentGrid.Cells[gbPoints[i].X, gbPoints[i].Y].Id = i;
                 }
             }
         }
